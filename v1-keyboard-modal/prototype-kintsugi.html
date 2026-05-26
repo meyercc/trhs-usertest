@@ -1,16 +1,16 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="kintsugi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Treehouse</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&family=Miranda+Sans:ital,wght@0,400..700;1,400..700&display=swap"
-      rel="stylesheet"
-    />
+    <title>Treehouse — KINTSUGI</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&
+      family=Geist+Mono:ital,wght@0,100..900;1,100..900&family=Miranda+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Three.js for Light Studio 3D viewport -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -18,6 +18,7 @@
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/FBXLoader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/DRACOLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <!-- Post-processing for bloom -->
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
@@ -26,7 +27,7 @@
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
-    <!-- ECharts for gauge visualizations -->
+    <!-- ECharts for premium gauge visualizations -->
     <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
     <script type="importmap">
 {
@@ -62,6 +63,7 @@
     </script>
     <script type="module" crossorigin src="./_bundle/main-DbScehtf.js"></script>
     <link rel="stylesheet" crossorigin href="./_bundle/main-BlzThurQ.css">
+    <link rel="stylesheet" crossorigin href="./_bundle/prototype-kintsugi-Bw7CWT8W.css">
   </head>
   <body>
     <div class="cursor-spotlight" id="cursor-spotlight"></div>
@@ -75,7 +77,7 @@
       </div>
 
       <!-- ── TITLE BAR ── -->
-      <div class="title-bar" data-tauri-drag-region>
+      <!-- <div class="title-bar" data-tauri-drag-region>
         <div class="title-bar-left">
           <svg class="title-bar-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M8 1L14 7H10.5V14H5.5V7H2L8 1Z" fill="rgba(228,232,240,0.45)" />
@@ -98,43 +100,32 @@
             </svg>
           </button>
         </div>
-      </div>
+      </div> -->
 
       <!-- ── NAV BAR ── -->
       <nav class="nav-bar">
+        <div class="nav-logo">
+          <svg width="72" height="40" viewBox="0 0 72 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="HyperX">
+            <path d="M66.4226 0.00102466C66.4834 0.00944235 66.5396 0.016393 66.5144 0.345751C66.4554 1.10976 66.2243 11.4068 57.7946 19.5557C63.154 24.1864 67.8956 30.656 71.0427 39.6807C71.0444 39.6849 71.1478 39.9339 70.9851 39.9932C70.8782 40.0317 70.7749 39.9084 70.6735 39.7618C70.6735 39.7618 65.2596 30.7547 54.3454 22.419C52.9795 23.4422 37.0434 36.2246 0.332718 31.711C0.332718 31.711 -0.0109725 31.7064 0.000686808 31.502C0.00818185 31.3655 0.0849227 31.3051 0.448929 31.3106C0.448929 31.3106 29.3918 32.1168 49.7419 19.1807C41.7942 14.0445 31.5702 9.7104 19.0437 8.752C19.0437 8.752 18.806 8.75017 18.7966 8.62895C18.7904 8.54345 18.8564 8.47944 19.1052 8.45903C19.268 8.44559 23.678 7.85922 29.9538 8.43169C30.2958 7.29393 31.2659 4.05847 31.279 4.0147H35.9929L34.4929 9.02056C40.4154 10.0255 47.2856 12.1428 53.6716 16.4151C59.0148 12.2553 63.4862 6.93903 66.2556 0.142626C66.2581 0.135787 66.3141 -0.0137379 66.4226 0.00102466ZM15.4314 16.9747H10.7419L14.6306 4.0147H19.3122L15.4314 16.9747ZM18.7497 9.99614C24.0223 10.3971 28.8923 11.3933 33.363 12.7969L32.111 16.9737H27.3933C27.4051 16.934 28.5588 13.0818 28.8249 12.2051H18.0837L18.7497 9.99614Z" fill="var(--text-primary)"/>
+          </svg>
+        </div>
         <div class="nav-tabs-wrapper">
           <div class="nav-tabs">
             <button class="nav-tab active" onclick="setTab(this, 'home')" data-tip="Dashboard Ctrl+1" data-nav-main>
-              <!-- <svg class="nav-tab-icon" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-linejoin="round">
-          <path d="M1 6.5L7 1.5L13 6.5V13H9V9H5V13H1V6.5Z"/>
-        </svg> -->
               <svg class="nav-tab-icon" width="20" height="21"><use href="./_bundle/icons-BHtYpdZ-.svg#icon-home" /></svg>
               <span class="nav-tab-label">Dashboard</span>
             </button>
-            <button class="nav-tab" onclick="setTab(this, 'play')" data-tip="Play Ctrl+2" data-nav-main>
-              <!-- <svg class="nav-tab-icon" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-linejoin="round">
-          <rect x="1" y="3" width="12" height="8" rx="1.5"/>
-          <circle cx="7" cy="7" r="2"/>
-          <line x1="3" y1="5" x2="3" y2="9" stroke-width="1.5"/>
-          <line x1="11" y1="5" x2="11" y2="9" stroke-width="1.5"/>
-        </svg> -->
-              <svg class="nav-tab-icon" width="22" height="16"><use href="./_bundle/icons-BHtYpdZ-.svg#icon-play" /></svg>
-              <span class="nav-tab-label">Play</span>
-            </button>
             <button class="nav-tab" onclick="setTab(this, 'perform')" data-tip="Perform Ctrl+3" data-nav-main>
-              <!-- <svg class="nav-tab-icon" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-linejoin="round">
-          <polyline points="1,11 4,7 7,9 10,4 13,2"/>
-          <line x1="1" y1="13" x2="13" y2="13"/>
-        </svg> -->
               <svg class="nav-tab-icon" width="22" height="22"><use href="./_bundle/icons-BHtYpdZ-.svg#icon-performance" /></svg>
               <span class="nav-tab-label">Perform</span>
             </button>
             <button class="nav-tab" onclick="setTab(this, 'personalize')" data-tip="Personalize Ctrl+4" data-nav-main>
-              <!-- <svg class="nav-tab-icon" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-linejoin="round">
-          <path d="M9 2L12 5L5 12L1 13L2 9L9 2Z"/>
-        </svg> -->
               <svg class="nav-tab-icon" width="22" height="22"><use href="./_bundle/icons-BHtYpdZ-.svg#icon-personalize" /></svg>
               <span class="nav-tab-label">Personalize</span>
+            </button>
+            <button class="nav-tab" onclick="setTab(this, 'play')" data-tip="Play Ctrl+2" data-nav-main>
+              <svg class="nav-tab-icon" width="22" height="16"><use href="./_bundle/icons-BHtYpdZ-.svg#icon-play" /></svg>
+              <span class="nav-tab-label">Play</span>
             </button>
             <button
               class="nav-tab"
@@ -143,10 +134,6 @@
               data-nav-main
               data-module="shop"
             >
-              <!-- <svg class="nav-tab-icon" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-linejoin="round">
-          <path d="M2 5H12L11 13H3L2 5Z"/>
-          <path d="M5 5C5 3.3 5.9 2 7 2C8.1 2 9 3.3 9 5"/>
-        </svg> -->
               <svg class="nav-tab-icon" width="21" height="22"><use href="./_bundle/icons-BHtYpdZ-.svg#icon-shop" /></svg>
               <span class="nav-tab-label">Shop</span>
             </button>
@@ -315,10 +302,9 @@
       <div class="mobile-header" id="mobile-header" style="display: none">
         <!-- Brand mark -->
         <div class="mh-brand">
-          <svg class="mh-brand-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 1L14 7H10.5V14H5.5V7H2L8 1Z" fill="rgba(228,232,240,0.55)" />
+          <svg class="mh-brand-logo" width="72" height="40" viewBox="0 0 72 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="HyperX">
+            <path d="M66.4226 0.00102466C66.4834 0.00944235 66.5396 0.016393 66.5144 0.345751C66.4554 1.10976 66.2243 11.4068 57.7946 19.5557C63.154 24.1864 67.8956 30.656 71.0427 39.6807C71.0444 39.6849 71.1478 39.9339 70.9851 39.9932C70.8782 40.0317 70.7749 39.9084 70.6735 39.7618C70.6735 39.7618 65.2596 30.7547 54.3454 22.419C52.9795 23.4422 37.0434 36.2246 0.332718 31.711C0.332718 31.711 -0.0109725 31.7064 0.000686808 31.502C0.00818185 31.3655 0.0849227 31.3051 0.448929 31.3106C0.448929 31.3106 29.3918 32.1168 49.7419 19.1807C41.7942 14.0445 31.5702 9.7104 19.0437 8.752C19.0437 8.752 18.806 8.75017 18.7966 8.62895C18.7904 8.54345 18.8564 8.47944 19.1052 8.45903C19.268 8.44559 23.678 7.85922 29.9538 8.43169C30.2958 7.29393 31.2659 4.05847 31.279 4.0147H35.9929L34.4929 9.02056C40.4154 10.0255 47.2856 12.1428 53.6716 16.4151C59.0148 12.2553 63.4862 6.93903 66.2556 0.142626C66.2581 0.135787 66.3141 -0.0137379 66.4226 0.00102466ZM15.4314 16.9747H10.7419L14.6306 4.0147H19.3122L15.4314 16.9747ZM18.7497 9.99614C24.0223 10.3971 28.8923 11.3933 33.363 12.7969L32.111 16.9737H27.3933C27.4051 16.934 28.5588 13.0818 28.8249 12.2051H18.0837L18.7497 9.99614Z" fill="white"/>
           </svg>
-          <span class="mh-brand-text">Treehouse</span>
         </div>
         <!-- Utility icons (mirror of desktop .nav-utility) -->
         <div class="mh-utils">
@@ -454,7 +440,7 @@
                   ></div>
                   <div class="ds-carousel-scrim"></div>
                   <div class="ds-carousel-content">
-                    <div class="ds-carousel-tag" style="color: var(--cyan)">Feature Announcement</div>
+                    <div class="ds-carousel-tag">Feature Announcement</div>
                     <div class="ds-carousel-title">
                       OMEN AI
                       <br />
@@ -465,8 +451,7 @@
                     </div>
                     <div class="ds-carousel-ctas">
                       <button
-                        class="ds-carousel-btn primary"
-                        style="background: var(--cyan)"
+                        class="ds-btn accent"
                         onclick="deepLink('home', 'omenai')"
                       >
                         Try It Now
@@ -478,29 +463,27 @@
 
                 <!-- Slide 1 — HyperX Quadcast S Launch -->
                 <div class="ds-carousel-slide">
-                  <div class="ds-carousel-bg" style="background-image: url('./_bundle/control-resonant-WNzFmwcC.webp')"></div>
+                  <div class="ds-carousel-bg" style="background-image: url('./_bundle/hyperx-headset-sale-CHeviiLb.webp')"></div>
                   <div class="ds-carousel-scrim"></div>
                   <div class="ds-carousel-content">
-                    <div class="ds-carousel-tag" style="color: var(--purple)">New Hardware</div>
+                    <div class="ds-carousel-tag">New Hardware</div>
                     <div class="ds-carousel-title">
-                      HyperX
+                      Wireless Play Starts
                       <br />
-                      Quadcast S
+                      with No Compromises
                     </div>
                     <div class="ds-carousel-desc">
-                      Studio-quality condenser mic built for competitive gaming. Multi-pattern, RGB, tap-to-mute. Now in
-                      OMEN Hub.
+                      When it's time to squad up, don't compromise with the HyperX Cloud Stinger 3 wireless headset.
                     </div>
                     <div class="ds-carousel-ctas">
                       <button
-                        class="ds-carousel-btn primary"
-                        style="background: var(--purple)"
+                        class="ds-btn accent"
                         onclick="setTab(document.querySelectorAll('.nav-tab')[4], 'store')"
                         data-module="shop"
                       >
                         Shop Now
                       </button>
-                      <button class="ds-carousel-btn ghost">View Specs</button>
+                      <button class="ds-carousel-btn ghost">Learn More</button>
                     </div>
                   </div>
                 </div>
@@ -509,24 +492,23 @@
                 <div class="ds-carousel-slide">
                   <div
                     class="ds-carousel-bg"
-                    style="background-image: url('./_bundle/sylvain-sarrailh-vhalalacenterartstation-CgJqxcXv.webp')"
+                    style="background-image: url('./_bundle/control-resonant-WNzFmwcC.webp')"
                   ></div>
                   <div class="ds-carousel-scrim"></div>
                   <div class="ds-carousel-content">
-                    <div class="ds-carousel-tag" style="color: var(--green)">Partner Promotion</div>
+                    <div class="ds-carousel-tag">Partner Promotion</div>
                     <div class="ds-carousel-title">
                       PC Game Pass
                       <br />
                       $1 First Month
                     </div>
                     <div class="ds-carousel-desc">
-                      Over 100 high-quality PC games. Day-one releases, EA Play included. Exclusive deal for OMEN Hub
+                      Over 100 high-quality PC games. Day-one releases, EA Play included. Exclusive deal for HyperX VIP
                       members.
                     </div>
                     <div class="ds-carousel-ctas">
                       <button
-                        class="ds-carousel-btn primary"
-                        style="background: var(--green); color: var(--text-on-accent)"
+                        class="ds-btn accent"
                       >
                         Claim Offer
                       </button>
@@ -537,20 +519,20 @@
 
                 <!-- Slide 3 — OMEN Sweepstakes -->
                 <div class="ds-carousel-slide">
-                  <div class="ds-carousel-bg" style="background-image: url('./_bundle/valorant-CHTwSDU6.webp')"></div>
+                  <div class="ds-carousel-bg" style="background-image: url('./_bundle/omen45max-Bn84xFlQ.webp')"></div>
                   <div class="ds-carousel-scrim"></div>
                   <div class="ds-carousel-content">
-                    <div class="ds-carousel-tag" style="color: var(--orange)">Sweepstakes</div>
+                    <div class="ds-carousel-tag">Sweepstakes</div>
                     <div class="ds-carousel-title">
                       Win the
                       <br />
-                      OMEN 45L
+                      OMEN Max 45L
                     </div>
                     <div class="ds-carousel-desc">
-                      Enter for a chance to win an OMEN 45L desktop + full HyperX setup worth $4,200. One entry per day.
+                      Enter for a chance to win a OMEN Max 45L desktop + full HyperX setup worth $4,200. One entry per day.
                     </div>
                     <div class="ds-carousel-ctas">
-                      <button class="ds-carousel-btn primary" style="background: var(--orange)">Enter to Win</button>
+                      <button class="ds-btn accent">Enter to Win</button>
                       <button class="ds-carousel-btn ghost">Rules &amp; Details</button>
                     </div>
                   </div>
@@ -558,22 +540,21 @@
 
                 <!-- Slide 4 — Fanatical Partner Sale -->
                 <div class="ds-carousel-slide">
-                  <div class="ds-carousel-bg" style="background-image: url('./_bundle/19484-BCVDrVz8.webp')"></div>
+                  <div class="ds-carousel-bg" style="background-image: url('./_bundle/fanatical-sale-BkJ8rNnd.webp')"></div>
                   <div class="ds-carousel-scrim"></div>
                   <div class="ds-carousel-content">
-                    <div class="ds-carousel-tag" style="color: var(--pink)">Partner Sale</div>
+                    <div class="ds-carousel-tag">Partner Sale</div>
                     <div class="ds-carousel-title">
                       Fanatical
                       <br />
-                      Members Sale
+                      Summer Sale
                     </div>
                     <div class="ds-carousel-desc">
-                      Up to 80% off 500+ PC titles. OMEN Hub members get an extra 10% stacked discount. Ends Sunday.
+                      Up to 96% off 500+ PC titles. HyperX VIP members get an extra 10% stacked discount. Ends Sunday.
                     </div>
                     <div class="ds-carousel-ctas">
                       <button
-                        class="ds-carousel-btn primary"
-                        style="background: var(--pink); color: var(--text-on-accent)"
+                        class="ds-btn accent"
                         onclick="setTab(document.querySelectorAll('.nav-tab')[4], 'store')"
                         data-module="shop"
                       >
@@ -848,42 +829,23 @@
                   <div class="wv-cell">
                     <div class="gauge-wrap" data-sensor="cpu">
                       <div class="gauge-ec"></div>
-                      <div class="gauge-temp-badge">89&deg;F</div>
                     </div>
                     <div class="vital-label">CPU</div>
+                    <div class="gauge-temp-badge">89&deg;F</div>
                   </div>
                   <div class="wv-cell">
                     <div class="gauge-wrap" data-sensor="gpu">
                       <div class="gauge-ec"></div>
-                      <div
-                        class="gauge-temp-badge"
-                        style="
-                          background: rgba(243, 104, 34, 0.08);
-                          border-color: rgba(243, 104, 34, 0.25);
-                          color: var(--omen-orange);
-                        "
-                      >
-                        76&deg;F
-                      </div>
                     </div>
                     <div class="vital-label">GPU</div>
+                    <div class="gauge-temp-badge" style="background:rgba(243,104,34,0.08);border-color:rgba(243,104,34,0.25);color:var(--omen-orange);">76&deg;F</div>
                   </div>
                   <div class="wv-cell">
                     <div class="gauge-wrap" data-sensor="ram">
                       <div class="gauge-ec"></div>
-                      <div
-                        class="gauge-temp-badge"
-                        data-sensor-ram-used
-                        style="
-                          background: rgba(12, 31, 41, 1);
-                          border-color: rgba(0, 84, 94, 1);
-                          color: rgba(0, 204, 218, 1);
-                        "
-                      >
-                        18.4 GB
-                      </div>
                     </div>
                     <div class="vital-label">RAM</div>
+                    <div class="gauge-temp-badge" data-sensor-ram-used style="background:rgba(12,31,41,1);border-color:rgba(0,84,94,1);color:rgba(0,204,218,1);">18.4 GB</div>
                   </div>
                   <div class="wv-cell">
                     <div class="wv-net" data-sensor="net">
@@ -977,33 +939,30 @@
                 <div class="w-label draggable"><span class="w-label-text">Power Mode</span></div>
                 <div class="wpm-grid grid-2x2">
                   <div class="wpm-opt" id="wpm-opt-battery" onclick="wpmSet(this)">
-                    <div class="wpm-icon">
-                      <svg width="16" height="16"><use href="./_bundle/icons-BHtYpdZ-.svg#icon-battery" /></svg>
-                    </div>
-                    <div style="display: grid; gap: var(--gutter-xs)">
-                      <div class="wpm-name">Eco</div>
-                      <div class="wpm-sub">Power Save</div>
+                    <div class="wpm-content-group">
+                      <div class="wpm-icon">
+                        <!-- <svg width="16" height="16"><use href="shared/icons.svg#icon-battery" /></svg> -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="14" viewBox="0 0 22 14" fill="none">
+                          <path d="M5.5 5V9M9.5 5V9M13.5 5V9M21 8V6M5.8 13H13.2C14.8802 13 15.7202 13 16.362 12.673C16.9265 12.3854 17.3854 11.9265 17.673 11.362C18 10.7202 18 9.88016 18 8.2V5.8C18 4.11984 18 3.27976 17.673 2.63803C17.3854 2.07354 16.9265 1.6146 16.362 1.32698C15.7202 1 14.8802 1 13.2 1H5.8C4.11984 1 3.27976 1 2.63803 1.32698C2.07354 1.6146 1.6146 2.07354 1.32698 2.63803C1 3.27976 1 4.11984 1 5.8V8.2C1 9.88016 1 10.7202 1.32698 11.362C1.6146 11.9265 2.07354 12.3854 2.63803 12.673C3.27976 13 4.11984 13 5.8 13Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </div>
+                      <div style="display: grid; gap: var(--gutter-xs)">
+                        <div class="wpm-name">Eco</div>
+                        <!-- <div class="wpm-sub">Power Save</div> -->
+                      </div>
                     </div>
                   </div>
                   <div class="wpm-opt active" id="wpm-opt-balanced" onclick="wpmSet(this)">
-                    <div class="wpm-icon">
-                      <svg
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                      >
-                        <circle cx="8" cy="8" r="5.5" />
-                        <line x1="8" y1="1" x2="8" y2="2.5" />
-                        <line x1="8" y1="13.5" x2="8" y2="15" />
-                        <line x1="1" y1="8" x2="2.5" y2="8" />
-                        <line x1="13.5" y1="8" x2="15" y2="8" />
-                      </svg>
-                    </div>
-                    <div style="display: grid; gap: var(--gutter-xs)">
-                      <div class="wpm-name">Balanced</div>
-                      <div class="wpm-sub">Recommended</div>
+                    <div class="wpm-content-group">
+                      <div class="wpm-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16" fill="none">
+                          <path d="M1 4L13 4M13 4C13 5.65686 14.3431 7 16 7C17.6569 7 19 5.65685 19 4C19 2.34315 17.6569 1 16 1C14.3431 1 13 2.34315 13 4ZM7 12L19 12M7 12C7 13.6569 5.65685 15 4 15C2.34315 15 1 13.6569 1 12C1 10.3431 2.34315 9 4 9C5.65685 9 7 10.3431 7 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </div>
+                      <div style="display: grid; gap: var(--gutter-xs)">
+                          <div class="wpm-name">Balanced</div>
+                          <!-- <div class="wpm-sub">Recommended</div> -->
+                      </div>
                     </div>
                   </div>
                   <div class="wpm-opt" id="wpm-opt-perf" onclick="wpmSet(this)">
@@ -1011,29 +970,23 @@
                       <svg width="19" height="22"><use href="./_bundle/icons-BHtYpdZ-.svg#icon-bolt" /></svg>
                     </div>
                     <div style="display: grid; gap: var(--gutter-xs)">
-                      <div class="wpm-name">Performance</div>
-                      <div class="wpm-sub">Max FPS</div>
+                      <div class="wpm-content-group">
+                        <div class="wpm-name">Performance</div>
+                        <!-- <div class="wpm-sub">Max FPS</div> -->
+                      </div>
                     </div>
                   </div>
                   <div class="wpm-opt" id="wpm-opt-unleashed" onclick="wpmSet(this)">
-                    <div class="wpm-icon">
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                      >
-                        <path d="M8 1v2M8 13v2M1 8h2M13 8h2" />
-                        <path d="M3.5 3.5l1.4 1.4M11.1 11.1l1.4 1.4M3.5 12.5l1.4-1.4M11.1 4.9l1.4-1.4" />
-                        <circle cx="8" cy="8" r="3" />
-                      </svg>
-                    </div>
-                    <div style="display: grid; gap: var(--gutter-xs)">
-                      <div class="wpm-name">Unleashed</div>
-                      <div class="wpm-sub">No Limits</div>
+                    <div class="wpm-content-group">
+                      <div class="wpm-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                          <path d="M7.5 14.5L14.5 7.49998M8 3V1M14 19V21M3 8H1M19 14H21M3.91421 3.91421L2.5 2.5M18.0858 18.0857L19.5 19.4999M11 16.6568L8.87871 18.7781C7.31662 20.3402 4.78396 20.3402 3.22186 18.7781C1.65976 17.216 1.65976 14.6833 3.22186 13.1212L5.34318 10.9999M16.6569 10.9999L18.7782 8.87859C20.3403 7.31649 20.3403 4.78383 18.7782 3.22174C17.2161 1.65964 14.6835 1.65964 13.1214 3.22174L11 5.34306" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </div>
+                      <div style="display: grid; gap: var(--gutter-xs)">
+                          <div class="wpm-name">Unleashed</div>
+                          <!-- <div class="wpm-sub">No Limits</div> -->
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1279,13 +1232,13 @@
                 </div>
 
                 <!-- Zone chips -->
-                <div class="ds-chip-check-group wlt-zones" id="wlt-zone-group">
+<!--                 <div class="ds-chip-check-group wlt-zones" id="wlt-zone-group">
                   <button class="ds-chip-check active" onclick="wltZone(this, 'all')">All Zones</button>
                   <button class="ds-chip-check" onclick="wltZone(this, 'wasd')">WASD</button>
                   <button class="ds-chip-check" onclick="wltZone(this, 'fn')">Fn Keys</button>
                   <button class="ds-chip-check" onclick="wltZone(this, 'numpad')">Numpad</button>
                   <button class="ds-chip-check" onclick="wltZone(this, 'space')">Space</button>
-                </div>
+                </div> -->
 
                 <!-- Effect chips -->
                 <div class="ds-chip-check-group wlt-effects" id="wlt-effect-group">
@@ -1368,7 +1321,7 @@
                       <div
                         class="storage-bar-fill"
                         data-sensor-drive-bar
-                        style="width: 68%; background: var(--cyan)"
+                        style="width: 68%; background: var(--accent-color)"
                       ></div>
                     </div>
                   </div>
@@ -1381,7 +1334,7 @@
                       <div
                         class="storage-bar-fill"
                         data-sensor-drive-bar
-                        style="width: 41%; background: var(--purple)"
+                        style="width: 41%; background: var(--accent-color)"
                       ></div>
                     </div>
                   </div>
@@ -1819,40 +1772,6 @@
                           <rect x="11" y="9" width="3" height="5" rx="1" />
                         </svg>
                       </button>
-                      <button
-                        class="ls-device-btn"
-                        onclick="lsDashSelectDevice(this, 'headphones-nv')"
-                        title="Cloud III (No Velvet)"
-                      >
-                        <svg
-                          viewBox="0 0 16 16"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="1.3"
-                          stroke-linecap="round"
-                        >
-                          <path d="M4 10V8a4 4 0 0 1 8 0v2" />
-                          <rect x="2" y="9" width="3" height="5" rx="1" />
-                          <rect x="11" y="9" width="3" height="5" rx="1" />
-                        </svg>
-                      </button>
-                      <button
-                        class="ls-device-btn"
-                        onclick="lsDashSelectDevice(this, 'headphones-f2')"
-                        title="Flight 2 Lavender"
-                      >
-                        <svg
-                          viewBox="0 0 16 16"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="1.3"
-                          stroke-linecap="round"
-                        >
-                          <path d="M4 10V8a4 4 0 0 1 8 0v2" />
-                          <rect x="2" y="9" width="3" height="5" rx="1" />
-                          <rect x="11" y="9" width="3" height="5" rx="1" />
-                        </svg>
-                      </button>
                     </div>
                   </div>
                   <div>
@@ -1952,7 +1871,7 @@
                 </div>
                 <div class="w-section-label">Wallpaper</div>
                 <div class="pers-accent-row" style="gap: 6px; flex-wrap: wrap">
-                  <div class="w-wp-sw active" data-wallpaper="nord" onclick="setWallpaper('nord')">
+                  <!-- <div class="w-wp-sw" data-wallpaper="nord" onclick="setWallpaper('nord')">
                     <div class="app-wp-1"></div>
                   </div>
                   <div class="w-wp-sw" data-wallpaper="ember" onclick="setWallpaper('ember')">
@@ -1969,6 +1888,18 @@
                   </div>
                   <div class="w-wp-sw" data-wallpaper="sunset" onclick="setWallpaper('sunset')">
                     <div class="app-wp-6"></div>
+                  </div> -->
+                  <div class="w-wp-sw active" data-wallpaper="red" onclick="setWallpaper('red')">
+                    <div class="app-wp-red"></div>
+                  </div>
+                  <div class="w-wp-sw" data-wallpaper="blue" onclick="setWallpaper('blue')">
+                    <div class="app-wp-blue"></div>
+                  </div>
+                  <div class="w-wp-sw" data-wallpaper="purple" onclick="setWallpaper('purple')">
+                    <div class="app-wp-purple"></div>
+                  </div>
+                  <div class="w-wp-sw" data-wallpaper="abstractv2" onclick="setWallpaper('abstractv2')">
+                    <div class="app-wp-abstractv2"></div>
                   </div>
                   <div
                     class="w-wp-sw cwp-upload-thumb"
@@ -1989,6 +1920,24 @@
                       <path d="M4 15h12v1.5a.5.5 0 01-.5.5h-11a.5.5 0 01-.5-.5V15z" />
                     </svg>
                     <span class="cwp-lbl">Upload</span>
+                  </div>
+                </div>
+                <div class="wp-effect-sliders">
+                  <div class="wp-effect-row">
+                    <span class="wp-effect-label">Blur</span>
+                    <div class="ds-slider" style="flex: 1">
+                      <input type="range" class="wp-blur-slider" min="0" max="60" step="2" value="44"
+                        oninput="dsSliderUpdate(this); setWallpaperBlur(+this.value)" />
+                    </div>
+                    <span class="wp-blur-val wp-effect-val">44px</span>
+                  </div>
+                  <div class="wp-effect-row">
+                    <span class="wp-effect-label">Opacity</span>
+                    <div class="ds-slider" style="flex: 1">
+                      <input type="range" class="wp-opacity-slider" min="0" max="100" step="5" value="100"
+                        oninput="dsSliderUpdate(this); setWallpaperOpacity(+this.value)" />
+                    </div>
+                    <span class="wp-opacity-val wp-effect-val">100%</span>
                   </div>
                 </div>
               </div>
@@ -2266,7 +2215,7 @@
                     <svg
                       viewBox="0 0 20 20"
                       fill="none"
-                      stroke="currentColor"
+                      stroke="var(--text-subtle)"
                       stroke-width="1.8"
                       stroke-linecap="round"
                     >
@@ -2277,20 +2226,6 @@
                   <span class="w-add-label">Add Widget</span>
                 </div>
                 <button class="ds-btn ai-arrange-btn" id="ai-arrange-btn" onclick="expandAiArrange()">
-                  <svg
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.6"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    width="12"
-                    height="12"
-                  >
-                    <path
-                      d="M10 1 L11 4.5 L14 3 L12.5 6 L16 5.5 L12.5 7.5 L15 10 L11.5 9 L10 13 L8.5 9 L5 10 L7.5 7.5 L4 5.5 L7.5 6 L6 3 L9 4.5Z"
-                    />
-                  </svg>
                   AI Arrange
                 </button>
               </div>
@@ -2938,12 +2873,18 @@
 
                   <span class="lib-spacer"></span>
 
-                  <select class="ds-select sm" onchange="setLibSort(this.value)">
-                    <option value="recent">Recently Played</option>
-                    <option value="alpha">A–Z</option>
-                    <option value="hours">Most Played</option>
-                    <option value="added">Recently Added</option>
-                  </select>
+                  <div class="ds-dropdown" data-value="recent">
+                    <button class="ds-dropdown-trigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Sort library" onclick="dsDropdownToggle(this)">
+                      <span class="ds-dropdown-label">Recently Played</span>
+                      <span class="ds-dropdown-chevron" aria-hidden="true"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                    </button>
+                    <div class="ds-dropdown-menu" role="listbox" aria-label="Sort library">
+                      <button class="ds-dropdown-item selected" type="button" role="option" aria-selected="true" data-value="recent" onclick="dsDropdownPick(this); setLibSort('recent')">Recently Played</button>
+                      <button class="ds-dropdown-item" type="button" role="option" aria-selected="false" data-value="alpha" onclick="dsDropdownPick(this); setLibSort('alpha')">A–Z</button>
+                      <button class="ds-dropdown-item" type="button" role="option" aria-selected="false" data-value="hours" onclick="dsDropdownPick(this); setLibSort('hours')">Most Played</button>
+                      <button class="ds-dropdown-item" type="button" role="option" aria-selected="false" data-value="added" onclick="dsDropdownPick(this); setLibSort('added')">Recently Added</button>
+                    </div>
+                  </div>
 
                   <!-- View options popover -->
                   <div class="lib-options-wrap">
@@ -4456,7 +4397,7 @@
               <div class="ds-section-header">
                 <span class="ds-sh-label">Monitoring</span>
                 <div class="ds-sh-line"></div>
-                <span class="ds-sh-count">1 feature</span>
+                <!-- <span class="ds-sh-count">1 feature</span> -->
               </div>
 
               <!-- Full-width System Vitals bar -->
@@ -4465,27 +4406,18 @@
                 <div class="pvital-cell" onclick="openVitalsTab('cpu')" title="CPU Details">
                   <div class="gauge-wrap" data-sensor="cpu" style="margin-bottom: 6px">
                     <div class="gauge-ec"></div>
-                    <div class="gauge-temp-badge">89°F</div>
                   </div>
                   <span class="vital-label">CPU</span>
+                  <div class="gauge-temp-badge">89°F</div>
                 </div>
 
                 <!-- GPU -->
                 <div class="pvital-cell" onclick="openVitalsTab('gpu')" title="GPU Details">
                   <div class="gauge-wrap" data-sensor="gpu" style="margin-bottom: 6px">
                     <div class="gauge-ec"></div>
-                    <div
-                      class="gauge-temp-badge"
-                      style="
-                        background: var(--purple-dim);
-                        border-color: rgba(168, 85, 247, 0.25);
-                        color: var(--purple);
-                      "
-                    >
-                      76°F
-                    </div>
                   </div>
                   <span class="vital-label">GPU</span>
+                  <div class="gauge-temp-badge" style="background:var(--green-dim);border-color:var(--green-dim);color:var(--green);">76°F</div>
                 </div>
 
                 <!-- RAM -->
@@ -4497,9 +4429,9 @@
                   <div class="gauge-temp-badge"
                     data-sensor-ram-used
                     style="
-                    background: rgba(12, 31, 41, 1);
-                    border-color: rgba(0, 84, 94, 1);
-                    color: rgba(0, 204, 218, 1);
+                    background: var(--green-dim);
+                    border-color: var(--green-dim);
+                    color: var(--green);
                     "
                     >
                     18.4 GB
@@ -4584,7 +4516,7 @@
                         <div
                           class="storage-bar-fill"
                           data-sensor-drive-bar
-                          style="width: 68%; background: var(--cyan)"
+                          style="width: 68%; background: var(--accent-color)"
                         ></div>
                       </div>
                     </div>
@@ -4597,7 +4529,7 @@
                         <div
                           class="storage-bar-fill"
                           data-sensor-drive-bar
-                          style="width: 41%; background: var(--purple)"
+                          style="width: 41%; background: var(--accent-color)"
                         ></div>
                       </div>
                     </div>
@@ -4612,7 +4544,7 @@
             <!-- ══════════════════════════════
              01b — AI PERFORMANCE ADVISOR (TH-139)
         ══════════════════════════════ -->
-            <div class="perf-category">
+<!--             <div class="perf-category">
               <div class="ds-section-header">
                 <span class="ds-sh-label">AI Advisor</span>
                 <div class="ds-sh-line"></div>
@@ -4633,10 +4565,10 @@
                 </button>
               </div>
 
-              <div class="advisor-strip" id="advisor-cards">
+              <div class="advisor-strip" id="advisor-cards"> -->
                 <!-- populated by initAdvisor() -->
-              </div>
-            </div>
+<!--               </div>
+            </div> -->
             <!-- /AI Advisor -->
 
             <!-- ══════════════════════════════
@@ -4646,32 +4578,19 @@
               <div class="ds-section-header">
                 <span class="ds-sh-label">Power &amp; Thermal</span>
                 <div class="ds-sh-line"></div>
-                <span class="ds-sh-count">4 features</span>
+                <!-- <span class="ds-sh-count">4 features</span> -->
               </div>
 
               <div class="perf-grid perf-grid-4">
                 <!-- Power Mode Presets -->
                 <div class="ds-feature-card">
                   <div class="ds-feature-card-header">
-                    <div
-                      class="ds-feature-card-icon"
-                      style="
-                        background: rgba(255, 107, 43, 0.08);
-                        border: 1px solid rgba(255, 107, 43, 0.2);
-                        color: var(--orange);
-                      "
-                    >
-                      <svg
-                        viewBox="0 0 14 14"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.4"
-                        stroke-linecap="round"
-                      >
-                        <path d="M7.5 1.5L4 7.5H6.5L5.5 11.5L10 5.5H7.5L8.5 1.5Z" />
+                    <div class="ds-feature-card-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" viewBox="0 0 22 20" fill="none">
+                        <path d="M4 19V12M4 8V1M11 19V10M11 6V1M18 19V14M18 10V1M1 12H7M8 6H14M15 14H21" stroke="var(--accent-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                       </svg>
                     </div>
-                    <span class="ds-badge status warn">Performance</span>
+                    <span class="ds-badge status">Performance</span>
                   </div>
                   <div class="ds-feature-card-title">Power Mode</div>
                   <div class="power-modes">
@@ -4689,9 +4608,9 @@
                       <span class="power-mode-label">Balanced</span>
                       <span class="power-mode-watts">65W</span>
                     </button>
-                    <button class="power-mode-btn" data-mode="battery" onclick="setPowerMode(this, 'batt-mode', 'Battery Saver')">
+                    <button class="power-mode-btn" data-mode="battery" onclick="setPowerMode(this, 'batt-mode', 'Eco')">
                       <span class="power-mode-dot"></span>
-                      <span class="power-mode-label">Battery Saver</span>
+                      <span class="power-mode-label">Eco</span>
                       <span class="power-mode-watts">35W</span>
                     </button>
                   </div>
@@ -4700,27 +4619,12 @@
                 <!-- Fan Control -->
                 <div class="ds-feature-card" onclick="openFan()">
                   <div class="ds-feature-card-header">
-                    <div
-                      class="ds-feature-card-icon"
-                      style="
-                        background: rgba(0, 200, 215, 0.08);
-                        border: 1px solid rgba(0, 200, 215, 0.18);
-                        color: var(--cyan);
-                      "
-                    >
-                      <svg
-                        viewBox="0 0 14 14"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.4"
-                        stroke-linecap="round"
-                      >
-                        <circle cx="7" cy="7" r="2" />
-                        <path d="M7 1.5C7 1.5 9.5 3.5 7.5 5.5C9.5 5.5 11.5 4.5 11.5 7C11.5 7 10 7 8.5 7" />
-                        <path d="M7 12.5C7 12.5 4.5 10.5 6.5 8.5C4.5 8.5 2.5 9.5 2.5 7C2.5 7 4 7 5.5 7" />
+                    <div class="ds-feature-card-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                        <path d="M2.34025 15.9997C1.0881 13.8298 1.72473 11.0644 3.79795 9.66006L3.80018 9.65784C5.46564 8.53235 7.65775 8.57012 9.28433 9.75228L12.7164 12.2477C14.3418 13.4299 16.5339 13.4676 18.2005 12.3421L18.2027 12.3399C20.2771 10.9356 20.9148 8.16792 19.6604 6.00026M16.002 19.6593C13.8321 20.9114 11.0667 20.2748 9.66229 18.2016L9.66006 18.1994C8.53457 16.5339 8.57234 14.3418 9.7545 12.7152L12.2499 9.28317C13.4321 7.6577 13.4699 5.46559 12.3444 3.79901L12.3399 3.79679C10.9356 1.72468 8.16792 1.08582 6.00026 2.3402M18.0705 3.92901C21.9758 7.83436 21.9758 14.1651 18.0705 18.0705C14.1651 21.9758 7.83436 21.9758 3.92901 18.0705C0.0236626 14.1651 0.0236626 7.83436 3.92901 3.92901C7.83436 0.0236626 14.1651 0.0236626 18.0705 3.92901Z" stroke="var(--accent-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                       </svg>
                     </div>
-                    <span class="ds-badge status info">Custom</span>
+                    <span class="ds-badge status">Custom</span>
                   </div>
                   <div class="ds-feature-card-title">
                     Fan Control
@@ -4769,7 +4673,6 @@
                         openFan();
                         event.stopPropagation();
                       "
-                      style="border-color: rgba(0, 200, 215, 0.2); color: var(--cyan)"
                     >
                       Configure
                     </button>
@@ -4779,24 +4682,9 @@
                 <!-- Undervolting -->
                 <div class="ds-feature-card">
                   <div class="ds-feature-card-header">
-                    <div
-                      class="ds-feature-card-icon"
-                      style="
-                        background: rgba(168, 85, 247, 0.08);
-                        border: 1px solid rgba(168, 85, 247, 0.2);
-                        color: var(--purple);
-                      "
-                    >
-                      <svg
-                        viewBox="0 0 14 14"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.4"
-                        stroke-linecap="round"
-                      >
-                        <rect x="1" y="3" width="12" height="8" rx="1.5" />
-                        <line x1="5" y1="7" x2="9" y2="7" />
-                        <line x1="7" y1="5" x2="7" y2="9" />
+                    <div class="ds-feature-card-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="19" height="22" viewBox="0 0 19 22" fill="none">
+                        <path d="M10.4325 1L1.52593 11.6879C1.17713 12.1064 1.00272 12.3157 1.00006 12.4925C0.99774 12.6461 1.06621 12.7923 1.18574 12.8889C1.32323 13 1.59566 13 2.14051 13H9.43248L8.43248 21L17.339 10.3121C17.6878 9.89358 17.8622 9.68429 17.8649 9.50754C17.8672 9.35388 17.7987 9.2077 17.6792 9.11111C17.5417 9 17.2693 9 16.7244 9H9.43248L10.4325 1Z" stroke="var(--accent-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                       </svg>
                     </div>
                     <button
@@ -4844,7 +4732,6 @@
                         openUV();
                         event.stopPropagation();
                       "
-                      style="border-color: rgba(168, 85, 247, 0.25); color: #c084fc"
                     >
                       Configure
                     </button>
@@ -4854,24 +4741,9 @@
                 <!-- Overclocking -->
                 <div class="ds-feature-card">
                   <div class="ds-feature-card-header">
-                    <div
-                      class="ds-feature-card-icon"
-                      style="
-                        background: rgba(255, 107, 43, 0.08);
-                        border: 1px solid rgba(255, 107, 43, 0.2);
-                        color: var(--orange);
-                      "
-                    >
-                      <svg
-                        viewBox="0 0 14 14"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.4"
-                        stroke-linecap="round"
-                      >
-                        <path d="M2 11 L4 7 L7 9 L10 4 L13 2" />
-                        <line x1="2" y1="13" x2="13" y2="13" />
-                        <circle cx="10" cy="4" r="1.5" fill="currentColor" stroke="none" />
+                    <div class="ds-feature-card-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                        <path d="M8 1V3M14 1V3M8 19V21M14 19V21M19 8H21M19 13H21M1 8H3M1 13H3M7.8 19H14.2C15.8802 19 16.7202 19 17.362 18.673C17.9265 18.3854 18.3854 17.9265 18.673 17.362C19 16.7202 19 15.8802 19 14.2V7.8C19 6.11984 19 5.27976 18.673 4.63803C18.3854 4.07354 17.9265 3.6146 17.362 3.32698C16.7202 3 15.8802 3 14.2 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V14.2C3 15.8802 3 16.7202 3.32698 17.362C3.6146 17.9265 4.07354 18.3854 4.63803 18.673C5.27976 19 6.11984 19 7.8 19ZM9.6 14H12.4C12.9601 14 13.2401 14 13.454 13.891C13.6422 13.7951 13.7951 13.6422 13.891 13.454C14 13.2401 14 12.9601 14 12.4V9.6C14 9.03995 14 8.75992 13.891 8.54601C13.7951 8.35785 13.6422 8.20487 13.454 8.10899C13.2401 8 12.9601 8 12.4 8H9.6C9.03995 8 8.75992 8 8.54601 8.10899C8.35785 8.20487 8.20487 8.35785 8.10899 8.54601C8 8.75992 8 9.03995 8 9.6V12.4C8 12.9601 8 13.2401 8.10899 13.454C8.20487 13.6422 8.35785 13.7951 8.54601 13.891C8.75992 14 9.03995 14 9.6 14Z" stroke="var(--accent-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                       </svg>
                     </div>
                     <span class="ds-badge status">Stock</span>
@@ -4903,19 +4775,7 @@
                         openOC();
                         event.stopPropagation();
                       "
-                      style="border-color: rgba(255, 107, 43, 0.25); color: var(--orange)"
                     >
-                      <svg
-                        viewBox="0 0 10 10"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                      >
-                        <circle cx="5" cy="5" r="3.5" />
-                        <line x1="5" y1="3.5" x2="5" y2="5.5" />
-                        <circle cx="5" cy="7" r="0.4" fill="currentColor" stroke="none" />
-                      </svg>
                       Configure
                     </button>
                   </div>
@@ -4931,40 +4791,21 @@
               <div class="ds-section-header">
                 <span class="ds-sh-label">Optimizer</span>
                 <div class="ds-sh-line"></div>
-                <span class="ds-sh-count">3 features</span>
+                <!-- <span class="ds-sh-count">3 features</span> -->
               </div>
 
               <div class="perf-grid perf-grid-3">
                 <!-- OMEN AI -->
                 <div
                   class="ds-feature-card"
-                  style="
-                    background: linear-gradient(135deg, rgba(0, 200, 215, 0.04) 0%, rgba(255, 255, 255, 0.02) 60%);
-                    border-color: rgba(0, 200, 215, 0.1);
-                  "
                 >
                   <div class="ds-feature-card-header">
-                    <div
-                      class="ds-feature-card-icon"
-                      style="
-                        background: rgba(0, 200, 215, 0.1);
-                        border: 1px solid rgba(0, 200, 215, 0.25);
-                        color: var(--cyan);
-                      "
-                    >
-                      <!-- Diamond icon -->
-                      <svg
-                        viewBox="0 0 14 14"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.3"
-                        stroke-linejoin="round"
-                      >
-                        <polygon points="7,1.5 12.5,7 7,12.5 1.5,7" />
-                        <polygon points="7,4 10,7 7,10 4,7" />
+                    <div class="ds-feature-card-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M24 12L12 24L0 12L12 0L24 12ZM3 12L12 21L21 12L12 3L3 12ZM16.2861 12L12 16.2861L7.71484 12L12 7.71387L16.2861 12Z" fill="var(--accent-color)"/>
                       </svg>
                     </div>
-                    <span class="ds-badge status positive">Active</span>
+                    <span class="ds-badge status">Active</span>
                   </div>
                   <div class="ds-feature-card-title">OMEN AI</div>
                   <div class="ds-feature-card-sub">
@@ -4977,11 +4818,10 @@
                         openAI();
                         event.stopPropagation();
                       "
-                      style="border-color: rgba(0, 200, 215, 0.2); color: var(--cyan)"
                     >
                       Configure
                     </button>
-                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-subtle)">
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim)">
                       Last tuned 2h ago
                     </span>
                   </div>
@@ -4990,32 +4830,14 @@
                 <!-- Booster -->
                 <div
                   class="ds-feature-card"
-                  style="
-                    background: linear-gradient(135deg, rgba(255, 107, 43, 0.04) 0%, rgba(255, 255, 255, 0.02) 60%);
-                    border-color: rgba(255, 107, 43, 0.09);
-                  "
                 >
                   <div class="ds-feature-card-header">
-                    <div
-                      class="ds-feature-card-icon"
-                      style="
-                        background: rgba(255, 107, 43, 0.08);
-                        border: 1px solid rgba(255, 107, 43, 0.2);
-                        color: var(--orange);
-                      "
-                    >
-                      <svg
-                        viewBox="0 0 14 14"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.4"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path d="M8 1L4.5 7.5H7L6 13L11 6H8L9 1Z" fill="rgba(255,107,43,0.3)" stroke-width="0.8" />
+                    <div class="ds-feature-card-icon">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M10.5 14.0002L7.5 11.0002M10.5 14.0002C11.8968 13.469 13.2369 12.799 14.5 12.0002M10.5 14.0002V19.0002C10.5 19.0002 13.53 18.4502 14.5 17.0002C15.58 15.3802 14.5 12.0002 14.5 12.0002M7.5 11.0002C8.03214 9.61968 8.7022 8.29631 9.5 7.05025C10.6652 5.18723 12.2876 3.6533 14.213 2.59434C16.1384 1.53538 18.3027 0.986619 20.5 1.00025C20.5 3.72025 19.72 8.50025 14.5 12.0002M7.5 11.0002H2.5C2.5 11.0002 3.05 7.97025 4.5 7.00025C6.12 5.92025 9.5 7.00025 9.5 7.00025M3 15.5002C1.5 16.7602 1 20.5002 1 20.5002C1 20.5002 4.74 20.0002 6 18.5002C6.71 17.6602 6.7 16.3702 5.91 15.5902C5.52131 15.2193 5.00929 15.0049 4.47223 14.9883C3.93516 14.9717 3.41088 15.154 3 15.5002Z" stroke="var(--accent-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                       </svg>
                     </div>
-                    <span class="ds-badge status warn">Ready</span>
+                    <span class="ds-badge status">Ready</span>
                   </div>
                   <div class="ds-feature-card-title">Booster</div>
                   <div style="display: flex; align-items: baseline; gap: 3px; margin: 6px 0 2px">
@@ -5026,7 +4848,6 @@
                     <button
                       class="btn sm"
                       onclick="openBooster()"
-                      style="border-color: rgba(255, 107, 43, 0.2); color: var(--orange)"
                     >
                       Configure
                     </button>
@@ -5036,14 +4857,8 @@
                 <!-- Graphic Switcher -->
                 <div class="ds-feature-card">
                   <div class="ds-feature-card-header">
-                    <div
-                      class="ds-feature-card-icon"
-                      style="
-                        background: rgba(168, 85, 247, 0.08);
-                        border: 1px solid rgba(168, 85, 247, 0.2);
-                        color: var(--purple);
-                      "
-                    >
+<!--                     <div
+                      class="ds-feature-card-icon">
                       <svg
                         viewBox="0 0 14 14"
                         fill="none"
@@ -5067,15 +4882,13 @@
                         <line x1="4" y1="9" x2="4" y2="11.5" />
                         <line x1="10" y1="9" x2="10" y2="11.5" />
                       </svg>
-                    </div>
+                    </div> -->
+                    <div class="ds-feature-card-title">Graphic Switcher</div>
                     <span
-                      class="ds-badge status info"
-                      style="background: var(--purple-dim); border-color: rgba(168, 85, 247, 0.25); color: #c084fc"
-                    >
+                      class="ds-badge status">
                       Discrete
                     </span>
                   </div>
-                  <div class="ds-feature-card-title">Graphic Switcher</div>
                   <div class="gpu-switch-row">
                     <button class="gpu-btn active" onclick="setGPU(this, 'discrete')">
                       <span class="gpu-btn-label">Discrete</span>
@@ -5089,10 +4902,10 @@
                   <div
                     style="
                       font-family: 'JetBrains Mono', monospace;
-                      font-size: 9px;
-                      color: var(--text-subtle);
+                      font-size: var(--text-micro);
+                      color: var(--text-dim);
                       margin-top: 8px;
-                      letter-spacing: 0.04em;
+                      /*letter-spacing: 0.04em;*/
                     "
                   >
                     Requires restart to apply
@@ -5109,7 +4922,7 @@
               <div class="ds-section-header">
                 <span class="ds-sh-label">Maintenance</span>
                 <div class="ds-sh-line"></div>
-                <span class="ds-sh-count">2 features</span>
+                <!-- <span class="ds-sh-count">2 features</span> -->
               </div>
 
               <div class="perf-grid perf-grid-2">
@@ -5117,26 +4930,9 @@
                 <div class="ds-feature-card" onclick="openModal('sc')">
                   <div class="ds-feature-card-header">
                     <div
-                      class="ds-feature-card-icon"
-                      style="
-                        background: rgba(0, 200, 215, 0.08);
-                        border: 1px solid rgba(0, 200, 215, 0.18);
-                        color: var(--cyan);
-                      "
-                    >
-                      <svg
-                        viewBox="0 0 14 14"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.4"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <line x1="9" y1="2" x2="5" y2="10" />
-                        <path d="M3,10 Q4.5,8 5,10 Q5.5,12 7,10 Q8.5,8 9,10" />
-                        <line x1="3" y1="10" x2="9" y2="10" />
-                        <circle cx="11" cy="4" r="1" fill="currentColor" stroke="none" />
-                        <circle cx="8" cy="2.5" r="0.8" fill="currentColor" stroke="none" opacity="0.6" />
+                      class="ds-feature-card-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="22" viewBox="0 0 18 22" fill="none">
+                        <path d="M1 13L1 19.4C1 19.9601 1 20.2401 1.10899 20.454C1.20487 20.6422 1.35785 20.7951 1.54601 20.891C1.75992 21 2.03995 21 2.6 21L15.4 21C15.9601 21 16.2401 21 16.454 20.891C16.6422 20.7951 16.7951 20.6422 16.891 20.454C17 20.2401 17 19.9601 17 19.4L17 13M1 13L17 13M1 13L1 12.8C1 11.1198 1 10.2798 1.32698 9.63803C1.6146 9.07354 2.07354 8.6146 2.63803 8.32698C3.27976 8 4.11984 8 5.8 8L12.2 8C13.8802 8 14.7202 8 15.362 8.32698C15.9265 8.6146 16.3854 9.07354 16.673 9.63803C17 10.2798 17 11.1198 17 12.8L17 13M6.5 8L6.5 3.5C6.5 2.11929 7.61929 0.999999 9 0.999999C10.3807 0.999999 11.5 2.11929 11.5 3.5L11.5 8" stroke="var(--accent-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                       </svg>
                     </div>
                     <span class="ds-badge status">Ready</span>
@@ -5152,7 +4948,7 @@
                   </div>
                   <div class="cleaner-stat-row">
                     <span class="cleaner-stat-key">Last cleaned</span>
-                    <span class="cleaner-stat-val" style="font-size: 11px">3 days ago</span>
+                    <span class="cleaner-stat-val">3 days ago</span>
                   </div>
                   <div class="ds-feature-card-footer">
                     <button
@@ -5161,7 +4957,6 @@
                         openModal('sc');
                         event.stopPropagation();
                       "
-                      style="border-color: rgba(0, 200, 215, 0.2); color: var(--cyan)"
                     >
                       View &amp; Clean
                     </button>
@@ -5172,26 +4967,12 @@
                 <div class="ds-feature-card">
                   <div class="ds-feature-card-header">
                     <div
-                      class="ds-feature-card-icon"
-                      style="
-                        background: rgba(34, 197, 94, 0.08);
-                        border: 1px solid rgba(34, 197, 94, 0.2);
-                        color: var(--green);
-                      "
-                    >
-                      <svg
-                        viewBox="0 0 14 14"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.4"
-                        stroke-linecap="round"
-                      >
-                        <circle cx="7" cy="7" r="2" />
-                        <path d="M7 2C7 2 8.5 3.5 7 5.5C8.5 5.5 10.5 5 10.5 7C10.5 7 9 7 8 7" />
-                        <path d="M7 12C7 12 5.5 10.5 7 8.5C5.5 8.5 3.5 9 3.5 7C3.5 7 5 7 6 7" />
+                      class="ds-feature-card-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="22" viewBox="0 0 18 22" fill="none">
+                        <path d="M1 13L1 19.4C1 19.9601 1 20.2401 1.10899 20.454C1.20487 20.6422 1.35785 20.7951 1.54601 20.891C1.75992 21 2.03995 21 2.6 21L15.4 21C15.9601 21 16.2401 21 16.454 20.891C16.6422 20.7951 16.7951 20.6422 16.891 20.454C17 20.2401 17 19.9601 17 19.4L17 13M1 13L17 13M1 13L1 12.8C1 11.1198 1 10.2798 1.32698 9.63803C1.6146 9.07354 2.07354 8.6146 2.63803 8.32698C3.27976 8 4.11984 8 5.8 8L12.2 8C13.8802 8 14.7202 8 15.362 8.32698C15.9265 8.6146 16.3854 9.07354 16.673 9.63803C17 10.2798 17 11.1198 17 12.8L17 13M6.5 8L6.5 3.5C6.5 2.11929 7.61929 0.999999 9 0.999999C10.3807 0.999999 11.5 2.11929 11.5 3.5L11.5 8" stroke="var(--accent-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                       </svg>
                     </div>
-                    <span class="ds-badge status positive">Good</span>
+                    <span class="ds-badge status">Good</span>
                   </div>
                   <div class="ds-feature-card-title">Fan Cleaner</div>
                   <div class="ds-feature-card-sub" style="margin-bottom: 8px">Fan health and dust removal guide</div>
@@ -5199,14 +4980,7 @@
                     <div class="fan-health-fill" style="width: 82%"></div>
                   </div>
                   <div style="display: flex; justify-content: space-between; align-items: baseline">
-                    <span
-                      style="
-                        font-family: 'Barlow Condensed', sans-serif;
-                        font-size: 20px;
-                        font-weight: 700;
-                        color: var(--green);
-                      "
-                    >
+                    <span class="fan-health-pct">
                       82%
                     </span>
                     <span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-subtle)">
@@ -5228,15 +5002,15 @@
             <!-- ══════════════════════════════
                  05 — PREDICTIVE MAINTENANCE
              ══════════════════════════════ -->
-            <div class="perf-category" id="perf-predict">
+            <!-- <div class="perf-category" id="perf-predict">
               <div class="ds-section-header">
                 <span class="ds-sh-label">Predictive Maintenance</span>
                 <div class="ds-sh-line"></div>
                 <span class="ds-sh-count">3 alerts</span>
-              </div>
+              </div> -->
 
               <!-- Health Grades -->
-              <div class="predict-grades">
+              <!-- <div class="predict-grades">
                 <div class="predict-grade" data-grade="A">
                   <div class="predict-grade-ring" style="--ring-color: var(--green); --ring-pct: 92">
                     <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" stroke="rgba(255,255,255,0.06)" stroke-width="3" fill="none"/><circle cx="24" cy="24" r="20" stroke="var(--green)" stroke-width="3" fill="none" stroke-dasharray="125.7" stroke-dashoffset="10.1" transform="rotate(-90 24 24)"/></svg>
@@ -5277,12 +5051,12 @@
                   <span class="predict-grade-label">Fans</span>
                   <span class="predict-grade-sub">88% health</span>
                 </div>
-              </div>
+              </div> -->
 
               <!-- Alert Cards + Sparklines -->
-              <div class="perf-grid perf-grid-3">
+              <!-- <div class="perf-grid perf-grid-3"> -->
                 <!-- SSD Endurance Alert -->
-                <div class="ds-feature-card predict-alert-card">
+                <!-- <div class="ds-feature-card predict-alert-card">
                   <div class="ds-feature-card-header">
                     <div class="ds-feature-card-icon" style="background: rgba(255, 107, 43, 0.08); border: 1px solid rgba(255, 107, 43, 0.2); color: var(--orange);">
                       <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
@@ -5313,10 +5087,10 @@
                     <span class="cleaner-stat-key">Est. lifespan</span>
                     <span class="cleaner-stat-val">~2.1 years</span>
                   </div>
-                </div>
+                </div> -->
 
                 <!-- GPU Thermal Trend Alert -->
-                <div class="ds-feature-card predict-alert-card">
+                <!-- <div class="ds-feature-card predict-alert-card">
                   <div class="ds-feature-card-header">
                     <div class="ds-feature-card-icon" style="background: rgba(255, 107, 43, 0.08); border: 1px solid rgba(255, 107, 43, 0.2); color: var(--orange);">
                       <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
@@ -5347,10 +5121,10 @@
                     <span class="cleaner-stat-key">Recommendation</span>
                     <span class="cleaner-stat-val" style="font-size: 10px">Clean fan filters</span>
                   </div>
-                </div>
+                </div> -->
 
                 <!-- Fan RPM Variance Alert -->
-                <div class="ds-feature-card predict-alert-card">
+                <!-- <div class="ds-feature-card predict-alert-card">
                   <div class="ds-feature-card-header">
                     <div class="ds-feature-card-icon" style="background: rgba(250, 204, 21, 0.08); border: 1px solid rgba(250, 204, 21, 0.2); color: var(--yellow);">
                       <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
@@ -5383,13 +5157,14 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
             <!-- /Predictive Maintenance -->
           </div>
+
           <!-- /page-perform -->
           <div id="page-personalize" class="page-content" style="display: none">
-            <!-- ══ LIGHT STUDIO (Module) ══ -->
-            <div class="perf-category" data-module="lightstudio">
+            <!-- ══ LIGHT STUDIO (Module) — legacy single-device viewer (v1) ══ -->
+            <div class="perf-category ls-v1" data-module="lightstudio">
               <div class="ds-section-header">
                 <span class="ds-sh-label">Light Studio</span>
                 <div class="ds-sh-line"></div>
@@ -5825,6 +5600,121 @@
               </div>
             </div>
 
+            <!-- ══ LIGHT STUDIO V2 — 3D digital-desk replica (default) ══ -->
+            <div class="perf-category ls-v2" data-module="lightstudio">
+              <div class="ds-section-header">
+                <span class="ds-sh-label">Light Studio</span>
+                <div class="ds-sh-line"></div>
+                <button class="ds-sh-action" onclick="lsv2SelectAll()">Select All</button>
+                <button class="ds-sh-action" onclick="lsv2ClearSelection()">Deselect</button>
+                <button class="ds-sh-action" onclick="lsv2ResetLayout()">Reset Layout</button>
+              </div>
+
+              <div class="lsv2">
+                <div class="lsv2-workspace">
+                  <!-- 3D viewport (left) -->
+                  <div class="lsv2-viewport-wrap" id="lsv2-viewport">
+                    <canvas id="lsv2-canvas"></canvas>
+
+                    <div class="lsv2-hud">
+                      <div class="lsv2-hud-hint">Drag empty space to orbit · Right-click + drag to pan · Scroll to zoom</div>
+                      <div class="lsv2-hud-group">
+                        <button class="lsp-hud-btn"        data-view="front"         onclick="lsv2SetCameraView('front')">Front</button>
+                        <button class="lsp-hud-btn active" data-view="three-quarter" onclick="lsv2SetCameraView('three-quarter')">3/4</button>
+                        <button class="lsp-hud-btn"        data-view="top"           onclick="lsv2SetCameraView('top')">Top</button>
+                        <button class="lsp-hud-btn"        data-view="side"          onclick="lsv2SetCameraView('side')">Side</button>
+                      </div>
+                    </div>
+
+                    <div class="lsv2-loading" id="lsv2-loading">
+                      <div class="lsv2-loading-spinner"></div>
+                      <div class="lsv2-loading-text">Loading 3D Setup…</div>
+                    </div>
+
+                    <div class="lsv2-footer" id="lsv2-footer">
+                      <span><span class="lsv2-footer-count" id="lsv2-footer-count">0</span> devices selected</span>
+                      <button class="lsv2-footer-btn" onclick="lsv2SyncSelectionToAll()">Sync color to all →</button>
+                      <button class="lsv2-footer-btn" onclick="lsv2ClearSelection()">Clear</button>
+                    </div>
+                  </div>
+
+                  <!-- Controls panel (right) -->
+                  <div class="lsv2-controls">
+                    <div class="lsv2-ctrl-section">
+                      <div class="lsv2-ctrl-label">Editing</div>
+                      <div class="lsv2-ctrl-subtitle" id="lsv2-target-title">No device selected</div>
+                      <div class="lsv2-ctrl-desc" id="lsv2-target-desc">Click a device on the desk, or toggle Sync All to edit them together.</div>
+                      <div class="lsv2-target-bar" id="lsv2-target-chips"></div>
+                    </div>
+
+                    <div class="lsv2-ctrl-section">
+                      <div class="lsv2-sync-row" id="lsv2-sync-row">
+                        <div class="lsv2-sync-info">
+                          <div class="lsv2-sync-title">Sync All Devices</div>
+                          <div class="lsv2-sync-sub">Lighting applies to every device on the desk</div>
+                        </div>
+                        <button class="ds-toggle off" id="lsv2-sync-toggle" onclick="lsv2ToggleSync(this)"></button>
+                      </div>
+                    </div>
+
+                    <div class="lsv2-ctrl-section">
+                      <div class="lsv2-ctrl-label">Effect</div>
+                      <div class="lt-effect-row" id="lsv2-effect-row">
+                        <button class="lt-effect-btn active" data-effect="solid"   onclick="lsv2SetEffect(this)">Solid</button>
+                        <button class="lt-effect-btn"        data-effect="breathe" onclick="lsv2SetEffect(this)">Breathe</button>
+                        <button class="lt-effect-btn"        data-effect="wave"    onclick="lsv2SetEffect(this)">Wave</button>
+                        <button class="lt-effect-btn"        data-effect="rainbow" onclick="lsv2SetEffect(this)">Rainbow</button>
+                        <button class="lt-effect-btn"        data-effect="off"     onclick="lsv2SetEffect(this)">Off</button>
+                      </div>
+                    </div>
+
+                    <div class="lsv2-ctrl-section">
+                      <div class="lsv2-ctrl-label">Color</div>
+                      <div class="lt-swatch-row">
+                        <div class="lt-swatch active" data-color="168,85,247"  style="background:#a855f7" onclick="lsv2SetColor(this)"></div>
+                        <div class="lt-swatch"        data-color="0,200,215"   style="background:#00c8d7" onclick="lsv2SetColor(this)"></div>
+                        <div class="lt-swatch"        data-color="255,107,43"  style="background:#ff6b2b" onclick="lsv2SetColor(this)"></div>
+                        <div class="lt-swatch"        data-color="34,197,94"   style="background:#22c55e" onclick="lsv2SetColor(this)"></div>
+                        <div class="lt-swatch"        data-color="59,130,246"  style="background:#3b82f6" onclick="lsv2SetColor(this)"></div>
+                        <div class="lt-swatch"        data-color="244,63,94"   style="background:#f43f5e" onclick="lsv2SetColor(this)"></div>
+                        <div class="lt-swatch lt-swatch-custom" style="background: linear-gradient(135deg,#f43f5e,#a855f7,#3b82f6)" onclick="lsv2SetColor(this)"></div>
+                      </div>
+                      <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 14px">
+                        <div class="lt-slider-row">
+                          <span class="lt-slider-label">Brightness</span>
+                          <div class="ds-slider" style="flex: 1">
+                            <input type="range" min="0" max="100" value="80"
+                              oninput="dsSliderUpdate(this); this.closest('.lt-slider-row').querySelector('.lt-slider-val').textContent = this.value + '%'; lsv2SetBrightness(this.value)" />
+                          </div>
+                          <span class="lt-slider-val">80%</span>
+                        </div>
+                        <div class="lt-slider-row">
+                          <span class="lt-slider-label">Speed</span>
+                          <div class="ds-slider" style="flex: 1">
+                            <input type="range" min="1" max="10" value="5"
+                              oninput="dsSliderUpdate(this); this.closest('.lt-slider-row').querySelector('.lt-slider-val').textContent = this.value; lsv2SetSpeed(this.value)" />
+                          </div>
+                          <span class="lt-slider-val">5</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="lsv2-ctrl-section">
+                      <div class="lsv2-ctrl-label">Scene Presets</div>
+                      <div class="lsv2-presets">
+                        <div class="lsv2-preset" data-preset="ember"    data-color="244,63,94"  data-effect="breathe" onclick="lsv2SetPreset(this)"><span class="lsv2-preset-name">Ember</span></div>
+                        <div class="lsv2-preset" data-preset="cyber"    data-color="0,200,215"  data-effect="wave"    onclick="lsv2SetPreset(this)"><span class="lsv2-preset-name">Cyber</span></div>
+                        <div class="lsv2-preset" data-preset="forest"   data-color="34,197,94"  data-effect="solid"   onclick="lsv2SetPreset(this)"><span class="lsv2-preset-name">Forest</span></div>
+                        <div class="lsv2-preset" data-preset="midnight" data-color="59,130,246" data-effect="breathe" onclick="lsv2SetPreset(this)"><span class="lsv2-preset-name">Midnight</span></div>
+                        <div class="lsv2-preset" data-preset="sunset"   data-color="245,158,11" data-effect="rainbow" onclick="lsv2SetPreset(this)"><span class="lsv2-preset-name">Sunset</span></div>
+                        <div class="lsv2-preset" data-preset="off"      data-color="40,40,50"   data-effect="off"     onclick="lsv2SetPreset(this)"><span class="lsv2-preset-name">Off</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <!-- ══ PERIPHERALS ══ -->
             <div class="perf-category">
               <div class="ds-section-header">
@@ -5834,26 +5724,26 @@
               </div>
               <div class="perf-grid perf-grid-3">
                 <!-- Origins 65 keyboard -->
-                <div class="ds-feature-card device">
+                <div class="ds-feature-card device" onclick="openPeripheralsOn('kb')">
                   <div class="ds-feature-card-img">
                     <img src="./_bundle/HyperX%20Origins%2065-CEVNblb0.webp" alt="HyperX Origins 65" />
                   </div>
                   <div class="ds-feature-card-header">
-                    <span class="ds-badge status info">Connected</span>
+                    <!-- <span class="ds-badge status info">Connected</span> -->
                   </div>
-                  <div class="ds-feature-card-title">HyperX Origins 65</div>
-                  <div class="ds-feature-card-sub">65% compact keyboard · Red switches · Full RGB per-key</div>
+                  <div class="ds-feature-card-title">Origins 65</div>
+                  <!-- <div class="ds-feature-card-sub">65% compact keyboard · Red switches · Full RGB per-key</div> -->
                   <div class="ds-feature-card-footer">
                     <div>
-                      <div class="ds-feature-card-stat" style="font-size: 20px; color: var(--purple)">
+                      <div class="ds-feature-card-stat" style="font-size: 20px; color: var(--accent-color)">
                         12
                         <span class="ds-feature-card-stat-unit">macros</span>
                       </div>
-                      <div class="ds-feature-card-stat-label">1000 Hz polling</div>
+                      <!-- <div class="ds-feature-card-stat-label">1000 Hz polling</div> -->
                     </div>
                     <button class="btn sm" onclick="openPeripheralsOn('kb')">
                       Configure
-                      <svg
+<!--                       <svg
                         viewBox="0 0 10 10"
                         fill="none"
                         stroke="currentColor"
@@ -5861,32 +5751,32 @@
                         stroke-linecap="round"
                       >
                         <polyline points="3,2 7,5 3,8" />
-                      </svg>
+                      </svg> -->
                     </button>
                   </div>
                 </div>
 
                 <!-- Pulsefire Haste 2 mouse -->
-                <div class="ds-feature-card device">
+                <div class="ds-feature-card device" onclick="openPeripheralsOn('mouse')">
                   <div class="ds-feature-card-img">
                     <img src="./_bundle/HyperX%20Pulsefire%20Saga%20Pro-DO6_PVfh.webp" alt="HyperX Pulsefire Haste 2" />
                   </div>
                   <div class="ds-feature-card-header">
-                    <span class="ds-badge status info">Connected</span>
+                    <!-- <span class="ds-badge status info">Connected</span> -->
                   </div>
                   <div class="ds-feature-card-title">Pulsefire Haste 2</div>
-                  <div class="ds-feature-card-sub">Ultra-light gaming mouse · 61g · 8K Hz polling</div>
+                  <!-- <div class="ds-feature-card-sub">Ultra-light gaming mouse · 61g · 8K Hz polling</div> -->
                   <div class="ds-feature-card-footer">
                     <div>
-                      <div class="ds-feature-card-stat" style="font-size: 20px; color: var(--cyan)">
+                      <div class="ds-feature-card-stat" style="font-size: 20px; color: var(--accent-color)">
                         800
                         <span class="ds-feature-card-stat-unit">dpi</span>
                       </div>
-                      <div class="ds-feature-card-stat-label">Active · Stage 2 of 5</div>
+                      <!-- <div class="ds-feature-card-stat-label">Active · Stage 2 of 5</div> -->
                     </div>
                     <button class="btn sm" onclick="openPeripheralsOn('mouse')">
                       Configure
-                      <svg
+<!--                       <svg
                         viewBox="0 0 10 10"
                         fill="none"
                         stroke="currentColor"
@@ -5894,32 +5784,32 @@
                         stroke-linecap="round"
                       >
                         <polyline points="3,2 7,5 3,8" />
-                      </svg>
+                      </svg> -->
                     </button>
                   </div>
                 </div>
 
                 <!-- Cloud III headset -->
-                <div class="ds-feature-card device">
+                <div class="ds-feature-card device" onclick="openPeripheralsOn('hs')">
                   <div class="ds-feature-card-img">
                     <img src="./_bundle/HyperX%20Cloud%20III%20S-B0GxK9hU.webp" alt="HyperX Cloud III" />
                   </div>
                   <div class="ds-feature-card-header">
-                    <span class="ds-badge status info">Connected</span>
+                    <!-- <span class="ds-badge status info">Connected</span> -->
                   </div>
-                  <div class="ds-feature-card-title">HyperX Cloud III</div>
-                  <div class="ds-feature-card-sub">Wired gaming headset · DTS 7.1 Spatial · 53mm drivers</div>
+                  <div class="ds-feature-card-title">Cloud III</div>
+                  <!-- <div class="ds-feature-card-sub">Wired gaming headset · DTS 7.1 Spatial · 53mm drivers</div> -->
                   <div class="ds-feature-card-footer">
                     <div>
-                      <div class="ds-feature-card-stat" style="font-size: 20px; color: var(--green)">
-                        FPS
+                      <div class="ds-feature-card-stat" style="font-size: 20px; color: var(--accent-color)">
+                        Bass Boost
                         <span class="ds-feature-card-stat-unit">eq</span>
                       </div>
-                      <div class="ds-feature-card-stat-label">7.1 Spatial on</div>
+                      <!-- <div class="ds-feature-card-stat-label">7.1 Spatial on</div> -->
                     </div>
                     <button class="btn sm" onclick="openPeripheralsOn('hs')">
                       Configure
-                      <svg
+<!--                       <svg
                         viewBox="0 0 10 10"
                         fill="none"
                         stroke="currentColor"
@@ -5927,7 +5817,7 @@
                         stroke-linecap="round"
                       >
                         <polyline points="3,2 7,5 3,8" />
-                      </svg>
+                      </svg> -->
                     </button>
                   </div>
                 </div>
@@ -6110,14 +6000,14 @@
                   <!-- Theme row -->
                   <div class="pers-app-row">
                     <span class="pers-app-row-label">Theme</span>
-                    <div class="ds-segmented">
-                      <button class="ds-segmented-btn active" data-theme-mode="dark" onclick="setTheme('dark')">
+                    <div class="ds-toggle-group">
+                      <button class="ds-toggle-group-btn active" data-theme-mode="dark" onclick="setTheme('dark')">
                         Dark
                       </button>
-                      <button class="ds-segmented-btn" data-theme-mode="light" onclick="setTheme('light')">
+                      <button class="ds-toggle-group-btn" data-theme-mode="light" onclick="setTheme('light')">
                         Light
                       </button>
-                      <button class="ds-segmented-btn" data-theme-mode="system" onclick="setTheme('system')">
+                      <button class="ds-toggle-group-btn" data-theme-mode="system" onclick="setTheme('system')">
                         System
                       </button>
                     </div>
@@ -6126,7 +6016,7 @@
                   <div class="pers-app-row-divider"></div>
 
                   <!-- Density row -->
-                  <div class="pers-app-row">
+                  <!-- <div class="pers-app-row">
                     <span class="pers-app-row-label">Density</span>
                     <div class="pers-density-row" id="app-density-row">
                       <button class="pers-density-opt" onclick="persDensity(this)">Compact</button>
@@ -6135,7 +6025,7 @@
                     </div>
                   </div>
 
-                  <div class="pers-app-row-divider"></div>
+                  <div class="pers-app-row-divider"></div> -->
 
                   <!-- Wallpaper row -->
                   <div class="pers-app-row">
@@ -6143,6 +6033,12 @@
                     <div class="pers-wp-thumbs" id="app-wp-thumbs">
                       <div
                         class="pers-wp-thumb active"
+                        style="background: url('./_bundle/red-dark-rslXeJil.webp') center/cover"
+                        data-wallpaper="red"
+                        onclick="setWallpaper('red')"
+                      ></div>
+                      <!-- <div
+                        class="pers-wp-thumb"
                         style="background: linear-gradient(135deg, #0d0f13 0%, #1a1440 50%, #0f1a2e 100%)"
                         data-wallpaper="nord"
                         onclick="setWallpaper('nord')"
@@ -6184,6 +6080,24 @@
                         "
                         data-wallpaper="sunset"
                         onclick="setWallpaper('sunset')"
+                      ></div> -->
+                      <div
+                        class="pers-wp-thumb"
+                        style="background: url('./_bundle/blue-dark-D1W3Nvin.webp') center/cover"
+                        data-wallpaper="blue"
+                        onclick="setWallpaper('blue')"
+                      ></div>
+                      <div
+                        class="pers-wp-thumb"
+                        style="background: url('./_bundle/purple-dark-BwAvlkaI.webp') center/cover"
+                        data-wallpaper="purple"
+                        onclick="setWallpaper('purple')"
+                      ></div>
+                      <div
+                        class="pers-wp-thumb"
+                        style="background: url('./_bundle/abstractv2-dark-Bpeo4Hk1.webp') center/cover"
+                        data-wallpaper="abstractv2"
+                        onclick="setWallpaper('abstractv2')"
                       ></div>
                       <div
                         class="pers-wp-thumb cwp-upload-thumb"
@@ -6193,6 +6107,24 @@
                         <div class="cwp-bg"></div>
                         <span class="cwp-icon">+</span>
                         <span class="cwp-lbl">Upload</span>
+                      </div>
+                    </div>
+                    <div class="wp-effect-sliders">
+                      <div class="wp-effect-row">
+                        <span class="wp-effect-label">Blur</span>
+                        <div class="ds-slider" style="flex: 1">
+                          <input type="range" class="wp-blur-slider" min="0" max="60" step="2" value="44"
+                            oninput="dsSliderUpdate(this); setWallpaperBlur(+this.value)" />
+                        </div>
+                        <span class="wp-blur-val wp-effect-val">44px</span>
+                      </div>
+                      <div class="wp-effect-row">
+                        <span class="wp-effect-label">Opacity</span>
+                        <div class="ds-slider" style="flex: 1">
+                          <input type="range" class="wp-opacity-slider" min="0" max="100" step="5" value="100"
+                            oninput="dsSliderUpdate(this); setWallpaperOpacity(+this.value)" />
+                        </div>
+                        <span class="wp-opacity-val wp-effect-val">100%</span>
                       </div>
                     </div>
                   </div>
@@ -6914,11 +6846,17 @@
                     </div>
                     <div class="shop-sort-row">
                       <span class="shop-sort-label">Sort:</span>
-                      <select class="shop-sort-select" onchange="shopSort(this.value)">
-                        <option value="discount">Best Discount</option>
-                        <option value="price">Lowest Price</option>
-                        <option value="az">A–Z</option>
-                      </select>
+                      <div class="ds-dropdown" data-value="discount">
+                        <button class="ds-dropdown-trigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Sort deals" onclick="dsDropdownToggle(this)">
+                          <span class="ds-dropdown-label">Best Discount</span>
+                          <span class="ds-dropdown-chevron" aria-hidden="true"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                        </button>
+                        <div class="ds-dropdown-menu" role="listbox" aria-label="Sort deals">
+                          <button class="ds-dropdown-item selected" type="button" role="option" aria-selected="true" data-value="discount" onclick="dsDropdownPick(this); shopSort('discount')">Best Discount</button>
+                          <button class="ds-dropdown-item" type="button" role="option" aria-selected="false" data-value="price" onclick="dsDropdownPick(this); shopSort('price')">Lowest Price</button>
+                          <button class="ds-dropdown-item" type="button" role="option" aria-selected="false" data-value="az" onclick="dsDropdownPick(this); shopSort('az')">A–Z</button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -7220,7 +7158,7 @@
                 <img src="./_bundle/HyperX%20Origins%2065-CEVNblb0.webp" alt="HyperX Origins 65" />
               </div>
               <div class="ds-device-info">
-                <div class="ds-device-name">HyperX Origins 65</div>
+                <div class="ds-device-name">Origins 65</div>
                 <div class="ds-device-status">USB · RGB · Connected</div>
               </div>
               <div class="ds-device-conn"></div>
@@ -7244,7 +7182,7 @@
                 <img src="./_bundle/HyperX%20Cloud%20III%20S-B0GxK9hU.webp" alt="HyperX Cloud III S" />
               </div>
               <div class="ds-device-info">
-                <div class="ds-device-name">HyperX Cloud III S</div>
+                <div class="ds-device-name">Cloud III S</div>
                 <div class="ds-device-status">USB · 53mm · Connected</div>
               </div>
               <div class="ds-device-conn"></div>
@@ -7590,14 +7528,14 @@
             <!-- Benefits + risks -->
             <div class="uv-info-grid">
               <div class="uv-info-card benefits">
-                <div class="uv-info-card-title">Benefits</div>
+                <div class="uv-info-card-title">✅ Benefits</div>
                 <div class="uv-info-item">Lower temps (5–15°F typical)</div>
                 <div class="uv-info-item">Sustained boost clocks under load</div>
                 <div class="uv-info-item">Reduced fan noise</div>
                 <div class="uv-info-item">Better battery life</div>
               </div>
               <div class="uv-info-card risks">
-                <div class="uv-info-card-title">Risks</div>
+                <div class="uv-info-card-title">🚩 Risks</div>
                 <div class="uv-info-item">System instability if too aggressive</div>
                 <div class="uv-info-item">Potential crashes or BSODs</div>
                 <div class="uv-info-item">Start conservative (−50 mV) and test</div>
@@ -8415,14 +8353,14 @@
             <!-- Benefits + risks (reuse uv-info-grid classes) -->
             <div class="uv-info-grid">
               <div class="uv-info-card benefits">
-                <div class="uv-info-card-title">Benefits</div>
+                <div class="uv-info-card-title">✅ Benefits</div>
                 <div class="uv-info-item">Higher FPS in GPU-bound games</div>
                 <div class="uv-info-item">Faster CPU task completion</div>
                 <div class="uv-info-item">Unlocks hardware headroom</div>
                 <div class="uv-info-item">Pairs well with undervolting</div>
               </div>
               <div class="uv-info-card risks">
-                <div class="uv-info-card-title">Risks</div>
+                <div class="uv-info-card-title">🚩 Risks</div>
                 <div class="uv-info-item">Higher temps and power draw</div>
                 <div class="uv-info-item">Crashes if cooling is insufficient</div>
                 <div class="uv-info-item">May shorten component lifespan</div>
@@ -9111,14 +9049,14 @@
             <!-- Benefits + risks -->
             <div class="uv-info-grid">
               <div class="uv-info-card benefits">
-                <div class="uv-info-card-title">Benefits</div>
+                <div class="uv-info-card-title">✅ Benefits</div>
                 <div class="uv-info-item">Zero-effort game optimization</div>
                 <div class="uv-info-item">Improves over time automatically</div>
                 <div class="uv-info-item">Hardware-matched community data</div>
                 <div class="uv-info-item">Per-game granular control</div>
               </div>
               <div class="uv-info-card risks">
-                <div class="uv-info-card-title">Considerations</div>
+                <div class="uv-info-card-title">🚩 Considerations</div>
                 <div class="uv-info-item">May override manual tweaks</div>
                 <div class="uv-info-item">New versions change settings</div>
                 <div class="uv-info-item">Requires internet for updates</div>
@@ -9229,15 +9167,15 @@
                       <div class="ds-settings-row-labels" style="flex: 0 0 auto">
                         <div class="ds-settings-row-label">Mode</div>
                       </div>
-                      <div class="ds-segmented" style="margin-left: auto">
+                      <div class="ds-toggle-group" style="margin-left: auto">
                         <button
-                          class="ds-segmented-btn active"
+                          class="ds-toggle-group-btn active"
                           id="ai-perf-apex"
                           onclick="setAIMode('apex', 'performance', this)"
                         >
                           Performance
                         </button>
-                        <button class="ds-segmented-btn" id="ai-qual-apex" onclick="setAIMode('apex', 'quality', this)">
+                        <button class="ds-toggle-group-btn" id="ai-qual-apex" onclick="setAIMode('apex', 'quality', this)">
                           Quality
                         </button>
                       </div>
@@ -9270,9 +9208,8 @@
                         class="ds-btn sm ghost"
                         id="ai-revert-apex"
                         onclick="revertGameAI('apex')"
-                        style="color: var(--text-subtle); font-size: var(--text-nano)"
                       >
-                        ↩ Revert to Original
+                        Revert to Original
                       </button>
                     </div>
                   </div>
@@ -9341,15 +9278,15 @@
                       <div class="ds-settings-row-labels" style="flex: 0 0 auto">
                         <div class="ds-settings-row-label">Mode</div>
                       </div>
-                      <div class="ds-segmented" style="margin-left: auto">
+                      <div class="ds-toggle-group" style="margin-left: auto">
                         <button
-                          class="ds-segmented-btn active"
+                          class="ds-toggle-group-btn active"
                           id="ai-perf-cs2"
                           onclick="setAIMode('cs2', 'performance', this)"
                         >
                           Performance
                         </button>
-                        <button class="ds-segmented-btn" id="ai-qual-cs2" onclick="setAIMode('cs2', 'quality', this)">
+                        <button class="ds-toggle-group-btn" id="ai-qual-cs2" onclick="setAIMode('cs2', 'quality', this)">
                           Quality
                         </button>
                       </div>
@@ -9382,9 +9319,8 @@
                         class="ds-btn sm ghost"
                         id="ai-revert-cs2"
                         onclick="revertGameAI('cs2')"
-                        style="color: var(--text-subtle); font-size: var(--text-nano)"
                       >
-                        ↩ Revert to Original
+                        Revert to Original
                       </button>
                     </div>
                   </div>
@@ -9453,16 +9389,16 @@
                       <div class="ds-settings-row-labels" style="flex: 0 0 auto">
                         <div class="ds-settings-row-label">Mode</div>
                       </div>
-                      <div class="ds-segmented" style="margin-left: auto">
+                      <div class="ds-toggle-group" style="margin-left: auto">
                         <button
-                          class="ds-segmented-btn"
+                          class="ds-toggle-group-btn"
                           id="ai-perf-dota2"
                           onclick="setAIMode('dota2', 'performance', this)"
                         >
                           Performance
                         </button>
                         <button
-                          class="ds-segmented-btn active"
+                          class="ds-toggle-group-btn active"
                           id="ai-qual-dota2"
                           onclick="setAIMode('dota2', 'quality', this)"
                         >
@@ -9498,9 +9434,8 @@
                         class="ds-btn sm ghost"
                         id="ai-revert-dota2"
                         onclick="revertGameAI('dota2')"
-                        style="color: var(--text-subtle); font-size: var(--text-nano)"
                       >
-                        ↩ Revert to Original
+                        Revert to Original
                       </button>
                     </div>
                   </div>
@@ -9569,16 +9504,16 @@
                       <div class="ds-settings-row-labels" style="flex: 0 0 auto">
                         <div class="ds-settings-row-label">Mode</div>
                       </div>
-                      <div class="ds-segmented" style="margin-left: auto">
+                      <div class="ds-toggle-group" style="margin-left: auto">
                         <button
-                          class="ds-segmented-btn active"
+                          class="ds-toggle-group-btn active"
                           id="ai-perf-fortnite"
                           onclick="setAIMode('fortnite', 'performance', this)"
                         >
                           Performance
                         </button>
                         <button
-                          class="ds-segmented-btn"
+                          class="ds-toggle-group-btn"
                           id="ai-qual-fortnite"
                           onclick="setAIMode('fortnite', 'quality', this)"
                         >
@@ -9614,9 +9549,8 @@
                         class="ds-btn sm ghost"
                         id="ai-revert-fortnite"
                         onclick="revertGameAI('fortnite')"
-                        style="color: var(--text-subtle); font-size: var(--text-nano)"
                       >
-                        ↩ Revert to Original
+                        Revert to Original
                       </button>
                     </div>
                   </div>
@@ -9685,15 +9619,15 @@
                       <div class="ds-settings-row-labels" style="flex: 0 0 auto">
                         <div class="ds-settings-row-label">Mode</div>
                       </div>
-                      <div class="ds-segmented" style="margin-left: auto">
+                      <div class="ds-toggle-group" style="margin-left: auto">
                         <button
-                          class="ds-segmented-btn active"
+                          class="ds-toggle-group-btn active"
                           id="ai-perf-lol"
                           onclick="setAIMode('lol', 'performance', this)"
                         >
                           Performance
                         </button>
-                        <button class="ds-segmented-btn" id="ai-qual-lol" onclick="setAIMode('lol', 'quality', this)">
+                        <button class="ds-toggle-group-btn" id="ai-qual-lol" onclick="setAIMode('lol', 'quality', this)">
                           Quality
                         </button>
                       </div>
@@ -9726,9 +9660,8 @@
                         class="ds-btn sm ghost"
                         id="ai-revert-lol"
                         onclick="revertGameAI('lol')"
-                        style="color: var(--text-subtle); font-size: var(--text-nano)"
                       >
-                        ↩ Revert to Original
+                        Revert to Original
                       </button>
                     </div>
                   </div>
@@ -9797,16 +9730,16 @@
                       <div class="ds-settings-row-labels" style="flex: 0 0 auto">
                         <div class="ds-settings-row-label">Mode</div>
                       </div>
-                      <div class="ds-segmented" style="margin-left: auto">
+                      <div class="ds-toggle-group" style="margin-left: auto">
                         <button
-                          class="ds-segmented-btn active"
+                          class="ds-toggle-group-btn active"
                           id="ai-perf-marvel"
                           onclick="setAIMode('marvel', 'performance', this)"
                         >
                           Performance
                         </button>
                         <button
-                          class="ds-segmented-btn"
+                          class="ds-toggle-group-btn"
                           id="ai-qual-marvel"
                           onclick="setAIMode('marvel', 'quality', this)"
                         >
@@ -9842,9 +9775,8 @@
                         class="ds-btn sm ghost"
                         id="ai-revert-marvel"
                         onclick="revertGameAI('marvel')"
-                        style="color: var(--text-subtle); font-size: var(--text-nano)"
                       >
-                        ↩ Revert to Original
+                        Revert to Original
                       </button>
                     </div>
                   </div>
@@ -9917,16 +9849,16 @@
                       <div class="ds-settings-row-labels" style="flex: 0 0 auto">
                         <div class="ds-settings-row-label">Mode</div>
                       </div>
-                      <div class="ds-segmented" style="margin-left: auto">
+                      <div class="ds-toggle-group" style="margin-left: auto">
                         <button
-                          class="ds-segmented-btn active"
+                          class="ds-toggle-group-btn active"
                           id="ai-perf-minecraft"
                           onclick="setAIMode('minecraft', 'performance', this)"
                         >
                           Performance
                         </button>
                         <button
-                          class="ds-segmented-btn"
+                          class="ds-toggle-group-btn"
                           id="ai-qual-minecraft"
                           onclick="setAIMode('minecraft', 'quality', this)"
                         >
@@ -9963,9 +9895,8 @@
                         id="ai-revert-minecraft"
                         onclick="revertGameAI('minecraft')"
                         disabled
-                        style="color: var(--text-subtle); font-size: var(--text-nano)"
                       >
-                        ↩ Revert to Original
+                        Revert to Original
                       </button>
                     </div>
                   </div>
@@ -10034,15 +9965,15 @@
                       <div class="ds-settings-row-labels" style="flex: 0 0 auto">
                         <div class="ds-settings-row-label">Mode</div>
                       </div>
-                      <div class="ds-segmented" style="margin-left: auto">
+                      <div class="ds-toggle-group" style="margin-left: auto">
                         <button
-                          class="ds-segmented-btn active"
+                          class="ds-toggle-group-btn active"
                           id="ai-perf-ow2"
                           onclick="setAIMode('ow2', 'performance', this)"
                         >
                           Performance
                         </button>
-                        <button class="ds-segmented-btn" id="ai-qual-ow2" onclick="setAIMode('ow2', 'quality', this)">
+                        <button class="ds-toggle-group-btn" id="ai-qual-ow2" onclick="setAIMode('ow2', 'quality', this)">
                           Quality
                         </button>
                       </div>
@@ -10076,9 +10007,8 @@
                         id="ai-revert-ow2"
                         onclick="revertGameAI('ow2')"
                         disabled
-                        style="color: var(--text-subtle); font-size: var(--text-nano)"
                       >
-                        ↩ Revert to Original
+                        Revert to Original
                       </button>
                     </div>
                   </div>
@@ -10147,16 +10077,16 @@
                       <div class="ds-settings-row-labels" style="flex: 0 0 auto">
                         <div class="ds-settings-row-label">Mode</div>
                       </div>
-                      <div class="ds-segmented" style="margin-left: auto">
+                      <div class="ds-toggle-group" style="margin-left: auto">
                         <button
-                          class="ds-segmented-btn active"
+                          class="ds-toggle-group-btn active"
                           id="ai-perf-roblox"
                           onclick="setAIMode('roblox', 'performance', this)"
                         >
                           Performance
                         </button>
                         <button
-                          class="ds-segmented-btn"
+                          class="ds-toggle-group-btn"
                           id="ai-qual-roblox"
                           onclick="setAIMode('roblox', 'quality', this)"
                         >
@@ -10193,9 +10123,8 @@
                         id="ai-revert-roblox"
                         onclick="revertGameAI('roblox')"
                         disabled
-                        style="color: var(--text-subtle); font-size: var(--text-nano)"
                       >
-                        ↩ Revert to Original
+                        Revert to Original
                       </button>
                     </div>
                   </div>
@@ -10264,16 +10193,16 @@
                       <div class="ds-settings-row-labels" style="flex: 0 0 auto">
                         <div class="ds-settings-row-label">Mode</div>
                       </div>
-                      <div class="ds-segmented" style="margin-left: auto">
+                      <div class="ds-toggle-group" style="margin-left: auto">
                         <button
-                          class="ds-segmented-btn active"
+                          class="ds-toggle-group-btn active"
                           id="ai-perf-valorant"
                           onclick="setAIMode('valorant', 'performance', this)"
                         >
                           Performance
                         </button>
                         <button
-                          class="ds-segmented-btn"
+                          class="ds-toggle-group-btn"
                           id="ai-qual-valorant"
                           onclick="setAIMode('valorant', 'quality', this)"
                         >
@@ -10309,9 +10238,8 @@
                         class="ds-btn sm ghost"
                         id="ai-revert-valorant"
                         onclick="revertGameAI('valorant')"
-                        style="color: var(--text-subtle); font-size: var(--text-nano)"
                       >
-                        ↩ Revert to Original
+                        Revert to Original
                       </button>
                     </div>
                   </div>
@@ -10449,14 +10377,14 @@
             <!-- Info cards -->
             <div class="uv-info-grid">
               <div class="uv-info-card benefits">
-                <div class="uv-info-card-title">Benefits</div>
+                <div class="uv-info-card-title">✅ Benefits</div>
                 <div class="uv-info-item">Quieter at idle and light workloads</div>
                 <div class="uv-info-item">Smooth, gradual ramp instead of sudden jumps</div>
                 <div class="uv-info-item">Full RPM headroom when temps spike</div>
                 <div class="uv-info-item">Consistent thermal envelope for sustained FPS</div>
               </div>
               <div class="uv-info-card risks">
-                <div class="uv-info-card-title">Considerations</div>
+                <div class="uv-info-card-title">🚩 Considerations</div>
                 <div class="uv-info-item">Too-aggressive Silent curves risk thermal throttling</div>
                 <div class="uv-info-item">Zero-RPM stop-start can cause audible clicks</div>
                 <div class="uv-info-item">Test stability with a benchmark after any change</div>
@@ -10927,14 +10855,14 @@
             <!-- Info cards -->
             <div class="uv-info-grid">
               <div class="uv-info-card benefits">
-                <div class="uv-info-card-title">Benefits</div>
+                <div class="uv-info-card-title">✅ Benefits</div>
                 <div class="uv-info-item">Recovers gigabytes without risk to your files</div>
                 <div class="uv-info-item">Faster Windows Update installs after cache clear</div>
                 <div class="uv-info-item">Reduces SSD wear from unnecessary writes</div>
                 <div class="uv-info-item">Improved antivirus scan times on a clean drive</div>
               </div>
               <div class="uv-info-card risks">
-                <div class="uv-info-card-title">Considerations</div>
+                <div class="uv-info-card-title">🚩 Considerations</div>
                 <div class="uv-info-item">Browser cache clear will slow first page loads briefly</div>
                 <div class="uv-info-item">Shader cache rebuilds may cause brief stutters in games</div>
                 <div class="uv-info-item">Update cache cannot be restored once removed</div>
@@ -11084,8 +11012,8 @@
             </div>
 
             <div class="modal-actions">
-              <button class="modal-btn scan" onclick="boostScan(this)">Scan</button>
-              <button class="modal-btn boost" onclick="boostRun(this)">Boost Now</button>
+              <button class="btn sm" onclick="boostScan(this)">Scan</button>
+              <button class="ds-btn accent" onclick="boostRun(this)">Boost Now</button>
             </div>
 
             <!-- Stats -->
@@ -11111,14 +11039,14 @@
             <!-- Benefits + risks -->
             <div class="uv-info-grid">
               <div class="uv-info-card benefits">
-                <div class="uv-info-card-title">Benefits</div>
+                <div class="uv-info-card-title">✅ Benefits</div>
                 <div class="uv-info-item">Reclaim 1–3 GB of RAM for games</div>
                 <div class="uv-info-item">Eliminate background CPU drain</div>
                 <div class="uv-info-item">Lower input latency during sessions</div>
                 <div class="uv-info-item">Faster load times with cleared cache</div>
               </div>
               <div class="uv-info-card risks">
-                <div class="uv-info-card-title">Heads Up</div>
+                <div class="uv-info-card-title">🚩 Heads Up</div>
                 <div class="uv-info-item">Closed apps won’t be restored</div>
                 <div class="uv-info-item">Some services restart automatically</div>
                 <div class="uv-info-item">Antivirus toggles reduce protection</div>
@@ -12469,7 +12397,7 @@
 
                   <div class="pdm-settings-col">
                     <div class="pdm-settings-box">
-                      <span class="pdm-grid-section-label">HyperX Origins 65</span>
+                      <span class="pdm-grid-section-label">Origins 65</span>
                       <p class="pdm-settings-fw">Firmware Version 2.1.4</p>
                       <div class="pdm-settings-btns">
                         <button class="ds-btn" type="button" onclick="if(window.toast)window.toast('Opening Device Manager…')"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="1.8" y="2.8" width="12.4" height="8.4" rx="1.4" stroke="currentColor" stroke-width="1.3" /><path d="M5.6 14h4.8M8 11.2V14" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" /></svg>Device Manager</button>
@@ -12793,12 +12721,18 @@
                           <button class="ds-toggle off" role="switch" aria-checked="false" onclick="periSecToggle(this)" aria-label="Mic presets"></button>
                         </div>
                         <div class="peri-sec-body">
-                          <select class="ds-select peri-select" aria-label="Microphone preset">
-                            <option>Gaming</option>
-                            <option>Streaming</option>
-                            <option>Podcast</option>
-                            <option>Conference Call</option>
-                          </select>
+                          <div class="ds-dropdown peri-select" data-value="Gaming">
+                            <button class="ds-dropdown-trigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Microphone preset" onclick="dsDropdownToggle(this)">
+                              <span class="ds-dropdown-label">Gaming</span>
+                              <span class="ds-dropdown-chevron" aria-hidden="true"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                            </button>
+                            <div class="ds-dropdown-menu" role="listbox" aria-label="Microphone preset">
+                              <button class="ds-dropdown-item selected" type="button" role="option" aria-selected="true" data-value="Gaming" onclick="dsDropdownPick(this)">Gaming</button>
+                              <button class="ds-dropdown-item" type="button" role="option" aria-selected="false" data-value="Streaming" onclick="dsDropdownPick(this)">Streaming</button>
+                              <button class="ds-dropdown-item" type="button" role="option" aria-selected="false" data-value="Podcast" onclick="dsDropdownPick(this)">Podcast</button>
+                              <button class="ds-dropdown-item" type="button" role="option" aria-selected="false" data-value="Conference Call" onclick="dsDropdownPick(this)">Conference Call</button>
+                            </div>
+                          </div>
                         </div>
                       </div>
 
@@ -12826,6 +12760,10 @@
                       <button class="ds-toggle" role="switch" aria-checked="true" onclick="periSecToggle(this)" aria-label="Audio equalizer"></button>
                     </div>
                     <div class="peri-sec-body">
+                      <div class="ds-toggle-group" style="margin-bottom: var(--gutter)">
+                        <button class="ds-toggle-group-btn" data-eq-mode="hardware" onclick="periEqMode(this)">Hardware</button>
+                        <button class="ds-toggle-group-btn active" data-eq-mode="software" onclick="periEqMode(this)">Software</button>
+                      </div>
                       <div class="peri-eq-layout">
                         <div class="peri-eq-list" role="listbox" aria-label="Equalizer presets">
                           <button class="peri-eq-add" onclick="periEqAddPreset()">
@@ -12979,6 +12917,7 @@
           </div>
         </template>
         <!-- /tpl-peripherals-hs -->
+
 
         <!-- ─── tpl-profiles ─── -->
         <template id="tpl-profiles">
@@ -13493,7 +13432,7 @@
             </div>
 
             <!-- Layout density -->
-            <div class="app-modal-section">Layout Density</div>
+            <!-- <div class="app-modal-section">Layout Density</div>
             <div class="app-density-opts" id="app-density-opts">
               <div class="app-density-opt" onclick="appSetDensity(this, 'Compact')">
                 <div class="app-density-icon">▪▪▪</div>
@@ -13510,12 +13449,15 @@
                 <div class="app-density-name">Spacious</div>
                 <div class="app-density-sub">Easier on the eyes</div>
               </div>
-            </div>
+            </div> -->
 
             <!-- Wallpaper gallery -->
             <div class="app-modal-section">Wallpaper</div>
             <div class="app-wallpaper-grid" id="app-wallpaper-grid">
-              <div class="app-wallpaper-thumb active" data-wallpaper="nord" onclick="setWallpaper('nord')">
+              <div class="app-wallpaper-thumb active" data-wallpaper="red" onclick="setWallpaper('red')">
+                <div class="app-wp-red" style="width: 100%; height: 100%"></div>
+              </div>
+              <!-- <div class="app-wallpaper-thumb" data-wallpaper="nord" onclick="setWallpaper('nord')">
                 <div class="app-wp-1" style="width: 100%; height: 100%"></div>
               </div>
               <div class="app-wallpaper-thumb" data-wallpaper="ember" onclick="setWallpaper('ember')">
@@ -13532,6 +13474,15 @@
               </div>
               <div class="app-wallpaper-thumb" data-wallpaper="sunset" onclick="setWallpaper('sunset')">
                 <div class="app-wp-6" style="width: 100%; height: 100%"></div>
+              </div> -->
+              <div class="app-wallpaper-thumb" data-wallpaper="blue" onclick="setWallpaper('blue')">
+                <div class="app-wp-blue" style="width: 100%; height: 100%"></div>
+              </div>
+              <div class="app-wallpaper-thumb" data-wallpaper="purple" onclick="setWallpaper('purple')">
+                <div class="app-wp-purple" style="width: 100%; height: 100%"></div>
+              </div>
+              <div class="app-wallpaper-thumb" data-wallpaper="abstractv2" onclick="setWallpaper('abstractv2')">
+                <div class="app-wp-abstractv2" style="width: 100%; height: 100%"></div>
               </div>
               <div
                 class="app-wallpaper-thumb cwp-upload-thumb"
@@ -13541,6 +13492,26 @@
                 <div class="cwp-bg"></div>
                 <span class="cwp-icon">+</span>
                 <span class="cwp-lbl">Upload</span>
+              </div>
+            </div>
+
+            <!-- Wallpaper effect controls -->
+            <div class="wp-effect-sliders" style="margin-top: 14px">
+              <div class="wp-effect-row">
+                <span class="wp-effect-label">Blur</span>
+                <div class="ds-slider" style="flex: 1">
+                  <input type="range" class="wp-blur-slider" min="0" max="60" step="2" value="44"
+                    oninput="dsSliderUpdate(this); setWallpaperBlur(+this.value)" />
+                </div>
+                <span class="wp-blur-val wp-effect-val">44px</span>
+              </div>
+              <div class="wp-effect-row">
+                <span class="wp-effect-label">Opacity</span>
+                <div class="ds-slider" style="flex: 1">
+                  <input type="range" class="wp-opacity-slider" min="0" max="100" step="5" value="100"
+                    oninput="dsSliderUpdate(this); setWallpaperOpacity(+this.value)" />
+                </div>
+                <span class="wp-opacity-val wp-effect-val">100%</span>
               </div>
             </div>
 
@@ -14664,7 +14635,10 @@
             autocomplete="off"
             spellcheck="false"
           />
-          <span class="search-esc-hint">ESC to close</span>
+          <div class="ds-toggle-group" id="search-mode-toggle" aria-label="Search mode">
+            <button class="ds-toggle-group-btn active" data-mode="launch" onclick="setSearchMode('launch')">Search</button>
+            <button class="ds-toggle-group-btn" data-mode="ask" onclick="setSearchMode('ask')">Ask AI</button>
+          </div>
           <button class="search-close-btn" onclick="closeSearch()" aria-label="Close">
             <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
               <line x1="2" y1="2" x2="10" y2="10" />
@@ -14674,6 +14648,15 @@
         </div>
         <div class="search-results" id="search-results">
           <!-- populated by JS -->
+        </div>
+        <div class="search-footer">
+          <span class="search-footer-hint"
+            ><span class="search-footer-key">↑</span><span class="search-footer-key">↓</span>navigate</span
+          >
+          <span class="search-footer-hint"><span class="search-footer-key">⏎</span>select</span>
+          <span class="search-footer-hint"><span class="search-footer-key">esc</span>close</span>
+          <span class="search-footer-spacer"></span>
+          <span class="search-footer-status" id="search-footer-status">Launcher</span>
         </div>
       </div>
     </div>
@@ -15295,11 +15278,17 @@
             </div>
             <div class="gl-drilldown-sort">
               <span class="sbm-sort-label">Sort:</span>
-              <select class="sbm-sort-select" onchange="glSortDrilldown(this.value)">
-                <option value="trending">Trending</option>
-                <option value="newest">Newest</option>
-                <option value="most-liked">Most Liked</option>
-              </select>
+              <div class="ds-dropdown" data-value="trending">
+                <button class="ds-dropdown-trigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Sort clips" onclick="dsDropdownToggle(this)">
+                  <span class="ds-dropdown-label">Trending</span>
+                  <span class="ds-dropdown-chevron" aria-hidden="true"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </button>
+                <div class="ds-dropdown-menu" role="listbox" aria-label="Sort clips">
+                  <button class="ds-dropdown-item selected" type="button" role="option" aria-selected="true" data-value="trending" onclick="dsDropdownPick(this); glSortDrilldown('trending')">Trending</button>
+                  <button class="ds-dropdown-item" type="button" role="option" aria-selected="false" data-value="newest" onclick="dsDropdownPick(this); glSortDrilldown('newest')">Newest</button>
+                  <button class="ds-dropdown-item" type="button" role="option" aria-selected="false" data-value="most-liked" onclick="dsDropdownPick(this); glSortDrilldown('most-liked')">Most Liked</button>
+                </div>
+              </div>
             </div>
           </div>
           <div class="gl-drilldown-grid" id="gl-drilldown-grid">
@@ -16415,15 +16404,21 @@
                   The standard OMEN Hub home — balanced mix of performance monitoring, controls, and content.
                 </div>
               </div>
-              <select class="admin-select" id="layout-select" onchange="applyLayout(this.value)">
-                <option value="default">Default</option>
-                <option value="competitor">The Competitor</option>
-                <option value="creator">The Creator</option>
-                <option value="analyst">The Analyst</option>
-                <option value="plugnplay">Plug &amp; Play</option>
-                <option value="aishowcase">AI Showcase</option>
-                <option value="2-devices-minimal">2 Devices Minimal</option>
-              </select>
+              <div class="ds-dropdown" id="layout-select" data-value="default">
+                <button class="ds-dropdown-trigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Layout template" onclick="dsDropdownToggle(this)">
+                  <span class="ds-dropdown-label">Default</span>
+                  <span class="ds-dropdown-chevron" aria-hidden="true"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </button>
+                <div class="ds-dropdown-menu" role="listbox" aria-label="Layout template">
+                  <button class="ds-dropdown-item selected" type="button" role="option" aria-selected="true" data-value="default" onclick="dsDropdownPick(this); applyLayout('default')">Default</button>
+                  <button class="ds-dropdown-item" type="button" role="option" aria-selected="false" data-value="competitor" onclick="dsDropdownPick(this); applyLayout('competitor')">The Competitor</button>
+                  <button class="ds-dropdown-item" type="button" role="option" aria-selected="false" data-value="creator" onclick="dsDropdownPick(this); applyLayout('creator')">The Creator</button>
+                  <button class="ds-dropdown-item" type="button" role="option" aria-selected="false" data-value="analyst" onclick="dsDropdownPick(this); applyLayout('analyst')">The Analyst</button>
+                  <button class="ds-dropdown-item" type="button" role="option" aria-selected="false" data-value="plugnplay" onclick="dsDropdownPick(this); applyLayout('plugnplay')">Plug &amp; Play</button>
+                  <button class="ds-dropdown-item" type="button" role="option" aria-selected="false" data-value="aishowcase" onclick="dsDropdownPick(this); applyLayout('aishowcase')">AI Showcase</button>
+                  <button class="ds-dropdown-item" type="button" role="option" aria-selected="false" data-value="2-devices-minimal" onclick="dsDropdownPick(this); applyLayout('2-devices-minimal')">2 Devices Minimal</button>
+                </div>
+              </div>
             </div>
 
             <!-- Top Row Layout row -->
@@ -16432,14 +16427,20 @@
                 <div class="ds-settings-row-label">Top Row</div>
                 <div class="ds-settings-row-sublabel">Control the layout of the hero area above the widget grid.</div>
               </div>
-              <select class="admin-select" id="top-row-select" onchange="applyTopLayout(this.value)">
-                <option value="carousel-full">1 carousel</option>
-                <option value="carousel-stack">1 carousel + 2 stack</option>
-                <option value="carousel-single">1 carousel + 1 promo</option>
-                <option value="carousel-row-trio">1 row of tiles + 1 carousel</option>
-                <option value="split-2">2 split</option>
-                <option value="promo-trio">3 promo tiles</option>
-              </select>
+              <div class="ds-dropdown" id="top-row-select" data-value="carousel-full">
+                <button class="ds-dropdown-trigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Top row layout" onclick="dsDropdownToggle(this)">
+                  <span class="ds-dropdown-label">1 carousel</span>
+                  <span class="ds-dropdown-chevron" aria-hidden="true"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </button>
+                <div class="ds-dropdown-menu" role="listbox" aria-label="Top row layout">
+                  <button class="ds-dropdown-item selected" type="button" role="option" aria-selected="true" data-value="carousel-full" onclick="dsDropdownPick(this); applyTopLayout('carousel-full')">1 carousel</button>
+                  <button class="ds-dropdown-item" type="button" role="option" aria-selected="false" data-value="carousel-stack" onclick="dsDropdownPick(this); applyTopLayout('carousel-stack')">1 carousel + 2 stack</button>
+                  <button class="ds-dropdown-item" type="button" role="option" aria-selected="false" data-value="carousel-single" onclick="dsDropdownPick(this); applyTopLayout('carousel-single')">1 carousel + 1 promo</button>
+                  <button class="ds-dropdown-item" type="button" role="option" aria-selected="false" data-value="carousel-row-trio" onclick="dsDropdownPick(this); applyTopLayout('carousel-row-trio')">1 row of tiles + 1 carousel</button>
+                  <button class="ds-dropdown-item" type="button" role="option" aria-selected="false" data-value="split-2" onclick="dsDropdownPick(this); applyTopLayout('split-2')">2 split</button>
+                  <button class="ds-dropdown-item" type="button" role="option" aria-selected="false" data-value="promo-trio" onclick="dsDropdownPick(this); applyTopLayout('promo-trio')">3 promo tiles</button>
+                </div>
+              </div>
             </div>
 
             <!-- Sidebar Nav toggle -->
@@ -16471,6 +16472,22 @@
                 id="spotlight-toggle"
                 onclick="toggleCursorSpotlight()"
                 title="Toggle cursor spotlight"
+              ></div>
+            </div>
+
+            <!-- Light Studio v2 toggle -->
+            <div class="ds-settings-row" style="margin-top: 8px">
+              <div class="ds-settings-row-labels">
+                <div class="ds-settings-row-label">Light Studio · 3D Desk (v2)</div>
+                <div class="ds-settings-row-sublabel">
+                  Replace the single-device viewer on Personalize with the 3D digital-desk replica of your setup.
+                </div>
+              </div>
+              <div
+                class="admin-toggle"
+                id="light-studio-v2-toggle"
+                onclick="toggleLightStudioV2()"
+                title="Toggle Light Studio v2"
               ></div>
             </div>
             <!-- Ad Banner toggle -->
@@ -16849,12 +16866,18 @@
           </div>
           <div class="sbm-sort-row">
             <span class="sbm-sort-label">Sort:</span>
-            <select class="sbm-sort-select" onchange="sbmSort(this.value)">
-              <option value="featured">Featured</option>
-              <option value="discount">Best Discount</option>
-              <option value="price-asc">Price: Low – High</option>
-              <option value="az">A – Z</option>
-            </select>
+            <div class="ds-dropdown" data-value="featured">
+              <button class="ds-dropdown-trigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Sort titles" onclick="dsDropdownToggle(this)">
+                <span class="ds-dropdown-label">Featured</span>
+                <span class="ds-dropdown-chevron" aria-hidden="true"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </button>
+              <div class="ds-dropdown-menu" role="listbox" aria-label="Sort titles">
+                <button class="ds-dropdown-item selected" type="button" role="option" aria-selected="true" data-value="featured" onclick="dsDropdownPick(this); sbmSort('featured')">Featured</button>
+                <button class="ds-dropdown-item" type="button" role="option" aria-selected="false" data-value="discount" onclick="dsDropdownPick(this); sbmSort('discount')">Best Discount</button>
+                <button class="ds-dropdown-item" type="button" role="option" aria-selected="false" data-value="price-asc" onclick="dsDropdownPick(this); sbmSort('price-asc')">Price: Low – High</button>
+                <button class="ds-dropdown-item" type="button" role="option" aria-selected="false" data-value="az" onclick="dsDropdownPick(this); sbmSort('az')">A – Z</button>
+              </div>
+            </div>
           </div>
         </div>
         <div class="sbm-grid-wrap">
