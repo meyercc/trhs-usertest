@@ -1,0 +1,18 @@
+{
+  "id": "widget-customize",
+  "title": "Customize Widget Layout",
+  "category": "Dashboard",
+  "status": "draft",
+  "description": "User enters edit mode on the dashboard to rearrange, resize, add, or remove widgets from their layout.",
+  "videoPath": "",
+  "mermaid": "",
+  "steps": [
+    {
+      "title": "Step details to be documented",
+      "description": "Describe what happens at this step."
+    }
+  ],
+  "engNotes": [],
+  "order": 3,
+  "createdAt": "2026-03-24"
+}

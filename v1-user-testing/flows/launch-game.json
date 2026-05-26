@@ -1,0 +1,18 @@
+{
+  "id": "launch-game",
+  "title": "Launch a Game",
+  "category": "Game Library",
+  "status": "planned",
+  "description": "User browses their game library, selects a title, reviews optimized settings, and launches it — with the system automatically applying the game-specific performance profile.",
+  "videoPath": "",
+  "mermaid": "",
+  "steps": [
+    {
+      "title": "Step details to be documented",
+      "description": "Describe what happens at this step."
+    }
+  ],
+  "engNotes": [],
+  "order": 5,
+  "createdAt": "2026-03-24"
+}

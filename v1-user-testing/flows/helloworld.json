@@ -1,0 +1,27 @@
+{
+  "id": "helloworld",
+  "title": "helloworld",
+  "category": "Onboarding",
+  "status": "planned",
+  "description": "",
+  "videoPath": "",
+  "mermaid": "flowchart LR\n    A([Start]) --> B[Action]\n    B --> C{Condition?}\n    C -- Yes --> D[Path A]\n    C -- No --> E[Path B]\n    D --> F([End])\n    E --> F",
+  "steps": [
+    {
+      "title": "step1",
+      "description": "tjos os alksd;flaks dflk; asd;ljfkj"
+    },
+    {
+      "title": "step 2",
+      "description": "alksdjfklasdjf",
+      "nodeIds": ["B"]
+    }
+  ],
+  "engNotes": [],
+  "edgeCases": [],
+  "components": [],
+  "relatedFlows": [],
+  "order": 10,
+  "createdAt": "2026-03-25",
+  "lastUpdated": "2026-03-25T03:20:12.109Z"
+}

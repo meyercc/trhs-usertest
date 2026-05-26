@@ -1,0 +1,27 @@
+{
+  "id": "test-2",
+  "title": "test 2",
+  "category": "Onboarding",
+  "status": "planned",
+  "description": "",
+  "videoPath": "",
+  "mermaid": "flowchart LR\n    A([Start]) --> B[Action]\n    B --> C{Condition?}\n    C -- Yes --> D[Path A]\n    C -- No --> E[Path B]\n    D --> F([End])\n    E --> F",
+  "steps": [],
+  "engNotes": [],
+  "components": [
+    {
+      "name": "Pills & Filter Chips",
+      "href": "#pills-chips"
+    },
+    {
+      "name": "Toggles",
+      "href": "#toggles"
+    },
+    {
+      "name": "Buttons",
+      "href": "#buttons"
+    }
+  ],
+  "order": 6,
+  "createdAt": "2026-03-25"
+}

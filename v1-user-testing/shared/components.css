@@ -1,0 +1,4691 @@
+/* ══════════════════════════════════════════
+   TREEHOUSE — SHARED COMPONENTS
+   Source of truth: design-system.html
+   Consumers: prototype.html · widget-simulator.html
+   ──────────────────────────────────────────
+   Edit component styles here. Changes propagate
+   to all consuming files automatically.
+   Local overrides in each file take precedence.
+══════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────
+   WIDGET SHELL  (.ds-widget / .w)
+   .w is a legacy alias — prefer .ds-widget
+   in new markup.
+───────────────────────────────────────── */
+.ds-widget,
+.w {
+  background: var(--widget-tint-bg);
+  border: 1px solid var(--widget-tint-border);
+  border-radius: var(--radius-card);
+  padding: var(--gutter);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-lv-1);
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+.ds-widget:hover,
+.w:hover {
+  border-color: var(--accent-dim);
+}
+
+.ds-widget-label,
+.w-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 11px;
+  flex-shrink: 0;
+  transition: padding-left 0.3s ease-in-out;
+}
+.ds-widget-label-text,
+.w-label-text {
+  display: flex;
+  align-items: center;
+  gap: var(--gutter-sm);
+  margin-right: var(--gutter);
+}
+
+/* Draggable handle support */
+.ds-widget-label.draggable,
+.w-label.draggable {
+  margin-left: calc(var(--gutter) * -1);
+}
+.ds-widget:hover .ds-widget-label.draggable,
+.w:hover .w-label.draggable {
+  padding-left: var(--gutter);
+}
+
+.ds-widget-link,
+.w-link {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.15s;
+  position: relative;
+}
+@keyframes w-link-nudge {
+  0%,
+  55% {
+    transform: translateX(0);
+  } /* home + 1s pause */
+  70% {
+    transform: translateX();
+  } /* slide out */
+  85% {
+    transform: translateX();
+  } /* hold briefly */
+  100% {
+    transform: translateX(0);
+  } /* return home → 1s pause restarts */
+}
+.ds-widget-link:hover,
+.w-link:hover {
+  color: var(--accent-color);
+  animation: w-link-nudge 1.8s var(--ease-default) infinite;
+}
+
+/* Draggable link positioning */
+.draggable .ds-widget-link,
+.draggable .w-link {
+  position: absolute;
+  right: 40px;
+}
+
+/* Column spans */
+.w-1 {
+  grid-column: span 2; /* same as w-2 below 3000px; at ultrawide 12-col → span 2 = 1/6 row */
+}
+.w-2 {
+  grid-column: span 2;
+}
+.w-3 {
+  grid-column: span 3;
+}
+.w-4 {
+  grid-column: span 4;
+}
+.w-full {
+  grid-column: 1 / -1;
+}
+
+/* Row spans (height) — opt-in per widget */
+.w-h-2 {
+  grid-row: span 2;
+}
+
+/* ─────────────────────────────────────────
+   BADGES  (.ds-badge)
+   Inline status indicators — not card overlays.
+   .badge is a legacy alias — prefer .ds-badge
+   in new markup.
+   .ds-sh-badge is the section-header variant —
+   it extends this base with its own overrides.
+   Note: prototype.html overrides .badge base
+   for absolute-positioned card use.
+───────────────────────────────────────── */
+.ds-badge,
+.badge,
+.ds-sh-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: var(--text-nano);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.ds-badge.new,
+.badge.new {
+  background: rgba(0, 200, 215, 0.88);
+  color: var(--text-on-accent);
+}
+.ds-badge.sale,
+.badge.sale {
+  background: var(--orange);
+  color: var(--text-on-fill);
+}
+.ds-badge.coming,
+.badge.coming {
+  background: rgba(168, 85, 247, 0.85);
+  color: var(--text-on-fill);
+}
+.ds-badge.free,
+.badge.free {
+  background: rgba(34, 197, 94, 0.88);
+  color: var(--text-on-accent);
+}
+.ds-badge.omen-ai,
+.badge.omen-ai {
+  background: linear-gradient(90deg, var(--omen-red) 0%, var(--omen-yellow) 100%);
+  color: var(--text-on-accent);
+}
+
+.ds-badge.status,
+.badge.status {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+}
+.ds-badge.status.positive,
+.badge.status.positive {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  color: var(--green);
+}
+.ds-badge.status.warn,
+.badge.status.warn {
+  background: rgba(255, 107, 43, 0.1);
+  border: 1px solid rgba(255, 107, 43, 0.25);
+  color: var(--orange);
+}
+.ds-badge.status.info,
+.badge.status.info {
+  background: rgba(0, 200, 215, 0.1);
+  border: 1px solid rgba(0, 200, 215, 0.25);
+  color: var(--cyan);
+}
+.ds-badge.status.danger,
+.badge.status.danger {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  color: var(--red);
+}
+
+/* ─────────────────────────────────────────
+   BACKDROP  (.ds-backdrop)
+   Full-screen dimming overlay for modals,
+   dialogs, and focus surfaces.
+
+   Default: centered flex layout, 6px blur,
+   standard dim. Add .open to show.
+
+   Variants:
+     .heavy  — stronger blur () + darker bg,
+               for search/picker overlays
+     .plain  — no blur, lighter dim,
+               for confirmation dialogs
+     .top    — aligns content to top with padding
+
+   Z-index is NOT set — apply inline per context
+   since stacking varies by feature.
+
+   Usage:
+     <div class="ds-backdrop" style="z-index:120"
+          onclick="if(event.target===this)close()">
+       <div class="my-dialog">…</div>
+     </div>
+───────────────────────────────────────── */
+.ds-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 7, 9, 0.24);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-normal) var(--ease-default);
+}
+.ds-backdrop.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Heavy — search, pickers, module store */
+.ds-backdrop.heavy {
+  background: rgba(5, 7, 11, 0.78);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: opacity var(--dur-fast) var(--ease-default);
+}
+
+/* Plain — confirmation dialogs (no blur, lighter) */
+.ds-backdrop.plain {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transition: opacity var(--dur-fast) var(--ease-default);
+}
+
+/* Top-aligned — search, widget picker */
+.ds-backdrop.top {
+  align-items: flex-start;
+  padding-top: 76px;
+}
+
+/* Light theme */
+html[data-theme='light'] .ds-backdrop,
+html.light .ds-backdrop {
+  background: rgba(140, 144, 158, 0.72);
+}
+html[data-theme='light'] .ds-backdrop.plain,
+html.light .ds-backdrop.plain {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+/* ─────────────────────────────────────────
+   TAGS  (.ds-tag / .tag)
+   .tag is a legacy alias — prefer .ds-tag
+   in new markup.
+───────────────────────────────────────── */
+.ds-tag,
+.tag {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.ds-tag.accent,
+.tag.accent {
+  background: var(--accent-dimmer);
+  border-color: var(--accent-dim);
+  color: var(--accent-color);
+}
+.ds-tag.warn,
+.tag.warn {
+  background: rgba(255, 107, 43, 0.08);
+  border-color: rgba(255, 107, 43, 0.2);
+  color: var(--orange);
+}
+.ds-tag.success,
+.tag.success {
+  background: rgba(34, 197, 94, 0.08);
+  border-color: rgba(34, 197, 94, 0.2);
+  color: var(--green);
+}
+
+/* Overlay variant — sits on images with a dark translucent bg.
+   Position with absolute on the parent image container. */
+.ds-tag.overlay {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  background: rgba(0, 0, 0, 0.65);
+  border: none;
+  color: var(--text-on-image-dim);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+}
+
+/* ─────────────────────────────────────────
+   STAT DISPLAY  (.ds-stat-val / .ds-stat-unit / .ds-stat-lbl)
+   Legacy: .stat-val / .stat-unit / .stat-lbl
+───────────────────────────────────────── */
+.ds-stat-val,
+.stat-val {
+  font-family: var(--font-cond);
+  font-weight: 700;
+  color: var(--accent-color);
+  line-height: 1;
+}
+.ds-stat-unit,
+.stat-unit {
+  font-size: var(--text-micro);
+  font-weight: 400;
+  color: var(--text-dim);
+}
+.ds-stat-lbl,
+.stat-lbl {
+  font-family: var(--font-mono);
+  font-size: var(--text-nano);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-subtle);
+}
+
+/* ─────────────────────────────────────────
+   PROGRESS BAR  (.ds-prog-track / .ds-prog-fill)
+   Legacy: .prog-track / .prog-fill
+───────────────────────────────────────── */
+.ds-prog-track,
+.prog-track {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  width: 100%;
+}
+.ds-prog-fill,
+.prog-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: var(--accent-color);
+  opacity: 0.75;
+  transition: width var(--dur-slow) var(--ease-out);
+}
+
+/* ─────────────────────────────────────────
+   SPARKLINE  (.ds-spark-cell / .ds-spark-lbl / .ds-spark-val)
+   Legacy: .spark-cell / .spark-lbl / .spark-val
+───────────────────────────────────────── */
+.ds-spark-cell,
+.spark-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.ds-spark-lbl,
+.spark-lbl {
+  font-family: var(--font-mono);
+  font-size: var(--text-nano);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-subtle);
+}
+.ds-spark-val,
+.spark-val {
+  font-family: var(--font-cond);
+  font-size: var(--text-section);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  line-height: 1;
+  letter-spacing: 0.03rem;
+}
+
+/* ─────────────────────────────────────────
+   STAT GRID  (.ds-stat-grid / .ds-stat-cell)
+   2-column bordered grid for key-value stat pairs.
+   Uses .ds-spark-lbl + .ds-spark-val inside cells.
+   ─────────────────────────────────────────
+   Usage:
+     <div class="ds-stat-grid">
+       <div class="ds-stat-cell">
+         <div class="ds-spark-lbl">Label</div>
+         <div class="ds-spark-val">Value</div>
+       </div>
+       …
+     </div>
+
+   margin-bottom set per context (inline or parent).  */
+
+.ds-stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  margin-bottom: var(--gutter);
+  background: var(--border-light);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.ds-stat-cell {
+  background: rgba(255, 255, 255, 0.02);
+  padding: 9px ;
+}
+
+/* Light theme */
+html[data-theme='light'] .ds-stat-grid,
+html.light .ds-stat-grid {
+  background: rgba(0, 0, 0, 0.06);
+  border-color: rgba(0, 0, 0, 0.06);
+}
+html[data-theme='light'] .ds-stat-cell,
+html.light .ds-stat-cell {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+/* ─────────────────────────────────────────
+   BUTTON  (.ds-btn / .btn)
+   .btn is a legacy alias — prefer .ds-btn
+   in new markup.
+───────────────────────────────────────── */
+.ds-btn,
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gutter-xs);
+  padding: var(--gutter-xs) var(--gutter-mobile);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition:
+    background var(--dur-fast) var(--ease-default),
+    color var(--dur-fast) var(--ease-default),
+    border-color var(--dur-fast) var(--ease-default);
+  white-space: nowrap;
+}
+.ds-btn.sm,
+.btn.sm {
+  padding: 3px ;
+}
+.ds-btn.accent,
+.btn.accent {
+  padding: 7px 14px;
+  font-size: var(--text-body);
+  font-weight: var(--font-light);
+  letter-spacing: 0.07em;
+  color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+.ds-btn svg,
+.btn svg {
+  width: 10px;
+  height: 10px;
+}
+.ds-btn:hover,
+.btn:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--text-dim);
+}
+.ds-btn.accent:hover,
+.btn.accent:hover {
+  background: var(--accent-dimmer);
+  color: var(--accent-color);
+  border-color: var(--accent-dim);
+}
+
+/* ── Icon Button (.ds-btn-icon) ──────────────────── */
+/* Circular icon-only button with two sizes.
+   Default (32px) for overlay play buttons; .sm (24px)
+   for inline contexts like recent-tile rows. */
+.ds-btn-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  /*border: 1px solid var(--accent-dim);*/
+  background: var(--accent-dimmest);
+  color: var(--accent-color);
+  transition: all 0.15s ease;
+}
+.ds-btn-icon:hover {
+  background: var(--accent-dim);
+  border-color: var(--accent-color);
+  box-shadow: 0 0  var(--accent-dimmest);
+}
+.ds-btn-icon:active {
+  background: var(--accent-dim);
+  transform: scale(0.92);
+}
+.ds-btn-icon:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+.ds-btn-icon svg {
+  width: 12px;
+  height: 12px;
+  fill: currentColor;
+  margin-left: 1px; /* optical centering for play triangles */
+}
+
+/* Small variant */
+.ds-btn-icon.sm {
+  width: 24px;
+  height: 24px;
+}
+.ds-btn-icon.sm svg {
+  width: 9px;
+  height: 9px;
+}
+
+/* Solid / accent-filled variant — solid accent bg with dark icon (matches .ds-carousel-btn.primary) */
+.ds-btn-icon.solid {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+  color: var(--text-on-accent);
+  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.12);
+}
+.ds-btn-icon.solid:hover {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+  opacity: 0.88;
+  box-shadow: 0 2px 14px var(--accent-dimmest);
+}
+.ds-btn-icon.solid:active {
+  opacity: 0.72;
+  box-shadow: none;
+}
+
+/* Ghost variant — transparent bg, muted icon, hover highlight.
+   Used for toolbar / utility buttons (notifications, settings, etc.). */
+.ds-btn-icon.ghost {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-muted);
+  border-radius: var(--radius);
+}
+.ds-btn-icon.ghost:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+  box-shadow: none;
+}
+.ds-btn-icon.ghost:active {
+  background: var(--surface-hover);
+  transform: scale(0.95);
+}
+.ds-btn-icon.ghost svg {
+  fill: none;
+  stroke: currentColor;
+  margin-left: 0;
+}
+
+/* ── Select / Dropdown (.ds-select) ──────────────── */
+/* Native <select> styled to match .ds-btn.
+   Same padding, radius, font, and border tokens. */
+.ds-select {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--gutter-xs) 2var(--gutter-xs)  ;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition:
+    background var(--dur-fast) var(--ease-default),
+    color var(--dur-fast) var(--ease-default),
+    border-color var(--dur-fast) var(--ease-default);
+  white-space: nowrap;
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+  /* Chevron indicator */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='2.5,3.5 5,6.5 7.5,3.5' fill='none' stroke='rgba(228,232,240,0.28)' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 7px center;
+  background-size: 10px;
+}
+.ds-select:hover {
+  background-color: rgba(255, 255, 255, 0.07);
+  color: var(--text-dim);
+}
+.ds-select:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+.ds-select[disabled] {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.ds-select option {
+  background: var(--bg-base);
+  color: var(--text-primary);
+}
+
+/* Size variant — matches .ds-btn.sm */
+.ds-select.sm {
+  padding: 3px 22px 3px ;
+  background-position: right 6px center;
+}
+
+/* Accent variant — matches .ds-btn.accent */
+.ds-select.accent {
+  padding: 7px 28px 7px 14px;
+  font-size: var(--text-body);
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  color: var(--accent-color);
+  border-color: var(--accent-color);
+  background-position: right  center;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='2.5,3.5 5,6.5 7.5,3.5' fill='none' stroke='%23ffffff' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+.ds-select.accent:hover {
+  background-color: var(--accent-dimmer);
+  border-color: var(--accent-dim);
+}
+
+/* ── Light theme ── */
+html[data-theme='light'] .ds-select,
+html.light .ds-select {
+  background-color: rgba(0, 0, 0, 0.04);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='2.5,3.5 5,6.5 7.5,3.5' fill='none' stroke='rgba(26,29,36,0.35)' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+html[data-theme='light'] .ds-select:hover,
+html.light .ds-select:hover {
+  background-color: rgba(0, 0, 0, 0.07);
+}
+html[data-theme='light'] .ds-select option,
+html.light .ds-select option {
+  background: #f2f4f8;
+}
+
+/* ── Dropdown (.ds-dropdown) ─────────────────────────
+   Custom select: a styled trigger plus a popup menu of
+   items — replaces the native <select> so the open menu
+   can be themed. Behaviour: js/ds-behaviors.js
+   (dsDropdownToggle / dsDropdownPick).
+
+   Usage:
+     <div class="ds-dropdown" data-value="a">
+       <button class="ds-dropdown-trigger" type="button"
+               aria-haspopup="listbox" aria-expanded="false"
+               onclick="dsDropdownToggle(this)">
+         <span class="ds-dropdown-label">Option A</span>
+         <span class="ds-dropdown-chevron" aria-hidden="true">…</span>
+       </button>
+       <div class="ds-dropdown-menu" role="listbox">
+         <button class="ds-dropdown-item selected" type="button"
+                 role="option" aria-selected="true" data-value="a"
+                 onclick="dsDropdownPick(this)">Option A</button>
+       </div>
+     </div>                                            */
+.ds-dropdown {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  min-width: 160px;
+}
+
+/* Trigger */
+.ds-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  width: 100%;
+  padding: 0 0 0 var(--gutter-sm);
+  background: var(--surface);
+  border: 1px solid var(--border-med);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: var(--text-body);
+  cursor: pointer;
+  transition:
+    background var(--dur-fast) var(--ease-default),
+    border-color var(--dur-fast) var(--ease-default);
+}
+.ds-dropdown-trigger:hover {
+  background: var(--surface-hover);
+}
+.ds-dropdown-trigger:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+.ds-dropdown.open .ds-dropdown-trigger {
+  border-color: var(--accent-dim);
+}
+.ds-dropdown-label {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Chevron box */
+.ds-dropdown-chevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  margin-left: var(--gutter-sm);
+  background: var(--surface-active);
+  border-radius: 0 calc(var(--radius-sm) - 1px) calc(var(--radius-sm) - 1px) 0;
+  color: var(--text-dim);
+  transition: background var(--dur-fast) var(--ease-default);
+}
+.ds-dropdown-chevron svg {
+  display: block;
+  width: 10px;
+  height: 6px;
+  transition: transform var(--dur-fast) var(--ease-default);
+}
+.ds-dropdown.open .ds-dropdown-chevron {
+  background: var(--accent-dimmer);
+  color: var(--accent-color);
+}
+.ds-dropdown.open .ds-dropdown-chevron svg {
+  transform: rotate(180deg);
+}
+
+/* Popup menu */
+.ds-dropdown-menu {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 4px);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 100%;
+  padding: var(--gutter-xs);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-med);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lv-3);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--dur-fast) var(--ease-default),
+    visibility var(--dur-fast) var(--ease-default);
+}
+.ds-dropdown.open .ds-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+}
+/* Flip above the trigger when there is no room below */
+.ds-dropdown.open-up .ds-dropdown-menu {
+  top: auto;
+  bottom: calc(100% + 4px);
+}
+
+/* Menu item */
+.ds-dropdown-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 30px;
+  padding: 0 var(--gutter-sm);
+  border: none;
+  border-radius: calc(var(--radius-sm) - 1px);
+  background: transparent;
+  color: var(--text-dim);
+  font-family: var(--font-display);
+  font-size: var(--text-body);
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background var(--dur-fast) var(--ease-default),
+    color var(--dur-fast) var(--ease-default);
+}
+.ds-dropdown-item:hover {
+  background: var(--surface-hover);
+  color: var(--text);
+}
+.ds-dropdown-item.selected {
+  background: var(--accent-dimmer);
+  color: var(--accent-color);
+}
+.ds-dropdown-item:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: -2px;
+}
+.ds-dropdown-item[disabled] {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Text Input (.ds-input) ─────────────────────────
+   Text field styled to match .ds-btn and .ds-select.
+   Same border, radius, font, and background tokens.
+
+   Usage:
+     <div class="ds-input-group">
+       <label class="ds-input-label">Label <span class="ds-input-required">*</span></label>
+       <div class="ds-input-wrap">
+         <input type="text" class="ds-input" placeholder="Placeholder…">
+         <span class="ds-input-icon">…</span>        <!-- optional trailing icon -->
+         <span class="ds-input-loader"></span>         <!-- optional spinner -->
+       </div>
+       <span class="ds-input-hint">Helper text</span>
+       <span class="ds-input-error">Error message</span>
+     </div>
+
+   States: default, hover, focus, disabled, error, loading
+   Variants: .sm (compact)                              */
+
+/* Input field */
+.ds-input {
+  display: block;
+  width: 100%;
+  padding: 7px ;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-size: var(--text-body);
+  font-weight: 400;
+  color: var(--text-primary);
+  letter-spacing: 0.01em;
+  outline: none;
+  transition:
+    background var(--dur-fast) var(--ease-default),
+    color var(--dur-fast) var(--ease-default),
+    border-color var(--dur-fast) var(--ease-default),
+    box-shadow var(--dur-fast) var(--ease-default);
+}
+
+/* Placeholder */
+.ds-input::placeholder {
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+/* Hover */
+.ds-input:hover:not(:focus):not(:disabled):not(.error) {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--border-med);
+}
+
+/* Focus */
+.ds-input:focus:not(.error) {
+  border-color: var(--accent-dim);
+  box-shadow: 0 0 0 2px var(--accent-dimmest);
+}
+
+/* Disabled */
+.ds-input:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Error */
+.ds-input.error {
+  border-color: rgba(239, 68, 68, 0.5);
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.08);
+}
+.ds-input.error:focus {
+  border-color: rgba(239, 68, 68, 0.6);
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.12);
+}
+
+/* Small variant — matches .ds-btn.sm / .ds-select.sm */
+.ds-input.sm {
+  padding: var(--gutter-xs) var(--gutter-sm);
+  font-size: var(--text-caption);
+}
+
+/* ── Input wrapper (for icons and loader) ── */
+.ds-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.ds-input-wrap .ds-input {
+  flex: 1;
+}
+
+/* Trailing icon (default: right) */
+.ds-input-icon {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+.ds-input-icon svg {
+  width: 14px;
+  height: 14px;
+}
+.ds-input-wrap:has(.ds-input-icon) .ds-input {
+  padding-right: 30px;
+}
+
+/* Leading icon variant */
+.ds-input-icon.left {
+  right: auto;
+  left: 8px;
+}
+.ds-input-wrap:has(.ds-input-icon.left) .ds-input {
+  padding-left: 30px;
+  padding-right: var(--gutter-mobile);
+}
+
+/* Loading spinner */
+.ds-input-loader {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid var(--border-med);
+  border-top-color: var(--accent-color);
+  border-radius: 50%;
+  animation: ds-input-spin 0.6s linear infinite;
+  pointer-events: none;
+}
+.ds-input-wrap:has(.ds-input-loader) .ds-input {
+  padding-right: 30px;
+}
+
+@keyframes ds-input-spin {
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
+/* ── Input group (label + field + hint/error) ── */
+.ds-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* Label */
+.ds-input-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Required asterisk */
+.ds-input-required {
+  color: var(--red);
+  margin-left: 2px;
+}
+
+/* Hint text (below field) */
+.ds-input-hint {
+  font-family: var(--font-display);
+  font-size: var(--text-micro);
+  color: var(--text-subtle);
+  line-height: 1.3;
+}
+
+/* Error message (below field, replaces hint) */
+.ds-input-error {
+  font-family: var(--font-display);
+  font-size: var(--text-micro);
+  color: var(--red);
+  line-height: 1.3;
+  display: none;
+}
+.ds-input-group.has-error .ds-input-error {
+  display: block;
+}
+.ds-input-group.has-error .ds-input-hint {
+  display: none;
+}
+.ds-input-group.has-error .ds-input {
+  border-color: rgba(239, 68, 68, 0.5);
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.08);
+}
+
+/* ── Error shake animation ── */
+@keyframes ds-input-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  50%,
+  90% {
+    transform: translateX(-3px);
+  }
+  30%,
+  70% {
+    transform: translateX(3px);
+  }
+}
+.ds-input.shake {
+  animation: ds-input-shake var(--dur-slow) var(--ease-default);
+}
+
+/* ── Textarea variant ── */
+textarea.ds-input {
+  min-height: 72px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+/* ── Light theme ── */
+html[data-theme='light'] .ds-input,
+html.light .ds-input {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.12);
+  color: var(--text-primary);
+}
+html[data-theme='light'] .ds-input::placeholder,
+html.light .ds-input::placeholder {
+  color: rgba(0, 0, 0, 0.35);
+}
+html[data-theme='light'] .ds-input:hover:not(:focus):not(:disabled):not(.error),
+html.light .ds-input:hover:not(:focus):not(:disabled):not(.error) {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.18);
+}
+
+/* ── Carousel ─────────────────────────────────────── */
+.ds-carousel {
+  position: relative;
+  height: 320px;
+  overflow: hidden;
+  background: #060810;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border-med);
+}
+.ds-carousel:hover .w-menu-btn {
+  opacity: 1;
+}
+.ds-carousel .w-menu-wrap {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 5;
+}
+
+.ds-carousel-slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: stretch;
+  opacity: 0;
+  transition: opacity 0.55s ease;
+  pointer-events: none;
+}
+.ds-carousel-slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.ds-carousel-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center center;
+  filter: brightness(1.1) saturate(1.1);
+}
+.ds-carousel-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(6, 8, 16, 0.92) 0%,
+    rgba(6, 8, 16, 0.72) 38%,
+    rgba(6, 8, 16, 0.28) 65%,
+    transparent 100%
+  );
+}
+.ds-carousel-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 32px 48px;
+  max-width: 480px;
+}
+
+.ds-carousel-tag {
+  font-family: var(--font-mono);
+  font-size: var(--text-nano);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: var(--gutter);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.ds-carousel-tag::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 1.5px;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.ds-carousel-title {
+  font-family: var(--font-cond);
+  font-size: var(--text-title);
+  font-weight: var(--font-bold);
+  letter-spacing: 0.02em;
+  color: var(--text-on-fill);
+  line-height: 1.05;
+  margin-bottom: var(--gutter-sm);
+}
+.ds-carousel-desc {
+  font-family: var(--font-display);
+  font-size: var(--text-caption);
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.55;
+  margin-bottom: var(--gutter);
+  max-width: 340px;
+}
+.ds-carousel-ctas {
+  display: flex;
+  gap: var(--gutter-sm);
+}
+.ds-carousel-btn {
+  font-family: var(--font-cond);
+  font-size: var(--text-caption);
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 7px 18px;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  transition:
+    opacity 0.15s,
+    transform 0.1s;
+}
+.ds-carousel-btn:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+.ds-carousel-btn:active {
+  filter: brightness(0.8);
+  transform: translateY(1px);
+}
+.ds-carousel-btn.primary {
+  background: var(--accent-color);
+  color: var(--text-on-accent);
+}
+.ds-carousel-btn.ghost {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.8);
+}
+.ds-carousel-btn.ghost:active {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+.ds-carousel-btn.ghost-text {
+  background: transparent;
+  border: 1px solid transparent;
+  color: rgba(255, 255, 255, 0.5);
+}
+.ds-carousel-btn.ghost-text:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.85);
+  opacity: 1;
+}
+.ds-carousel-btn.ghost-text:active {
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.6);
+  transform: translateY(1px);
+  filter: none;
+}
+
+/* Nav: arrows + dots */
+.ds-carousel-nav {
+  position: absolute;
+  bottom: 22px;
+  left: 48px;
+  display: flex;
+  align-items: center;
+  gap: var(--gutter-sm);
+  z-index: 3;
+}
+.ds-carousel-dots {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.ds-carousel-dot {
+  width: 22px;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.18);
+  cursor: pointer;
+  transition: all 0.22s ease;
+}
+.ds-carousel-dot.active {
+  width: 34px;
+  background: var(--accent-color);
+}
+.ds-carousel-arrow {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.ds-carousel-arrow:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--text-on-fill);
+}
+.ds-carousel-arrow svg {
+  width: 10px;
+  height: 10px;
+}
+
+/* Variant: compact */
+.ds-carousel.compact {
+  height: 200px;
+}
+.ds-carousel.compact .ds-carousel-content {
+  padding: 24px 32px;
+}
+.ds-carousel.compact .ds-carousel-title {
+  font-size: var(--text-sm-title);
+}
+.ds-carousel.compact .ds-carousel-ctas {
+  display: none;
+}
+.ds-carousel.compact .ds-carousel-nav {
+  left: 32px;
+  bottom: 16px;
+}
+
+/* ── Toggle Switch ────────────────────────────────── */
+/* A compact on/off pill. Default state = on (accent bg, knob right).
+   Add .off class to flip to off state (dim bg, knob left). */
+.ds-toggle {
+  width: 32px;
+  height: 18px;
+  border-radius: 9px;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+  transition: background var(--dur-normal) ease;
+  border: none;
+  background: var(--accent-color);
+}
+.ds-toggle.off {
+  background: rgba(255, 255, 255, 0.12);
+}
+.ds-toggle::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 16px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--text-on-fill);
+  transition: left var(--dur-normal) ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+.ds-toggle.off::after {
+  left: 4px;
+}
+.ds-toggle:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+.ds-toggle[disabled] {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Segmented Toggle ─────────────────────────────── */
+/* A pill-group selector for 2–4 mutually exclusive options.
+   The .active child gets an accent fill; others are transparent. */
+.ds-segmented {
+  display: inline-flex;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-med);
+  border-radius: 6px;
+  padding: 2px;
+  gap: 2px;
+}
+.ds-segmented-btn {
+  padding: var(--gutter-xs) var(--gutter-tablet);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: var(--text-muted);
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+.ds-segmented-btn.active {
+  background: var(--accent-color);
+  color: var(--text-on-accent);
+}
+.ds-segmented-btn:hover:not(.active) {
+  color: var(--text-dim);
+}
+.ds-segmented-btn:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 1px;
+}
+.ds-segmented-btn[disabled] {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Toggle Button Group (.ds-toggle-group) ──────────
+   Pill-shaped segmented control — a pill-style
+   alternative to .ds-segmented (solid accent fill on
+   the active item). The selected item here gets an
+   accent border + translucent accent wash, keeping
+   the label readable.
+   Usage: <div class="ds-toggle-group">
+            <button class="ds-toggle-group-btn active">…</button>
+            <button class="ds-toggle-group-btn">…</button>
+          </div>
+─────────────────────────────────────────────── */
+.ds-toggle-group {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  border-radius: 999px;
+  border: 1px solid var(--border-med);
+  background: rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+}
+.ds-toggle-group-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gutter-sm);
+  height: 26px;
+  padding: 0 var(--gutter);
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-weight: var(--font-semibold);
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+  transition:
+    background 0.15s,
+    color 0.15s,
+    border-color 0.15s;
+}
+.ds-toggle-group-btn:hover:not(.active) {
+  color: var(--text-dim);
+}
+.ds-toggle-group-btn.active {
+  border-color: var(--accent-color);
+  background: var(--accent-dim);
+  color: var(--text-primary);
+}
+.ds-toggle-group-btn:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: -3px;
+}
+.ds-toggle-group-btn[disabled] {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+/* Icon slot for the icon variant */
+.ds-toggle-group-btn .ds-toggle-group-icon {
+  display: inline-flex;
+  width: 16px;
+  height: 16px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ── Checkbox (.ds-checkbox) ─────────────────────── */
+/* Custom checkbox using hidden input + styled <span>.
+   Usage: <label class="ds-checkbox">
+            <input type="checkbox">
+            <span class="ds-checkbox-mark"></span>
+            Label text
+          </label>                                    */
+.ds-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gutter-sm);
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 12px;
+  color: var(--text-dim);
+  user-select: none;
+  line-height: 1;
+}
+.ds-checkbox input[type='checkbox'] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Box */
+.ds-checkbox-mark {
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid var(--border-med);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background var(--dur-fast) var(--ease-default),
+    border-color var(--dur-fast) var(--ease-default);
+}
+
+/* Check icon (hidden until checked) */
+.ds-checkbox-mark::after {
+  content: '';
+  width: 8px;
+  height: 5px;
+  border-left: 1.5px solid transparent;
+  border-bottom: 1.5px solid transparent;
+  transform: rotate(-45deg) translate(0.5px, -0.5px);
+  transition: border-color var(--dur-fast) var(--ease-default);
+}
+
+/* Checked */
+.ds-checkbox input:checked + .ds-checkbox-mark {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+}
+.ds-checkbox input:checked + .ds-checkbox-mark::after {
+  border-left-color: var(--text-on-accent);
+  border-bottom-color: var(--text-on-accent);
+}
+
+/* Indeterminate */
+.ds-checkbox input:indeterminate + .ds-checkbox-mark {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+}
+.ds-checkbox input:indeterminate + .ds-checkbox-mark::after {
+  width: 7px;
+  height: 0;
+  border-left: none;
+  border-bottom: 1.5px solid var(--text-on-accent);
+  transform: none;
+}
+
+/* Hover */
+.ds-checkbox:hover .ds-checkbox-mark {
+  border-color: var(--accent-dim);
+}
+.ds-checkbox:hover input:checked + .ds-checkbox-mark,
+.ds-checkbox:hover input:indeterminate + .ds-checkbox-mark {
+  opacity: 0.88;
+}
+
+/* Focus */
+.ds-checkbox input:focus-visible + .ds-checkbox-mark {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+/* Disabled */
+.ds-checkbox.disabled,
+.ds-checkbox:has(input:disabled) {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Radio Button (.ds-radio) ───────────────────── */
+/* Custom radio using hidden input + styled <span>.
+   Matches .ds-checkbox dimensions for alignment.
+   Usage: <label class="ds-radio">
+            <input type="radio" name="group">
+            <span class="ds-radio-mark"></span>
+            Label text
+          </label>                                    */
+.ds-radio {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gutter-sm);
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 12px;
+  color: var(--text-dim);
+  user-select: none;
+  line-height: 1;
+}
+.ds-radio input[type='radio'] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Circle */
+.ds-radio-mark {
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid var(--border-med);
+  border-radius: 50%;
+  background: transparent;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition:
+    background var(--dur-fast) var(--ease-default),
+    border-color var(--dur-fast) var(--ease-default);
+}
+
+/* Inner dot (hidden until selected) */
+.ds-radio-mark::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: transparent;
+  transition: background var(--dur-fast) var(--ease-default);
+}
+
+/* Selected */
+.ds-radio input:checked + .ds-radio-mark {
+  border-color: var(--accent-color);
+}
+.ds-radio input:checked + .ds-radio-mark::after {
+  background: var(--accent-color);
+}
+
+/* Hover */
+.ds-radio:hover .ds-radio-mark {
+  border-color: var(--accent-dim);
+}
+.ds-radio:hover input:checked + .ds-radio-mark {
+  opacity: 0.88;
+}
+
+/* Focus */
+.ds-radio input:focus-visible + .ds-radio-mark {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+/* Disabled */
+.ds-radio.disabled,
+.ds-radio:has(input:disabled) {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Chip Checkbox (.ds-chip-check) ──────────────── */
+/* Multi-select text chip — toggles .active.
+   Generalises .wrgb-zone pattern with accent tokens.
+   Usage: <button class="ds-chip-check active">Label</button>
+   or wrap a group: <div class="ds-chip-check-group">…</div> */
+.ds-chip-check-group {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+.ds-chip-check {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  font-weight: var(--font-light);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition:
+    background var(--dur-fast) var(--ease-default),
+    border-color var(--dur-fast) var(--ease-default),
+    color var(--dur-fast) var(--ease-default);
+}
+.ds-chip-check:hover {
+  border-color: var(--border-med);
+  color: var(--text-dim);
+}
+.ds-chip-check.active {
+  background: var(--accent-dimmer);
+  border-color: var(--accent-dim);
+  color: var(--accent-color);
+}
+.ds-chip-check:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 1px;
+}
+.ds-chip-check[disabled] {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Light theme */
+html[data-theme='light'] .ds-chip-check,
+html.light .ds-chip-check {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+/* ── Pill ─────────────────────────────────────────── */
+/* Small rectangular selection chip for option groups
+   (layout modes, time ranges, categories). Square corners
+   distinguish pills from the rounded filter-chip. */
+.ds-pill {
+  padding: 3px ;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--dur-fast) ease;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}
+.ds-pill:hover:not(.active) {
+  background: var(--surface-hover);
+  color: var(--text-dim);
+}
+.ds-pill.active {
+  background: var(--accent-dimmer);
+  border-color: var(--accent-dim);
+  color: var(--accent-color);
+}
+.ds-pill:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+.ds-pill[disabled] {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Filter Chip ──────────────────────────────────── */
+/* Rounded chip for content filtering (library genres,
+   shop categories). Full pill radius gives a softer,
+   more tactile feel than the rectangular pill. */
+.ds-filter-chip {
+  padding:  11px;
+  border-radius: 20px;
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--dur-fast) ease;
+  background: var(--surface);
+  border: 1px solid var(--border-light);
+  color: var(--text-muted);
+}
+.ds-filter-chip:hover:not(.active) {
+  background: var(--surface-hover);
+  color: var(--text-dim);
+}
+.ds-filter-chip.active {
+  background: var(--accent-dimmer);
+  border-color: var(--accent-dim);
+  color: var(--accent-color);
+}
+.ds-filter-chip:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+.ds-filter-chip[disabled] {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Notification Item ────────────────────────────── */
+/* Dot-indicator + text row for changelogs, activity
+   feeds, and notification panels. Dot color variants
+   convey entry type (new, improved, fix, security).  */
+.ds-notif-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gutter-mobile);
+  padding: 3px 0;
+  font-family: var(--font-display);
+}
+.ds-notif-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+.ds-notif-dot.new {
+  background: var(--cyan);
+}
+.ds-notif-dot.improved {
+  background: #818cf8;
+}
+.ds-notif-dot.fix {
+  background: var(--orange);
+}
+.ds-notif-dot.security {
+  background: #f87171;
+}
+.ds-notif-text {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.45;
+  flex: 1;
+}
+.ds-notif-text strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* ── Device Item ─────────────────────────────────── */
+/* Selectable device row for device panels — icon,
+   name, status, and connection-state dot. Active state
+   shows an accent bar and green connection indicator. */
+.ds-device-item {
+  display: flex;
+  align-items: center;
+  gap: var(--gutter-sm);
+  padding: var(--gutter-sm)   ;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background var(--dur-fast) ease;
+  position: relative;
+  margin-bottom: 1px;
+}
+.ds-device-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+.ds-device-item.active {
+  background: var(--accent-dimmer);
+}
+.ds-device-item.active::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 14px;
+  bottom: 8px;
+  width: 4px;
+  height: 24px;
+  background: var(--accent-color);
+  border-radius: 2px;
+}
+.ds-device-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--text-muted);
+  overflow: hidden;
+}
+.ds-device-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: var(--gutter-xs);
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
+}
+.ds-device-icon svg {
+  width: 14px;
+  height: 14px;
+}
+.ds-device-item.active .ds-device-icon {
+  background: var(--accent-dimmer);
+  border-color: var(--accent-dim);
+  color: var(--accent-color);
+}
+.ds-device-info {
+  flex: 1;
+  min-width: 0;
+}
+.ds-device-name {
+  font-family: var(--font-display);
+  font-size: var(--text-caption);
+  font-weight: 500;
+  color: var(--text-dim);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ds-device-item.active .ds-device-name {
+  color: var(--text-primary);
+}
+.ds-device-status {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-subtle);
+  letter-spacing: 0.04em;
+  margin-top: 1px;
+}
+.ds-device-item.active .ds-device-status {
+  color: var(--green);
+}
+.ds-device-conn {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  flex-shrink: 0;
+}
+.ds-device-item.active .ds-device-conn {
+  background: var(--green);
+  box-shadow: 0 0 5px rgba(34, 197, 94, 0.5);
+}
+
+/* ── Filter List ─────────────────────────────────── */
+/* Vertical sidebar filter with dot indicators,
+   category labels, and accent-highlighted active state.
+   Used for sidebar filtering in galleries, shops, etc. */
+.ds-filter-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.ds-filter-list-label {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0 ;
+  margin-bottom: var(--gutter-xs);
+}
+.ds-filter-list-item {
+  display: flex;
+  align-items: center;
+  gap: var(--gutter-sm);
+  padding: 5px ;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--text-muted);
+  transition:
+    background 0.1s ease,
+    color 0.1s ease;
+  user-select: none;
+  line-height: 1;
+}
+.ds-filter-list-item:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+.ds-filter-list-item.active {
+  background: var(--accent-dimmer);
+  color: var(--accent-color);
+}
+.ds-filter-list-item:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+.ds-filter-list-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+/* ── Color Swatch (.ds-swatch) ─────────────────────
+   Circular color-picker dot for accent palettes,
+   theme pickers, or any colour-selection grid.
+   Default size 20px; add .lg for 30px (modals).
+   Wrap in .ds-swatch-row for consistent gap. ────── */
+.ds-swatch-row {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.ds-swatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  flex-shrink: 0;
+  position: relative;
+  transition: transform var(--dur-fast) ease,
+    box-shadow 0.12s ease,
+    border-color 0.12s ease;
+}
+.ds-swatch:hover {
+  transform: scale(1.15);
+}
+.ds-swatch.active {
+  border-color: rgba(255, 255, 255, 0.65);
+  box-shadow: 0 0  rgba(255, 255, 255, 0.2);
+}
+
+/* Large variant — modals and expanded pickers */
+.ds-swatch.lg {
+  width: 30px;
+  height: 30px;
+}
+.ds-swatch.lg:hover {
+  transform: scale(1.12);
+}
+.ds-swatch.lg.active {
+  box-shadow: 0 0  rgba(255, 255, 255, 0.15);
+}
+
+/* Custom rainbow swatch with + icon */
+.ds-swatch.custom {
+  background: conic-gradient(#f00 0deg, #ff0 60deg, #0f0 120deg, #0ff 180deg, #00f 240deg, #f0f 300deg, #f00 360deg);
+  overflow: hidden;
+}
+.ds-swatch.custom::after {
+  content: '+';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.65);
+}
+.ds-swatch.lg.custom::after {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 0  rgba(0, 0, 0, 0.6);
+}
+.ds-swatch.custom.has-value::after {
+  content: '';
+}
+
+/* Near-white fills need a subtle resting border to stay visible */
+.ds-swatch.outline {
+  border-color: rgba(255, 255, 255, 0.25);
+}
+.ds-swatch.outline.active {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+/* ── Section Header (.ds-section-header) ─────────────
+   A horizontal rule with a label, optional badges,
+   optional description/count text, optional buttons,
+   and a primary action link — used to introduce page
+   sections on Play, Perform, Personalize, etc.
+
+   Slot layout (all optional except .ds-sh-label):
+   [drag-handle] [label] [badges…] [---line---] [count/desc] [extra-btn] [action-btn]
+
+   The .ds-sh-line flexes to fill remaining space.
+   Items after the line are right-aligned.
+   Drag handle is injected by JS (sec-drag-handle). */
+
+.ds-section-header {
+  display: flex;
+  align-items: center;
+  gap: var(--gutter-sm);
+  margin-bottom: var(--gutter-sm);
+}
+
+/* Label — uppercase mono, muted */
+.ds-sh-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* Flexible rule */
+.ds-sh-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border-light);
+}
+
+/* Count / description text — right-side subtle info */
+.ds-sh-count {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+/* Action button — primary navigation for the section */
+.ds-sh-action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gutter-xs);
+  padding: 3px 9px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-default);
+  white-space: nowrap;
+}
+.ds-sh-action:hover {
+  background: var(--surface-hover);
+  color: var(--text-dim);
+  border-color: var(--border-med);
+}
+.ds-sh-action svg {
+  width: 9px;
+  height: 9px;
+}
+
+/* .ds-sh-badge — section-header variant, extends .ds-badge base */
+.ds-sh-badge {
+  gap: 5px;
+  padding: 3px  3px 6px;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.05em;
+}
+.ds-sh-badge svg {
+  width: 10px;
+  height: 10px;
+}
+
+/* ── Section Header — light theme ── */
+html[data-theme='light'] .ds-sh-action,
+html.light .ds-sh-action {
+  background: rgba(0, 0, 0, 0.04);
+}
+html[data-theme='light'] .ds-sh-action:hover,
+html.light .ds-sh-action:hover {
+  background: rgba(0, 0, 0, 0.07);
+}
+
+/* ── Thumbnail Tile (.ds-thumb) ──────────────────── */
+/* Compact image card with optional footer.
+   Used for gallery thumbnails, deal cards, and
+   any image-first grid/scroll content. */
+.ds-thumb {
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease;
+}
+.ds-thumb:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-med);
+}
+
+/* Image area — default 16/10 aspect; override with inline style or modifier */
+.ds-thumb-img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  flex-shrink: 0;
+}
+.ds-thumb-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Optional footer — omit entirely for image-only contexts */
+.ds-thumb-meta {
+  padding: 7px var(--gutter-sm) ;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* ══════════════════════════════════════════
+   LIGHT THEME — COMPONENT OVERRIDES
+   Flips rgba(255,255,255,x) tints to
+   rgba(0,0,0,x) for light backgrounds.
+══════════════════════════════════════════ */
+
+/* ── Badge status ── */
+html[data-theme='light'] .ds-badge.status,
+html[data-theme='light'] .badge.status,
+html.light .ds-badge.status,
+html.light .badge.status {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+/* ── Tags ── */
+html[data-theme='light'] .ds-tag,
+html[data-theme='light'] .tag,
+html.light .ds-tag,
+html.light .tag {
+  background: rgba(0, 0, 0, 0.04);
+}
+/* Overlay tag stays dark on both themes (sits on images) */
+html[data-theme='light'] .ds-tag.overlay,
+html.light .ds-tag.overlay {
+  background: rgba(0, 0, 0, 0.65);
+  color: var(--text-on-image-dim);
+}
+
+/* ── Buttons ── */
+html[data-theme='light'] .ds-btn,
+html[data-theme='light'] .btn,
+html.light .ds-btn,
+html.light .btn {
+  background: rgba(0, 0, 0, 0.04);
+}
+html[data-theme='light'] .ds-btn:hover,
+html[data-theme='light'] .btn:hover,
+html.light .ds-btn:hover,
+html.light .btn:hover {
+  background: rgba(0, 0, 0, 0.07);
+}
+
+/* ── Progress track ── */
+html[data-theme='light'] .ds-prog-track,
+html[data-theme='light'] .prog-track,
+html.light .ds-prog-track,
+html.light .prog-track {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+/* ── Toggle switch ── */
+html[data-theme='light'] .ds-toggle.off,
+html.light .ds-toggle.off {
+  background: rgba(0, 0, 0, 0.12);
+}
+html[data-theme='light'] .ds-toggle::after,
+html.light .ds-toggle::after {
+  background: var(--text-on-fill);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+/* ── Segmented toggle ── */
+html[data-theme='light'] .ds-segmented,
+html.light .ds-segmented {
+  background: rgba(0, 0, 0, 0.04);
+}
+html[data-theme='light'] .ds-segmented-btn.active,
+html.light .ds-segmented-btn.active {
+  color: var(--text-on-accent);
+}
+
+/* ── Toggle Button Group ── */
+html[data-theme='light'] .ds-toggle-group,
+html.light .ds-toggle-group {
+  background: rgba(0, 0, 0, 0.04);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Pill ── */
+html[data-theme='light'] .ds-pill,
+html.light .ds-pill {
+  background: rgba(0, 0, 0, 0.03);
+}
+html[data-theme='light'] .ds-pill:hover:not(.active),
+html.light .ds-pill:hover:not(.active) {
+  background: rgba(0, 0, 0, 0.06);
+}
+html[data-theme='light'] .ds-pill.active,
+html.light .ds-pill.active {
+  background: var(--accent-dimmer);
+}
+
+/* ── Filter chip ── */
+html[data-theme='light'] .ds-filter-chip,
+html.light .ds-filter-chip {
+  background: rgba(0, 0, 0, 0.03);
+}
+html[data-theme='light'] .ds-filter-chip.active,
+html.light .ds-filter-chip.active {
+  background: var(--accent-dimmer);
+}
+
+/* ── Filter list ── */
+html[data-theme='light'] .ds-filter-list-item:hover,
+html.light .ds-filter-list-item:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+html[data-theme='light'] .ds-filter-list-item.active,
+html.light .ds-filter-list-item.active {
+  background: var(--accent-dimmer);
+}
+
+/* ── Notification item ── */
+html[data-theme='light'] .ds-notif-text,
+html.light .ds-notif-text {
+  color: var(--text-muted);
+}
+
+/* ── Device item ── */
+html[data-theme='light'] .ds-device-item:hover,
+html.light .ds-device-item:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+html[data-theme='light'] .ds-device-icon,
+html.light .ds-device-icon {
+  background: rgba(0, 0, 0, 0.03);
+}
+html[data-theme='light'] .ds-device-conn,
+html.light .ds-device-conn {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* ── Color swatch ── */
+html[data-theme='light'] .ds-swatch.active,
+html.light .ds-swatch.active {
+  border-color: rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0  rgba(0, 0, 0, 0.12);
+}
+html[data-theme='light'] .ds-swatch.lg.active,
+html.light .ds-swatch.lg.active {
+  box-shadow: 0 0  rgba(0, 0, 0, 0.1);
+}
+html[data-theme='light'] .ds-swatch.outline,
+html.light .ds-swatch.outline {
+  border-color: rgba(0, 0, 0, 0.2);
+}
+html[data-theme='light'] .ds-swatch.outline.active,
+html.light .ds-swatch.outline.active {
+  border-color: rgba(0, 0, 0, 0.55);
+}
+
+/* ── Thumbnail tile ── */
+html[data-theme='light'] .ds-thumb-meta,
+html.light .ds-thumb-meta {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+/* ─────────────────────────────────────────
+   SETTINGS GROUP  (.ds-settings-group)
+   Collapsible panels for grouped controls.
+   Header: icon · title/desc · meta badges · chevron
+   Body:   rows with label/sublabel + any control
+───────────────────────────────────────── */
+.ds-settings-group {
+  background: var(--surface);
+  border-radius: var(--radius);
+  margin-bottom: var(--gutter-sm);
+}
+
+/* ── Header (click to expand/collapse) ── */
+.ds-settings-group-header {
+  display: flex;
+  align-items: center;
+  padding: var(--gutter);
+  cursor: pointer;
+  gap: var(--gutter-mobile);
+  transition: background var(--dur-fast) ease;
+  user-select: none;
+  border-radius: var(--radius);
+}
+.ds-settings-group-header:hover {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.ds-settings-group-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ds-settings-group-icon svg {
+  width: 13px;
+  height: 13px;
+}
+
+.ds-settings-group-titles {
+  flex: 1;
+  min-width: 0;
+}
+.ds-settings-group-title {
+  font-family: var(--font-display);
+  font-size: var(--text-body);
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+}
+.ds-settings-group-desc {
+  font-family: var(--font-display);
+  font-size: var(--text-caption);
+  font-weight: 300;
+  color: var(--text-muted);
+  margin-top: 2px;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ds-settings-group-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--gutter-sm);
+  flex-shrink: 0;
+}
+
+/* Chevron rotates when expanded */
+.ds-settings-group-chevron {
+  width: 14px;
+  height: 14px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: transform var(--dur-normal) ease;
+}
+.ds-settings-group.expanded .ds-settings-group-chevron {
+  transform: rotate(90deg);
+}
+
+/* ── Items body (hidden by default, shown when .expanded) ── */
+.ds-settings-group-items {
+  display: none;
+  flex-direction: column;
+  padding: 0 var(--gutter);
+}
+.ds-settings-group.expanded .ds-settings-group-items {
+  display: flex;
+}
+
+/* ── Row ── */
+.ds-settings-row {
+  display: flex;
+  align-items: center;
+  padding: var(--gutter-sm) 0;
+  gap: var(--gutter-sm);
+  border-bottom: 1px solid var(--border-light);
+}
+.ds-settings-row:last-child {
+  border-bottom: none;
+}
+/* Inline controls should never stretch or wrap */
+.ds-settings-row > .ds-btn,
+.ds-settings-row > .btn,
+.ds-settings-row > .ds-toggle,
+.ds-settings-row > .ds-segmented,
+.ds-settings-row > .ds-select,
+.ds-settings-row > .sp-plat-btn,
+.ds-settings-row > .sp-row-val {
+  flex-shrink: 0;
+}
+
+.ds-settings-row-labels {
+  flex: 1;
+  min-width: 0;
+}
+.ds-settings-row-label {
+  font-family: var(--font-display);
+  font-size: var(--text-body);
+  font-weight: var(--font-medium);
+  color: var(--text-dim);
+  letter-spacing: 0.01em;
+  line-height: 1.3;
+}
+.ds-settings-row-sublabel {
+  font-family: var(--font-display);
+  font-size: var(--text-caption);
+  font-weight: 300;
+  color: var(--text-muted);
+  margin-top: 1px;
+  line-height: 1.4;
+}
+
+/* ── Slider (.ds-slider) ─────────────────────────── */
+/* Standalone range input with accent-filled track,
+   animated thumb, optional value readout + range labels.
+   Usage: <div class="ds-slider">
+            <input type="range" min="0" max="100" value="50">
+          </div>
+   With value + labels:
+          <div class="ds-slider">
+            <div class="ds-slider-top">
+              <input type="range" min="0" max="100" value="50">
+              <span class="ds-slider-value">50%</span>
+            </div>
+            <div class="ds-slider-range">
+              <span>0%</span><span>100%</span>
+            </div>
+          </div>                                      */
+.ds-slider {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+}
+.ds-slider-top {
+  display: flex;
+  align-items: center;
+  gap: var(--gutter-sm);
+}
+/* Input grows beside the value readout — only safe inside this flex ROW.
+   On the bare .ds-slider (a flex column) flex-grow would stretch the
+   track to the thumb's height, so it is scoped here, not on the input. */
+.ds-slider-top input[type='range'] {
+  flex: 1;
+}
+.ds-slider-value {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--accent-color);
+  white-space: nowrap;
+  min-width: 36px;
+  text-align: right;
+  letter-spacing: 0.02em;
+}
+.ds-slider-range {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  color: var(--text-subtle);
+  padding-top: 1px;
+  letter-spacing: 0.02em;
+}
+
+/* ── Track ── */
+.ds-slider input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  background: var(--border-med); /* dsSliderUpdate() paints the accent fill gradient over this */
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  outline: none;
+  margin: var(--gutter-sm) 0;
+  padding: 0;
+  overflow: visible;
+}
+/* WebKit track — transparent so input background gradient shows through */
+.ds-slider input[type='range']::-webkit-slider-runnable-track {
+  height: 8px;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* ── Thumb (WebKit) ── */
+.ds-slider input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent-color);    /* inner dot */
+  border: 4px solid #fff;             /* white outer ring */
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.22), 0 2px 6px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  margin-top: -6px; /* (20 - 8) / 2 */
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+.ds-slider input[type='range']:hover::-webkit-slider-thumb {
+  transform: scale(1.12);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.22), 0 2px 8px rgba(0, 0, 0, 0.4),
+    0 0 0 5px var(--accent-dimmest);
+}
+.ds-slider input[type='range']:active::-webkit-slider-thumb {
+  transform: scale(1.0);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25), 0 1px 4px rgba(0, 0, 0, 0.4),
+    0 0 0 6px var(--accent-dimmer);
+}
+
+/* ── Firefox track + progress ── */
+.ds-slider input[type='range']::-moz-range-track {
+  height: 8px;
+  border-radius: var(--radius-sm);
+  background: var(--border-med);
+  border: none;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+.ds-slider input[type='range']::-moz-range-progress {
+  height: 8px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-color);
+}
+
+/* ── Thumb (Firefox) ── */
+.ds-slider input[type='range']::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent-color);
+  border: 4px solid #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.22), 0 2px 6px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+.ds-slider input[type='range']:hover::-moz-range-thumb {
+  transform: scale(1.12);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.22), 0 2px 8px rgba(0, 0, 0, 0.4),
+    0 0 0 5px var(--accent-dimmest);
+}
+.ds-slider input[type='range']:active::-moz-range-thumb {
+  transform: scale(1.0);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25), 0 1px 4px rgba(0, 0, 0, 0.4),
+    0 0 0 6px var(--accent-dimmer);
+}
+
+/* ── Focus ring ── */
+.ds-slider input[type='range']:focus-visible::-webkit-slider-thumb {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 3px;
+}
+.ds-slider input[type='range']:focus-visible::-moz-range-thumb {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 3px;
+}
+
+/* ── Disabled ── */
+.ds-slider input[type='range']:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Accent variant — no-op; base thumb already uses accent inner dot ── */
+.ds-slider.accent input[type='range']::-webkit-slider-thumb,
+.ds-slider.accent input[type='range']::-moz-range-thumb { /* inherits base */ }
+
+/* ── Light theme ── */
+html[data-theme='light'] .ds-slider input[type='range']::-webkit-slider-runnable-track,
+html.light .ds-slider input[type='range']::-webkit-slider-runnable-track {
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+html[data-theme='light'] .ds-slider input[type='range']::-moz-range-track,
+html.light .ds-slider input[type='range']::-moz-range-track {
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+html[data-theme='light'] .ds-slider input[type='range']::-webkit-slider-thumb,
+html.light .ds-slider input[type='range']::-webkit-slider-thumb {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15), 0 2px 6px rgba(0, 0, 0, 0.18);
+}
+html[data-theme='light'] .ds-slider input[type='range']::-moz-range-thumb,
+html.light .ds-slider input[type='range']::-moz-range-thumb {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15), 0 2px 6px rgba(0, 0, 0, 0.18);
+}
+
+/* ── Settings-group inline slider ──────────────────
+   Thin wrapper around .ds-slider scoped to 50% width
+   for right-aligned placement inside .ds-settings-row.
+   Uses .ds-slider classes for track, thumb, and labels.
+   Legacy aliases kept for backward compat.            */
+.ds-settings-slider-control {
+  width: 50%;
+  flex-shrink: 0;
+}
+/* Alias legacy sub-class names to .ds-slider equivalents */
+.ds-settings-slider-top {
+  display: flex;
+  align-items: center;
+  gap: var(--gutter-sm);
+}
+.ds-settings-slider-value {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--accent-color);
+  white-space: nowrap;
+  min-width: 36px;
+  text-align: right;
+}
+.ds-settings-slider-range {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  color: var(--text-subtle);
+  padding-top: 1px;
+}
+
+/* ── Light theme ── */
+html[data-theme='light'] .ds-settings-group-header:hover,
+html.light .ds-settings-group-header:hover {
+  background: rgba(0, 0, 0, 0.025);
+}
+html[data-theme='light'] .ds-settings-row,
+html.light .ds-settings-row {
+  border-bottom-color: rgba(0, 0, 0, 0.04);
+}
+
+/* ─────────────────────────────────────────
+   TOAST NOTIFICATIONS  (.ds-toast)
+   API: toast(message, { type, duration })
+   Types: default · success · warn · error
+   duration: ms (0 = persistent). Default 3000.
+───────────────────────────────────────── */
+.ds-toast-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.ds-toast {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--gutter-sm);
+  padding: var(--gutter-sm)   14px;
+  background: #10131a;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius);
+  box-shadow: 0  40px rgba(0, 0, 0, 0.65),
+    0 0 0 1px rgba(0, 0, 0, 0.5);
+  max-width: 260px;
+  min-width: 160px;
+  pointer-events: all;
+  /* enter/exit state */
+  transform: translateX(calc(100% + 28px));
+  opacity: 0;
+  transition:
+    transform 0.28s cubic-bezier(0.22, 0.61, 0.36, 1),
+    opacity 0.22s ease;
+}
+.ds-toast.ds-toast-in {
+  transform: translateX(0);
+  opacity: 1;
+}
+.ds-toast.ds-toast-out {
+  transform: translateX(calc(100% + 28px));
+  opacity: 0;
+}
+
+/* Left accent bar */
+.ds-toast::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  bottom: 7px;
+  width: 2px;
+  border-radius: 0 2px 2px 0;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.ds-toast-icon {
+  flex-shrink: 0;
+  width: 13px;
+  height: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+.ds-toast-icon svg {
+  width: 12px;
+  height: 12px;
+  display: block;
+}
+
+.ds-toast-msg {
+  font-family: 'Barlow', sans-serif;
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.35;
+  flex: 1;
+  white-space: nowrap;
+}
+
+.ds-toast-close {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: var(--text-subtle);
+  cursor: pointer;
+  border-radius: 3px;
+  padding: 0;
+  transition: color var(--dur-fast) ease,
+    background 0.12s ease;
+  margin-left: 2px;
+}
+.ds-toast-close:hover {
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.06);
+}
+.ds-toast-close svg {
+  width: 7px;
+  height: 7px;
+  display: block;
+}
+
+/* ── Variants ── */
+.ds-toast-success .ds-toast-icon {
+  color: var(--green);
+}
+.ds-toast-success::before {
+  background: var(--green);
+}
+
+.ds-toast-warn .ds-toast-icon {
+  color: var(--orange);
+}
+.ds-toast-warn::before {
+  background: var(--orange);
+}
+
+.ds-toast-error .ds-toast-icon {
+  color: var(--red);
+}
+.ds-toast-error::before {
+  background: var(--red);
+}
+
+/* ── Light theme ── */
+html[data-theme='light'] .ds-toast,
+html.light .ds-toast {
+  background: #e8eaf0;
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0  28px rgba(0, 0, 0, 0.14),
+    0 0 0 1px rgba(0, 0, 0, 0.06);
+}
+html[data-theme='light'] .ds-toast-msg,
+html.light .ds-toast-msg {
+  color: rgba(20, 24, 32, 0.7);
+}
+
+/* ─────────────────────────────────────────
+   CONTEXT MENU  (.ds-ctx-menu)
+   Floating overlay menu triggered by right-click
+   or action button. Supports action rows, dividers,
+   section labels, toggles, radios, checkboxes,
+   disabled items, danger items, and nested submenus.
+───────────────────────────────────────── */
+.ds-ctx-menu {
+  position: fixed;
+  width: 230px;
+  background: rgba(16, 19, 26, 0.82);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border-med);
+  border-radius: 10px;
+  box-shadow: var(--shadow-lv-4);
+  overflow: visible;
+  z-index: 8000;
+  padding: 5px 0;
+  /* Enter / exit */
+  opacity: 0;
+  transform: translateY(-5px);
+  pointer-events: none;
+  transition:
+    opacity var(--dur-normal) var(--ease-out),
+    transform var(--dur-normal) var(--ease-out);
+}
+.ds-ctx-menu.open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+/* ── Action item ── */
+.ds-ctx-item {
+  display: flex;
+  align-items: center;
+  padding: 7px 13px;
+  gap: 9px;
+  cursor: pointer;
+  transition: background var(--dur-instant) ease;
+  user-select: none;
+  position: relative;
+}
+.ds-ctx-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Icon slot */
+.ds-ctx-icon {
+  width: 14px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+.ds-ctx-icon svg {
+  width: 12px;
+  height: 12px;
+  display: block;
+}
+
+/* Label */
+.ds-ctx-label {
+  font-family: var(--font-display);
+  font-size: 12.5px;
+  color: var(--text-dim);
+  flex: 1;
+  line-height: 1;
+}
+
+/* Trailing meta — shortcut hint, chevron, etc. */
+.ds-ctx-trail {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  color: var(--text-subtle);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* ── Variant: muted (de-emphasised actions like "More Info") ── */
+.ds-ctx-item.muted .ds-ctx-label {
+  color: var(--text-muted);
+}
+
+/* ── Variant: danger (destructive actions) ── */
+.ds-ctx-item.danger .ds-ctx-label {
+  color: rgba(239, 68, 68, 0.7);
+}
+.ds-ctx-item.danger .ds-ctx-icon {
+  color: rgba(239, 68, 68, 0.55);
+}
+.ds-ctx-item.danger:hover {
+  background: rgba(239, 68, 68, 0.06);
+}
+.ds-ctx-item.danger:hover .ds-ctx-label {
+  color: var(--red);
+}
+.ds-ctx-item.danger:hover .ds-ctx-icon {
+  color: var(--red);
+}
+
+/* ── Variant: disabled ── */
+.ds-ctx-item.disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Section label ── */
+.ds-ctx-section {
+  padding: 7px 13px 5px;
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+}
+
+/* ── Divider ── */
+.ds-ctx-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  margin:  0;
+}
+
+/* ── Toggle row ── */
+.ds-ctx-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 13px;
+  cursor: pointer;
+  transition: background var(--dur-instant) ease;
+}
+.ds-ctx-toggle-row:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+.ds-ctx-toggle-label {
+  font-family: var(--font-display);
+  font-size: 12.5px;
+  color: var(--text-dim);
+  user-select: none;
+}
+/* Compact toggle inside context menu */
+.ds-ctx-toggle-row .ds-toggle {
+  width: 28px;
+  height: 15px;
+  border-radius: var(--radius);
+}
+.ds-ctx-toggle-row .ds-toggle::after {
+  top: 3px;
+  left: 16px;
+  width: 9px;
+  height: 9px;
+}
+.ds-ctx-toggle-row .ds-toggle.off::after {
+  left: 2px;
+}
+
+/* ── Checkbox row ── */
+.ds-ctx-check-row {
+  display: flex;
+  align-items: center;
+  padding: 5px 13px;
+  gap: 9px;
+  cursor: pointer;
+  transition: background var(--dur-instant) ease;
+}
+.ds-ctx-check-row:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+.ds-ctx-check-row .ds-checkbox {
+  pointer-events: none;
+}
+
+/* ── Radio row (uses shared .ds-radio) ── */
+.ds-ctx-radio-row {
+  display: flex;
+  gap: var(--gutter-xs);
+  align-items: center;
+  padding: 5px 13px;
+  cursor: pointer;
+  transition: background var(--dur-instant) ease;
+}
+.ds-ctx-radio-row:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+.ds-ctx-radio-row .ds-radio {
+  pointer-events: none;
+}
+
+/* ── Submenu (nested) ── */
+.ds-ctx-item.has-submenu .ds-ctx-trail::after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-right: 1.3px solid var(--text-muted);
+  border-bottom: 1.3px solid var(--text-muted);
+  transform: rotate(-45deg);
+  margin-left: 2px;
+}
+
+.ds-ctx-submenu {
+  position: absolute;
+  left: calc(100% + 4px);
+  top: -5px;
+  width: 200px;
+  background: rgba(16, 19, 26, 0.82);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border-med);
+  border-radius: 10px;
+  box-shadow:
+    0 20px 56px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(0, 0, 0, 0.5);
+  padding: 5px 0;
+  opacity: 0;
+  transform: translateX(-);
+  pointer-events: none;
+  transition:
+    opacity var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+.ds-ctx-item.has-submenu:hover > .ds-ctx-submenu {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: all;
+}
+
+/* ── Submenu action row (plain, no icon slot) ── */
+.ds-ctx-submenu-item {
+  display: flex;
+  align-items: center;
+  padding: 7px 13px;
+  gap: 9px;
+  cursor: pointer;
+  transition: background var(--dur-instant) ease;
+  user-select: none;
+}
+.ds-ctx-submenu-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+.ds-ctx-submenu-item .ds-ctx-label {
+  color: var(--text-dim);
+}
+.ds-ctx-submenu-item.disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Light theme ── */
+html[data-theme='light'] .ds-ctx-menu,
+html.light .ds-ctx-menu {
+  background: rgba(232, 234, 240, 0.82);
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow:
+    0 20px 56px rgba(0, 0, 0, 0.18),
+    0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+html[data-theme='light'] .ds-ctx-submenu,
+html.light .ds-ctx-submenu {
+  background: rgba(232, 234, 240, 0.82);
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow:
+    0 20px 56px rgba(0, 0, 0, 0.18),
+    0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+html[data-theme='light'] .ds-ctx-item:hover,
+html.light .ds-ctx-item:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+html[data-theme='light'] .ds-ctx-submenu-item:hover,
+html.light .ds-ctx-submenu-item:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+html[data-theme='light'] .ds-ctx-toggle-row:hover,
+html.light .ds-ctx-toggle-row:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+html[data-theme='light'] .ds-ctx-check-row:hover,
+html.light .ds-ctx-check-row:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+html[data-theme='light'] .ds-ctx-radio-row:hover,
+html.light .ds-ctx-radio-row:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+html[data-theme='light'] .ds-ctx-divider,
+html.light .ds-ctx-divider {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+/* ── Feature Card (.ds-feature-card / .pcard) ────────────
+   Card for features with state — icon top-left, status
+   badge top-right, title + subtitle below, optional stats
+   and footer CTA.
+
+   Usage:
+     <div class="ds-feature-card">
+       <div class="ds-feature-card-header">
+         <div class="ds-feature-card-icon" style="background:…;border-color:…;color:…">
+           <svg …></svg>
+         </div>
+         <span class="ds-badge status positive">Active</span>
+       </div>
+       <div class="ds-feature-card-title">Feature Name</div>
+       <div class="ds-feature-card-sub">Description text</div>
+       <div class="ds-feature-card-footer">
+         <button class="ds-btn sm accent">Configure</button>
+         <span class="ds-feature-card-meta">Last tuned 2h ago</span>
+       </div>
+     </div>
+
+   .pcard is a legacy alias — prefer .ds-feature-card
+   in new markup.
+───────────────────────────────────────── */
+.ds-feature-card,
+.pcard {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: var(--gutter);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  cursor: pointer;
+  box-shadow: var(--shadow-lv-1);
+  transition:
+    border-color var(--dur-fast) var(--ease-default),
+    background var(--dur-fast) var(--ease-default);
+  position: relative;
+  overflow: hidden;
+}
+.ds-feature-card:hover,
+.pcard:hover {
+  border-color: var(--accent-dim);
+}
+
+/* Header — icon left, badge right */
+.ds-feature-card-header,
+.pcard-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 11px;
+}
+
+/* Icon — tinted square with centered SVG */
+.ds-feature-card-icon,
+.pcard-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ds-feature-card-icon svg,
+.pcard-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Title & subtitle */
+.ds-feature-card-title,
+.pcard-title {
+  font-family: var(--font-display);
+  font-size: var(--text-body);
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  margin-bottom: var(--gutter-xs);
+}
+.ds-feature-card-sub,
+.pcard-sub {
+  font-family: var(--font-display);
+  font-size: var(--text-caption);
+  /*font-weight: 300;*/
+  color: var(--text-muted);
+  line-height: 1.45;
+  flex: 1;
+}
+
+/* Footer — CTA left, meta text right */
+.ds-feature-card-footer,
+.pcard-footer {
+  margin-top: var(--gutter-tablet);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Optional meta text in footer (e.g. "Last tuned 2h ago") */
+.ds-feature-card-meta {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  color: var(--text-subtle);
+  letter-spacing: 0.02em;
+}
+
+/* Statistics display */
+.ds-feature-card-stat,
+.pcard-stat-big {
+  font-family: var(--font-cond);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+.ds-feature-card-stat-unit,
+.pcard-stat-unit {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  color: var(--text-muted);
+  margin-left: 3px;
+  vertical-align: middle;
+}
+.ds-feature-card-stat-label,
+.pcard-stat-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+  margin-top: 2px;
+}
+
+/* Device image slot (peripheral cards) */
+.ds-feature-card-img,
+.pcard-img {
+  margin: -14px - ;
+  height: 110px;
+  background: rgba(255, 255, 255, 0.018);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+.ds-feature-card-img::before,
+.pcard-img::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 60%, rgba(255, 255, 255, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+.ds-feature-card-img img,
+.pcard-img img {
+  max-width: 78%;
+  max-height: 90px;
+  object-fit: contain;
+  display: block;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0   rgba(0, 0, 0, 0.55));
+  transition: transform var(--dur-normal) var(--ease-default);
+}
+.ds-feature-card:hover .ds-feature-card-img img,
+.pcard:hover .pcard-img img {
+  transform: translateY(-2px);
+}
+
+/* ── Device variant (.device) ──
+   Taller image slot for peripheral device photos.
+   Usage: <div class="ds-feature-card device">         */
+.ds-feature-card.device .ds-feature-card-img {
+  height: 150px;
+}
+.ds-feature-card.device .ds-feature-card-img img {
+  max-height: 120px;
+  max-width: 85%;
+}
+
+/* ── Light theme ── */
+html[data-theme='light'] .ds-feature-card,
+html.light .ds-feature-card,
+html[data-theme='light'] .pcard,
+html.light .pcard {
+  background: rgba(0, 0, 0, 0.03);
+}
+html[data-theme='light'] .ds-feature-card:hover,
+html.light .ds-feature-card:hover,
+html[data-theme='light'] .pcard:hover,
+html.light .pcard:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+html[data-theme='light'] .ds-feature-card-img,
+html.light .ds-feature-card-img,
+html[data-theme='light'] .pcard-img,
+html.light .pcard-img {
+  background: rgba(0, 0, 0, 0.025);
+  border-bottom-color: rgba(0, 0, 0, 0.07);
+}
+
+/* ── Product Card (.ds-card) ─────────────────────────
+   Versatile image + text card for shop listings, media
+   galleries, and content grids. NOT for game tiles
+   (use .ds-tile) or feature/status cards (use
+   .ds-feature-card).
+
+   Structure:
+     .ds-card(.portrait | .landscape | .overlay)
+       .ds-card-art                ← image container
+         img                       ← cover image
+         .ds-badge                 ← optional badge (sale, free, new)
+       .ds-card-body               ← text below art (portrait/landscape)
+         .ds-card-title
+         .ds-card-meta             ← genre, category, etc.
+         .ds-card-prices           ← optional price row
+           .ds-card-price
+           .ds-card-price.sale     ← green sale price
+           .ds-card-price.orig     ← struck-through original
+       .ds-card-overlay            ← gradient text ON art (overlay variant)
+         .ds-card-label            ← small uppercase label
+         .ds-card-title
+         .ds-card-meta
+
+   Variants:
+     (default)   — portrait 3:4 aspect, text below
+     .landscape  — 16:9 aspect, text below
+     .overlay    — image with gradient overlay text
+     .overlay.hero — larger overlay title
+───────────────────────────────────────── */
+
+/* ── Base ── */
+.ds-card {
+  position: relative;
+  cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-default);
+}
+.ds-card:hover {
+  transform: translateY(-3px);
+}
+
+/* ── Art container ── */
+.ds-card-art {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+  transition: border-color var(--dur-fast) var(--ease-default);
+}
+.ds-card:hover .ds-card-art {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+.ds-card-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Landscape variant (16:9) ── */
+.ds-card.landscape .ds-card-art {
+  aspect-ratio: 16 / 9;
+}
+
+/* ── Gallery variant (16:10, subtle hover) ── */
+.ds-card.gallery .ds-card-art {
+  aspect-ratio: 16 / 10;
+}
+.ds-card.gallery:hover {
+  transform: translateY(-2px);
+}
+
+/* ── Overlay variant (gradient text on image) ── */
+.ds-card.overlay .ds-card-art {
+  aspect-ratio: auto;
+  height: 100%;
+}
+.ds-card.overlay {
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+.ds-card.overlay:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+.ds-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(13, 15, 20, 0.93) 0%, transparent 60%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding:  14px;
+}
+
+/* Side-gradient variant (partner-style horizontal overlay) */
+.ds-card.overlay.side .ds-card-overlay {
+  background: linear-gradient(
+    95deg,
+    rgba(13, 15, 20, 0.93) 0%,
+    rgba(13, 15, 20, 0.62) 45%,
+    rgba(13, 15, 20, 0.18) 100%
+  );
+  padding:  18px;
+}
+
+/* ── Text body (below art) ── */
+.ds-card-body {
+  padding: 7px 0 0;
+}
+
+/* ── Title ── */
+.ds-card-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* Overlay title: white, condensed */
+.ds-card-overlay .ds-card-title {
+  font-family: var(--font-cond);
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+  white-space: normal;
+}
+.ds-card.overlay.hero .ds-card-overlay .ds-card-title {
+  font-size: 26px;
+}
+
+/* ── Label (overlay only — publisher, category) ── */
+.ds-card-label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--orange);
+  font-family: var(--font-cond);
+  margin-bottom: var(--gutter-xs);
+}
+
+/* ── Meta (genre, subtitle, etc.) ── */
+.ds-card-meta {
+  font-size: var(--text-micro);
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+.ds-card-overlay .ds-card-meta {
+  font-size: var(--text-caption);
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: var(--gutter-xs);
+}
+
+/* ── Prices ── */
+.ds-card-prices {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 3px;
+}
+.ds-card-price {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  font-weight: 500;
+  color: var(--text-primary);
+}
+.ds-card-price.sale {
+  color: var(--green);
+}
+.ds-card-price.orig {
+  font-size: var(--text-micro);
+  color: var(--text-subtle);
+  text-decoration: line-through;
+  font-weight: 400;
+}
+/* Overlay price (muted white) */
+.ds-card-overlay .ds-card-price {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* ── Light theme ── */
+html[data-theme='light'] .ds-card-art,
+html.light .ds-card-art {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+html[data-theme='light'] .ds-card:hover .ds-card-art,
+html.light .ds-card:hover .ds-card-art {
+  border-color: rgba(0, 0, 0, 0.18);
+}
+html[data-theme='light'] .ds-card.overlay,
+html.light .ds-card.overlay {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+html[data-theme='light'] .ds-card.overlay:hover,
+html.light .ds-card.overlay:hover {
+  border-color: rgba(0, 0, 0, 0.18);
+}
+
+/* ── Modal Shell (.ds-modal / .modal-shell) ──────────
+   Full-screen inset panel for detail views, settings,
+   and configuration. Composes with .ds-backdrop for
+   the dimming layer behind.
+
+   Structure:
+     .ds-backdrop          ← dimming layer (z-index: 50)
+     .modal-shell          ← this component (z-index: 51)
+       .modal-breadcrumb   ← back nav + title
+       .modal-body         ← 2-column grid
+         .modal-left       ← hero/sidebar (300px)
+         .modal-right      ← scrollable content area
+
+   .modal-shell is the canonical class. A .ds-modal
+   alias will be added in a future pass.
+───────────────────────────────────────── */
+.modal-shell {
+  position: fixed;
+  margin: 0 auto;
+  max-width: 1600px;
+  inset: 108px;
+  /*top: calc(var(--titlebar-h) + var(--nav-full-h) + 24px);*/
+  border-radius: 10px;
+  background: rgba(13, 15, 20, 0.97);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow:
+    0 32px 80px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+  z-index: 51;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY();
+  pointer-events: none;
+  transition:
+    opacity 0.22s ease,
+    transform 0.22s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.modal-shell.open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+/* When the modal is closed, every descendant must also stop capturing clicks.
+   pointer-events does not inherit — any child with an explicit `auto` (SVG
+   hotspots, hero overlays, etc.) would otherwise still hijack clicks even
+   though the shell is invisible. !important is required to override
+   equal-specificity rules defined later in the cascade (e.g. prototype.css). */
+.modal-shell:not(.open) * {
+  pointer-events: none !important;
+}
+
+/* Breadcrumb bar */
+.modal-breadcrumb {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: var(--gutter-sm);
+  padding:  var(--gutter);
+  flex-shrink: 0;
+}
+.breadcrumb-back {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 400;
+  padding: 3px 6px 3px 2px;
+  border-radius: var(--radius-sm);
+  transition:
+    color var(--dur-fast) var(--ease-default),
+    background var(--dur-fast) var(--ease-default);
+  letter-spacing: 0.01em;
+}
+.breadcrumb-back:hover {
+  color: var(--text-dim);
+  background: rgba(255, 255, 255, 0.05);
+}
+html[data-theme='light'] .breadcrumb-back,
+html.light .breadcrumb-back {
+  color: var(--text-muted);
+}
+html[data-theme='light'] .breadcrumb-back:hover,
+html.light .breadcrumb-back:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+.breadcrumb-back svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+.breadcrumb-sep {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--text-subtle);
+  line-height: 1;
+  user-select: none;
+}
+.breadcrumb-current {
+  font-family: var(--font-display);
+  font-size: var(--text-caption);
+  font-weight: 500;
+  color: var(--text-dim);
+  letter-spacing: 0.01em;
+}
+
+/* Body: 2-column grid */
+.modal-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 33% 1fr;
+  overflow: hidden;
+}
+
+/* Left panel (hero/sidebar) */
+.modal-left {
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border-light);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.07) transparent;
+}
+
+/* Right panel (scrollable content) */
+.modal-right {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.07) transparent;
+  padding: 20px  0;
+}
+.modal-right::-webkit-scrollbar {
+  width: 3px;
+}
+.modal-right::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+}
+
+/* ── Light theme ── */
+html[data-theme='light'] .modal-shell,
+html.light .modal-shell {
+  background: rgba(233, 235, 241, 0.98);
+  border-color: rgba(0, 0, 0, 0.09);
+  box-shadow:
+    0 32px 80px rgba(0, 0, 0, 0.14),
+    0 0 0 1px rgba(0, 0, 0, 0.05) inset;
+}
+html[data-theme='light'] .modal-left,
+html.light .modal-left {
+  scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
+}
+html[data-theme='light'] .modal-right,
+html.light .modal-right {
+  scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
+}
+
+/* ── Thumbnail Tile (.ds-tile) ──────────────
+   Image card for games, apps, and media. Supports
+   cover art (default) and icon-only fallback variants.
+
+   Structure:
+     .ds-tile(.glow)             ← container, opt-in glow
+       .ds-tile-art              ← image area (2:3 ratio)
+         .ds-tile-overlay        ← optional play button
+         .ds-tile-menu           ← optional ••• menu
+         .ds-tile-platform       ← optional platform icon
+         .ds-badge               ← optional badge(s)
+       .ds-tile-footer           ← optional name label
+         .ds-tile-name
+
+   Icon-only variant:
+     .ds-tile-art.icon-only
+       .ds-tile-icon-bg          ← blurred bg layer
+       .ds-tile-icon-fg          ← sharp centered icon
+
+   Sizes: default, .sm, .lg
+   Features: .glow (hover glow), badges, platform, menu
+───────────────────────────────────────── */
+
+/* ── Container ── */
+.ds-tile {
+  position: relative;
+  cursor: pointer;
+  isolation: isolate; /* Creates stacking context so ::before glow at z-index:-1 stays visible */
+}
+
+/* Hover glow (opt-in via .glow class) */
+.ds-tile.glow::before {
+  content: '';
+  position: absolute;
+  /*inset: - -var(--gutter-tablet) -14px -;*/
+  inset: -1% -3% -3.5% -3%;
+  border-radius: 18px;
+  background-image: var(--_gtile-bg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(20px) saturate(2.2) brightness(1.8);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+  pointer-events: none;
+}
+.ds-tile.glow:hover::before {
+  opacity: 0.4;
+}
+/* Force-glow utility — for design system state previews (JS can't style ::before) */
+.ds-tile.force-glow::before {
+  opacity: 0.75 !important;
+}
+
+/* No-glow variant gets a shadow instead */
+.ds-tile:not(.glow):hover .ds-tile-art {
+  box-shadow: 0  28px rgba(0, 0, 0, 0.55),
+    inset 0 0 0 1.5px rgba(255, 255, 255, 0.11);
+}
+
+/* ── Art area ── */
+.ds-tile-art {
+  width: 100%;
+  aspect-ratio: 2/3;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0 0 0 1.5px var(--border);
+  border: none;
+  position: relative;
+  z-index: 1;
+  background-size: cover;
+  background-position: center top;
+  transition:
+    transform var(--dur-normal) var(--ease-default),
+    box-shadow var(--dur-normal) var(--ease-default),
+    border-color var(--dur-fast) var(--ease-default),
+    filter var(--dur-normal) var(--ease-default);
+  filter: brightness(0.97) saturate(1);
+}
+.ds-tile:hover .ds-tile-art {
+  transform: translateY(-3px);
+  box-shadow:
+    0 14px 36px rgba(0, 0, 0, 0.5),
+    inset 0 0 0 1.5px rgba(255, 255, 255, 0.11);
+  filter: brightness(1.12) saturate(1.2);
+}
+
+/* Pressed */
+.ds-tile:active .ds-tile-art {
+  transform: translateY(-1px) scale(0.98);
+  transition-duration: var(--dur-instant);
+}
+
+/* Disabled */
+.ds-tile.disabled {
+  pointer-events: none;
+}
+.ds-tile.disabled .ds-tile-art {
+  filter: brightness(0.5) saturate(0.2);
+  opacity: 0.6;
+}
+.ds-tile.disabled .ds-tile-footer {
+  opacity: 0.4;
+}
+
+/* Loading shimmer */
+.ds-tile.loading .ds-tile-art {
+  background: linear-gradient(
+    110deg,
+    rgba(255, 255, 255, 0.04) 30%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.04) 70%
+  );
+  background-size: 200% 100%;
+  animation: ds-tile-shimmer 1.5s ease-in-out infinite;
+}
+@keyframes ds-tile-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ── Overlay (play button) ── */
+.ds-tile-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-default);
+}
+.ds-tile:hover .ds-tile-overlay {
+  opacity: 1;
+}
+
+.ds-tile-play {
+  width: 38px;
+  height: 38px;
+}
+.ds-tile-play svg {
+  width: 14px;
+  height: 14px;
+  margin-left: 2px;
+}
+
+/* ── Menu button (•••) ── */
+.ds-tile-menu {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.48);
+  opacity: 0;
+  transition:
+    opacity var(--dur-fast) var(--ease-default),
+    background var(--dur-fast) var(--ease-default);
+  cursor: pointer;
+}
+.ds-tile:hover .ds-tile-menu {
+  opacity: 1;
+}
+.ds-tile-menu:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+.ds-tile-menu svg {
+  width: 11px;
+  height: 11px;
+  color: var(--text-dim);
+}
+
+/* ── Platform icon ── */
+.ds-tile-platform {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  width: 16px;
+  height: 16px;
+  color: var(--text-on-fill);
+  opacity: 0.55;
+  pointer-events: none;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.7));
+  transition: opacity var(--dur-normal) var(--ease-default);
+}
+.ds-tile-platform svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.ds-tile:hover .ds-tile-platform {
+  opacity: 0.85;
+}
+
+/* ── Badge positioning inside art ── */
+.ds-tile-art .ds-badge {
+  position: absolute;
+  top: var(--gutter-sm);
+  left: var(--gutter-sm);
+  pointer-events: none;
+}
+
+/* ── Footer ── */
+.ds-tile-footer {
+  padding: 6px 0 0;
+  position: relative;
+  z-index: 1;
+}
+.ds-tile-name {
+  font-family: var(--font-display);
+  font-size: var(--text-caption);
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Icon-only variant ── */
+.ds-tile-art.icon-only {
+  background: var(--bg-base);
+  background-size: initial;
+  background-image: none !important;
+}
+.ds-tile-icon-bg {
+  position: absolute;
+  inset: -20px;
+  background-size: cover;
+  background-position: center;
+  filter: blur(28px) saturate(1.4) brightness(0.5);
+  transform: scale(1.15);
+  z-index: 0;
+}
+.ds-tile-icon-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 20%, var(--bg-base) 85%);
+}
+.ds-tile-icon-fg {
+  position: absolute;
+  z-index: 1;
+  width: 52%;
+  height: auto;
+  aspect-ratio: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  object-fit: contain;
+  border-radius: var(--radius);
+  filter: drop-shadow(0  20px rgba(0, 0, 0, 0.6));
+}
+.ds-tile:hover .ds-tile-icon-fg {
+  filter: drop-shadow(0  24px rgba(0, 0, 0, 0.4));
+}
+
+/* ── Size variants ── */
+.ds-tile.sm .ds-tile-play {
+  width: 28px;
+  height: 28px;
+}
+.ds-tile.sm .ds-tile-play svg {
+  width: 10px;
+  height: 10px;
+}
+.ds-tile.sm .ds-tile-menu {
+  width: 18px;
+  height: 18px;
+  top: 4px;
+  right: 4px;
+}
+.ds-tile.sm .ds-tile-menu svg {
+  width: 9px;
+  height: 9px;
+}
+.ds-tile.sm .ds-tile-name {
+  font-size: var(--text-micro);
+}
+
+.ds-tile.lg .ds-tile-play {
+  width: 48px;
+  height: 48px;
+}
+.ds-tile.lg .ds-tile-play svg {
+  width: 18px;
+  height: 18px;
+}
+.ds-tile.lg .ds-tile-name {
+  font-size: var(--text-body);
+}
+
+/* ── Light theme ── */
+html[data-theme='light'] .ds-tile-art,
+html.light .ds-tile-art {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+html[data-theme='light'] .ds-tile.glow::before,
+html.light .ds-tile.glow::before {
+  filter: blur(18px) saturate(1.4) brightness(0.9);
+}
+html[data-theme='light'] .ds-tile.glow:hover::before,
+html.light .ds-tile.glow:hover::before {
+  opacity: 0.45;
+}
+html[data-theme='light'] .ds-tile:hover .ds-tile-art,
+html.light .ds-tile:hover .ds-tile-art {
+  box-shadow:
+    0 14px 36px rgba(0, 0, 0, 0.15),
+    inset 0 0 0 1.5px rgba(0, 0, 0, 0.08);
+}
+
+/* ─────────────────────────────────────────
+   PANEL  (.ds-panel)
+   Slide-in side panel with frosted glass,
+   header bar, and scrollable body.
+   ─────────────────────────────────────────
+   Usage:
+     <div class="ds-panel" id="my-panel">
+       <div class="ds-panel-header">
+         <span class="ds-panel-title">Title</span>
+         <button class="ds-panel-close" onclick="...">
+           <svg>…</svg>
+         </button>
+       </div>
+       <div class="ds-panel-body">
+         …scrollable content…
+       </div>
+     </div>
+
+   Open/close via .open class.
+   Position, top offset, z-index set inline per context.
+   Variants: (none yet)                                   */
+
+/* ── Panel shell ── */
+.ds-panel {
+  position: absolute;
+  right: var(--gutter);
+  bottom: var(--gutter);
+  width: var(--panel-w);
+  display: flex;
+  flex-direction: column;
+  /*background: var(--accent-dimmest);*/
+  background: color-mix(in srgb, var(--bg-elevated) 45%, transparent);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) * 2);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  overflow: hidden;
+  transform: translateX(calc(100% + var(--gutter)));
+  transition: transform 0.28s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.ds-panel.open {
+  transform: translateX(0);
+}
+
+/* ── Panel header ── */
+.ds-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px  ;
+  border-bottom: 1px solid var(--border-light);
+  flex-shrink: 0;
+}
+.ds-panel-title {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ── Panel close button ── */
+.ds-panel-close {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  transition:
+    background var(--dur-fast) var(--ease-default),
+    color var(--dur-fast) var(--ease-default);
+}
+.ds-panel-close:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+}
+.ds-panel-close svg {
+  width: 10px;
+  height: 10px;
+  stroke-width: 2;
+}
+
+/* ── Panel body (scrollable) ── */
+.ds-panel-body {
+  flex: 1;
+  overflow-y: auto;
+  padding:   20px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.07) transparent;
+}
+.ds-panel-body::-webkit-scrollbar {
+  width: 3px;
+}
+.ds-panel-body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+/* ── Panel hero image (optional) ── */
+.ds-panel-hero {
+  width: 100%;
+  height: 200px;
+  flex-shrink: 0;
+  background-size: cover;
+  background-position: center top;
+  position: relative;
+}
+.ds-panel-hero-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, var(--bg-base) 0%, transparent 55%);
+}
+
+/* ── Light theme ── */
+html[data-theme='light'] .ds-panel,
+html.light .ds-panel {
+  background: rgba(228, 231, 238, 0.98);
+  border-color: rgba(0, 0, 0, 0.09);
+}
+html[data-theme='light'] .ds-panel-close:hover,
+html.light .ds-panel-close:hover {
+  background: rgba(0, 0, 0, 0.06);
+  color: #111;
+}
+
+/* ─────────────────────────────────────────
+   SELECTABLE CARD  (.ds-card-select)
+   Radio-like cards — only one active at a time
+   within a .ds-card-select-group.
+   ─────────────────────────────────────────
+   Usage:
+     <div class="ds-card-select-group" role="radiogroup">
+       <div class="ds-card-select active" role="radio"
+            aria-checked="true" tabindex="0"
+            onclick="dsCardSelect(this)">
+         <div class="ds-card-select-header">
+           <div class="ds-card-select-icon" style="background:…;color:…">
+             <svg>…</svg>
+           </div>
+           <span class="ds-badge status positive">Active</span>
+         </div>
+         <div class="ds-card-select-title">Card Name</div>
+         <div class="ds-card-select-desc">Description</div>
+         <div class="ds-card-select-tags">
+           <span class="ds-card-select-tag">Tag</span>
+         </div>
+       </div>
+     </div>
+
+   Active card mirrors widget tint: --widget-tint-bg + --widget-tint-border.
+   Call dsCardSelect(card) on click — handles mutual exclusivity + ARIA.
+   Arrow keys navigate within group.                                      */
+
+/* ── Group container ── */
+.ds-card-select-group {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gutter);
+}
+
+/* ── Card ── */
+.ds-card-select {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 14px ;
+  cursor: pointer;
+  transition:
+    border-color var(--dur-fast) var(--ease-default),
+    background var(--dur-fast) var(--ease-default);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  overflow: hidden;
+  outline: none;
+}
+.ds-card-select:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.035);
+}
+.ds-card-select.active {
+  border-color: var(--widget-tint-border);
+  background: var(--widget-tint-bg);
+}
+.ds-card-select:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+/* ── Header (icon + optional badge) ── */
+.ds-card-select-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 11px;
+}
+.ds-card-select-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ds-card-select-icon svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* Badge hidden until active */
+.ds-card-select .ds-card-select-header .ds-badge,
+.ds-card-select .ds-card-select-header .badge {
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-default);
+}
+.ds-card-select.active .ds-card-select-header .ds-badge,
+.ds-card-select.active .ds-card-select-header .badge {
+  opacity: 1;
+}
+
+/* ── Title ── */
+.ds-card-select-title {
+  font-family: var(--font-display);
+  font-size: var(--text-body);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 3px;
+}
+
+/* ── Description ── */
+.ds-card-select-desc {
+  font-family: var(--font-display);
+  font-size: var(--text-caption);
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1.4;
+  flex: 1;
+}
+
+/* ── Tags ── */
+.ds-card-select-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gutter-xs);
+  margin-top: var(--gutter-mobile);
+}
+.ds-card-select-tag {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  color: var(--text-subtle);
+  transition:
+    background var(--dur-fast) var(--ease-default),
+    border-color var(--dur-fast) var(--ease-default),
+    color var(--dur-fast) var(--ease-default);
+}
+.ds-card-select.active .ds-card-select-tag {
+  background: var(--accent-dimmest);
+  border-color: var(--accent-dimmer);
+  color: var(--accent-color);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .ds-card-select-group {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .ds-card-select-group {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Light theme ── */
+html[data-theme='light'] .ds-card-select,
+html.light .ds-card-select {
+  background: rgba(0, 0, 0, 0.02);
+}
+html[data-theme='light'] .ds-card-select:hover,
+html.light .ds-card-select:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+html[data-theme='light'] .ds-card-select-tag,
+html.light .ds-card-select-tag {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+/* ─────────────────────────────────────────
+   CALLOUT  (.ds-callout)
+   Positioned dot + frosted label overlay.
+   Place inside a position:relative container.
+
+   <div class="ds-callout" style="top:30%;left:40%">
+     <div class="ds-callout-dot"></div>
+     <div class="ds-callout-line"></div>
+     <div class="ds-callout-label">
+       <div class="ds-callout-title">Label</div>
+       <div class="ds-callout-value">Value</div>
+       <div class="ds-callout-status">Normal</div>  <!-- optional -->
+     </div>
+   </div>
+───────────────────────────────────────── */
+.ds-callout {
+  position: absolute;
+  cursor: pointer;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: var(--gutter-sm);
+  transition: transform var(--dur-fast) var(--ease-default);
+}
+.ds-callout:hover {
+  transform: scale(1.06);
+}
+.ds-callout:hover .ds-callout-dot {
+  transform: scale(1.3);
+  box-shadow: 0 0 8px var(--accent-color);
+}
+.ds-callout:hover .ds-callout-label {
+  border-color: var(--accent-dim);
+  background: rgba(13, 15, 19, 0.92);
+}
+
+.ds-callout-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent-color);
+  box-shadow: 0 0 6px var(--accent-color),
+    0 0 20px color-mix(in srgb, var(--accent-color), transparent 85%);
+  flex-shrink: 0;
+  animation: ds-callout-pulse 2s ease-in-out infinite;
+  transition:
+    transform var(--dur-fast) var(--ease-default),
+    box-shadow var(--dur-fast) var(--ease-default);
+}
+
+@keyframes ds-callout-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(0.8);
+  }
+}
+
+/* Click feedback — add .clicked via JS, remove after 500ms */
+@keyframes ds-callout-flash {
+  0% {
+    box-shadow: 0 0 6px var(--accent-color),
+      0 0 0 0 color-mix(in srgb, var(--accent-color), transparent 40%);
+    transform: scale(1);
+  }
+  40% {
+    box-shadow: 0 0 6px var(--accent-color),
+      0 0 0 18px transparent;
+    transform: scale(1.8);
+  }
+  100% {
+    box-shadow: 0 0 6px var(--accent-color),
+      0 0 0 0 transparent;
+    transform: scale(1);
+  }
+}
+.ds-callout.clicked .ds-callout-dot {
+  animation: ds-callout-flash var(--dur-xslow) ease-out;
+}
+.ds-callout.clicked .ds-callout-label {
+  border-color: var(--accent-color);
+  background: color-mix(in srgb, var(--accent-color), transparent 88%);
+}
+
+.ds-callout-label {
+  background: rgba(13, 15, 19, 0.78);
+  backdrop-filter: blur();
+  -webkit-backdrop-filter: blur();
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px ;
+  transition:
+    border-color var(--dur-fast) var(--ease-default),
+    background var(--dur-fast) var(--ease-default);
+}
+
+.ds-callout-title {
+  font-family: var(--font-mono);
+  font-size: var(--text-nano);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+  margin-bottom: 1px;
+}
+
+.ds-callout-line {
+  width: 20px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent-color), transparent);
+  flex-shrink: 0;
+  opacity: 0.5;
+  transition:
+    opacity var(--dur-fast) var(--ease-default),
+    width var(--dur-fast) var(--ease-default);
+}
+.ds-callout:hover .ds-callout-line {
+  opacity: 0.8;
+  width: 28px;
+}
+
+.ds-callout-value {
+  font-family: var(--font-cond);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.ds-callout-status {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--text-nano);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-top: 3px;
+  line-height: 1;
+}
+.ds-callout-status.ok {
+  color: var(--green);
+  background: var(--green-dim);
+}
+.ds-callout-status.warn {
+  color: var(--orange);
+  background: var(--orange-dim);
+}
+.ds-callout-status.critical {
+  color: var(--red);
+  background: rgba(239, 68, 68, 0.12);
+}
+
+/* ── Callout mobile collapse ── */
+@media (max-width: 600px) {
+  .ds-callout {
+    position: static;
+    flex-direction: row;
+    gap: var(--gutter-mobile);
+    padding:  0;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .ds-callout:last-child {
+    border-bottom: none;
+  }
+  .ds-callout-dot {
+    width: 6px;
+    height: 6px;
+    animation: none;
+  }
+  .ds-callout-line {
+    display: none;
+  }
+  .ds-callout-label {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--gutter-sm);
+  }
+  .ds-callout-title {
+    margin-bottom: 0;
+  }
+  .ds-callout-value {
+    font-size: var(--text-body);
+  }
+  .ds-callout:hover {
+    transform: none;
+  }
+  .ds-callout:hover .ds-callout-dot {
+    transform: none;
+    box-shadow: 0 0 6px var(--accent-color);
+  }
+  .ds-callout:hover .ds-callout-label {
+    background: transparent;
+    border-color: transparent;
+  }
+}
+
+/* ─────────────────────────────────────────
+   TOOLTIP  (.ds-tooltip)
+   Hover/focus-triggered floating info box.
+   ─────────────────────────────────────────
+   Usage:
+     <span class="ds-tooltip-wrap">
+       <button class="ds-tooltip-trigger" aria-describedby="tip-1">
+         <svg>…ⓘ icon…</svg>
+       </button>
+       <span class="ds-tooltip" id="tip-1" role="tooltip">
+         Tooltip text here
+       </span>
+     </span>
+
+   Appears above trigger by default.
+   CSS-only via :hover/:focus-within — no JS needed.
+   Add .below to position below trigger instead.        */
+
+/* ── Wrapper ── */
+.ds-tooltip-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+}
+
+/* ── Trigger icon ── */
+.ds-tooltip-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  border: none;
+  background: none;
+  color: var(--text-subtle);
+  cursor: help;
+  padding: 0;
+  margin: 0 0 0 ;
+  border-radius: 50%;
+  transition:
+    color var(--dur-fast) var(--ease-default),
+    background var(--dur-fast) var(--ease-default);
+  flex-shrink: 0;
+}
+.ds-tooltip-trigger svg {
+  width: 100%;
+  height: 12px;
+}
+.ds-tooltip-trigger:hover,
+.ds-tooltip-trigger:focus-visible {
+  color: var(--text-dim);
+  background: rgba(255, 255, 255, 0.06);
+  outline: none;
+}
+.ds-tooltip-trigger:focus-visible {
+  box-shadow: 0 0 0 2px var(--accent-color);
+}
+
+/* ── Tooltip box ── */
+.ds-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  width: max-content;
+  max-width: 220px;
+  padding: 7px ;
+  border-radius: var(--radius-sm);
+  background: rgba(13, 15, 19, 0.92);
+  backdrop-filter: blur();
+  -webkit-backdrop-filter: blur();
+  border: 1px solid var(--border-med);
+  box-shadow: var(--shadow-lv-2);
+  font-family: var(--font-display);
+  font-size: var(--text-caption);
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--text-dim);
+  white-space: normal;
+  text-align: left;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0;
+  transition:
+    opacity var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+
+/* ── Show on hover / focus-within ── */
+.ds-tooltip-wrap:hover .ds-tooltip,
+.ds-tooltip-wrap:focus-within .ds-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+/* ── Below variant ── */
+.ds-tooltip.below {
+  bottom: auto;
+  top: calc(100% + 8px);
+  transform: translateX(-50%) translateY(-4px);
+}
+.ds-tooltip-wrap:hover .ds-tooltip.below,
+.ds-tooltip-wrap:focus-within .ds-tooltip.below {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── Left-aligned (when tooltip is near left edge) ── */
+.ds-tooltip.align-left {
+  left: 0;
+  transform: translateX(0) translateY();
+}
+.ds-tooltip-wrap:hover .ds-tooltip.align-left,
+.ds-tooltip-wrap:focus-within .ds-tooltip.align-left {
+  transform: translateX(0) translateY(0);
+}
+.ds-tooltip.below.align-left {
+  transform: translateX(0) translateY(-);
+}
+.ds-tooltip-wrap:hover .ds-tooltip.below.align-left,
+.ds-tooltip-wrap:focus-within .ds-tooltip.below.align-left {
+  transform: translateX(0) translateY(0);
+}
+
+/* ── Light theme ── */
+html[data-theme='light'] .ds-tooltip,
+html.light .ds-tooltip {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #333;
+}
+html[data-theme='light'] .ds-tooltip-trigger:hover,
+html.light .ds-tooltip-trigger:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* ── Hide on touch devices (no hover) ── */
+@media (hover: none) {
+  .ds-tooltip-trigger {
+    display: none;
+  }
+}
