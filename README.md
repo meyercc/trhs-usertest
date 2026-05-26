@@ -83,6 +83,11 @@ peripheral modals, lighting presets, 3D viewers) works as designed.
 - **Git history:** unshipped snapshots remain in the repo's git history. For
   user testing that's fine; if something ever needs to be scrubbed entirely,
   that's a separate `git filter-repo` job.
-- **Asset size:** each snapshot is ~290 MB (mostly `Assets/`). After several
-  ships, the repo will grow into the gigabytes — at that point, prune
-  unused assets in `trhs/vite.config.js`'s `copy-static-assets` plugin.
+- **Asset size:** each snapshot is ~96 MB. The `copy-static-assets` plugin
+  in `trhs/vite.config.js` greps source for `Assets/*.ext` references and
+  only ships referenced files — so adding a new asset to a JS/CSS/HTML
+  source path is enough; the build picks it up. For paths the scanner
+  can't see (fully runtime-computed), add them to `FORCE_INCLUDE_ASSETS`
+  at the top of `vite.config.js`. The remaining bulk is the four 3D `.glb`
+  models in `Assets/3d-devices/` (~38 MB combined); Draco-compressing them
+  is the next lever if size becomes an issue.
