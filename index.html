@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Treehouse · User Test Builds</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #0b0d10;
+        --surface: #15181d;
+        --surface-hover: #1c2026;
+        --border: #262a31;
+        --text: #e6e8eb;
+        --text-dim: #8a909a;
+        --text-faint: #5a606a;
+        --accent: #7dd3fc;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; }
+      body {
+        font-family: 'Inter', system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        -webkit-font-smoothing: antialiased;
+        line-height: 1.5;
+      }
+      main {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 80px 32px 120px;
+      }
+      header { margin-bottom: 56px; }
+      .eyebrow {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text-faint);
+        margin: 0 0 12px;
+      }
+      h1 {
+        font-size: 32px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        margin: 0 0 12px;
+      }
+      .intro {
+        color: var(--text-dim);
+        font-size: 15px;
+        max-width: 56ch;
+        margin: 0;
+      }
+      .versions { display: flex; flex-direction: column; gap: 12px; }
+      .version {
+        display: block;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 20px 24px;
+        text-decoration: none;
+        color: inherit;
+        transition: background 120ms ease, border-color 120ms ease, transform 120ms ease;
+      }
+      .version:hover {
+        background: var(--surface-hover);
+        border-color: #353a44;
+      }
+      .version:active { transform: translateY(1px); }
+      .version-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 6px;
+      }
+      .version-label { font-size: 16px; font-weight: 600; }
+      .version-slug {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+        color: var(--text-faint);
+      }
+      .version-meta {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 13px;
+        color: var(--text-dim);
+      }
+      .version-meta time { font-variant-numeric: tabular-nums; }
+      .version-note { color: var(--text-dim); }
+      .empty {
+        border: 1px dashed var(--border);
+        border-radius: 10px;
+        padding: 40px 24px;
+        text-align: center;
+        color: var(--text-dim);
+        font-size: 14px;
+      }
+      .empty code {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+        background: var(--surface);
+        padding: 2px 6px;
+        border-radius: 4px;
+        color: var(--text);
+      }
+      footer {
+        margin-top: 64px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border);
+        color: var(--text-faint);
+        font-size: 12px;
+        font-family: 'JetBrains Mono', monospace;
+      }
+      footer a { color: var(--text-dim); text-decoration: none; }
+      footer a:hover { color: var(--text); }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <p class="eyebrow">Treehouse · User-Test Builds</p>
+        <h1>Frozen prototype snapshots</h1>
+        <p class="intro">
+          Each build below is a self-contained snapshot of the Treehouse prototype
+          at the moment it was shipped. They don't change while you're testing.
+        </p>
+      </header>
+
+      <section class="versions" id="versions"></section>
+
+      <footer>
+        <a href="https://github.com/meyercc/trhs-usertest">github.com/meyercc/trhs-usertest</a>
+      </footer>
+    </main>
+
+    <script type="module">
+      const fmt = new Intl.DateTimeFormat(undefined, {
+        year: 'numeric', month: 'short', day: 'numeric',
+      });
+
+      const mount = document.getElementById('versions');
+
+      try {
+        const res = await fetch('./versions.json', { cache: 'no-cache' });
+        const { versions = [] } = await res.json();
+
+        if (!versions.length) {
+          mount.innerHTML = `
+            <div class="empty">
+              No builds shipped yet. Run
+              <code>npm run ship:usertest -- &lt;slug&gt;</code>
+              from the <code>trhs/</code> repo.
+            </div>`;
+        } else {
+          mount.innerHTML = versions
+            .map((v) => {
+              const date = v.shippedAt ? fmt.format(new Date(v.shippedAt)) : '';
+              const note = v.note ? `<span class="version-note">${v.note}</span>` : '';
+              return `
+                <a class="version" href="./${v.entry}">
+                  <div class="version-head">
+                    <span class="version-label">${v.label || v.slug}</span>
+                    <span class="version-slug">${v.slug}</span>
+                  </div>
+                  <div class="version-meta">
+                    <time datetime="${v.shippedAt || ''}">${date}</time>
+                    ${note ? '·' : ''} ${note}
+                  </div>
+                </a>`;
+            })
+            .join('');
+        }
+      } catch (err) {
+        mount.innerHTML = `<div class="empty">Couldn't load versions.json — ${err.message}</div>`;
+      }
+    </script>
+  </body>
+</html>
