@@ -87,6 +87,17 @@
         font-size: 12px;
         color: var(--text-faint);
       }
+      .version-theme {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 2px 8px;
+        border-radius: 999px;
+        background: rgba(125, 211, 252, 0.08);
+        color: var(--accent);
+        border: 1px solid rgba(125, 211, 252, 0.2);
+      }
       .version-meta {
         display: flex;
         align-items: center;
@@ -165,6 +176,9 @@
             .map((v) => {
               const date = v.shippedAt ? fmt.format(new Date(v.shippedAt)) : '';
               const note = v.note ? `<span class="version-note">${v.note}</span>` : '';
+              const theme = v.theme && v.theme !== 'default'
+                ? `<span class="version-theme">${v.theme}</span>`
+                : '';
               return `
                 <a class="version" href="./${v.entry}">
                   <div class="version-head">
@@ -174,6 +188,7 @@
                   <div class="version-meta">
                     <time datetime="${v.shippedAt || ''}">${date}</time>
                     ${note ? '·' : ''} ${note}
+                    ${theme}
                   </div>
                 </a>`;
             })
