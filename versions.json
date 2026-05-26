@@ -1,3 +1,11 @@
 {
-  "versions": []
+  "versions": [
+    {
+      "slug": "v1-keyboard-modal",
+      "label": "Keyboard Modal · Round 1",
+      "note": "HyperX Origins 65 — Keys, Lighting, Settings",
+      "shippedAt": "2026-05-26T20:22:28.216Z",
+      "entry": "v1-keyboard-modal/prototype.html"
+    }
+  ]
 }

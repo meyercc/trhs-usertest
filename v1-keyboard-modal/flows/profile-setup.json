@@ -1,0 +1,18 @@
+{
+  "id": "profile-setup",
+  "title": "Profile Setup",
+  "category": "Onboarding",
+  "status": "draft",
+  "description": "User configures their profile — avatar, display name, and linked accounts. This flow can be triggered from onboarding or later from settings.",
+  "videoPath": "",
+  "mermaid": "flowchart LR\n    A([test]) --> B[empty]\n    B --> C{question?}\n    C -- Yes --> D[hello]\n    C -- No --> E[world]\n    D --> F[hello]\n    E --> F\n    A --> G[/hi/]\n    G --> F",
+  "steps": [
+    {
+      "title": "Step details to be documented",
+      "description": "Describe what happens at this step."
+    }
+  ],
+  "engNotes": [],
+  "order": 2,
+  "createdAt": "2026-03-24"
+}
