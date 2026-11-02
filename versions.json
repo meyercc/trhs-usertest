@@ -1,6 +1,14 @@
 {
   "versions": [
     {
+      "slug": "v2-user-testing",
+      "label": "General User Testing · Round 2",
+      "note": "Treehouse React app — Nova agent stories, devices, Play",
+      "shippedAt": "2026-11-02T18:30:55.083Z",
+      "entry": "v2-user-testing/index.html",
+      "commit": "e9e98e5"
+    },
+    {
       "slug": "v1-user-testing",
       "label": "General User Testing · Round 1",
       "note": "Treehouse general purpose user testing prototype",
