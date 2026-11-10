@@ -64,9 +64,8 @@ build).
 trhs-usertest/
 ├── index.html        landing page; reads versions.json + lists builds
 ├── versions.json     manifest, newest first; written by the ship scripts
-├── .nojekyll         lets Pages serve folders that start with _ (v1's _bundle/)
+├── .nojekyll         lets Pages serve folders whose names start with _
 └── <slug>/           one per shipped build; serves <slug>/index.html
-                      (v1-user-testing is the retired vanilla prototype: prototype.html)
 ```
 
 ## Notes for testers
